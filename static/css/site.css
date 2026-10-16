@@ -234,3 +234,17 @@ html.has-cursor, html.has-cursor * { cursor: none !important; }
 @media (min-width: 1280px) { .is-driven .rail { padding-inline: 5rem; } }
 .cert-art { overflow: hidden; border-radius: 4px; }
 .is-driven .rail { padding-block: .5rem; }
+
+/* Pinned gallery must fit the viewport height so the whole card stays visible (sizes follow viewport height). */
+.is-driven h2 { font-size: clamp(2rem, 6.2vh, 4rem); }
+.is-driven .wrap > div:first-child { margin-bottom: clamp(.75rem, 2.5vh, 2.5rem); }
+.is-driven .rail-hint { margin-bottom: clamp(.4rem, 1.5vh, 1rem); }
+.is-driven .cert-art { height: clamp(7rem, 24vh, 16rem); }
+.is-driven .cert-art svg, .is-driven .cert-art img { width: 100%; height: 100%; object-fit: cover; }
+.is-driven .rail article { padding: .75rem; }
+@media (max-height: 620px) {
+  .is-driven .cert-art { height: 15vh; }
+  .is-driven .rail-hint { display: none; }
+  .is-driven .rail .font-display { font-size: 1.35rem; }
+  .is-driven .rail article > div:last-child { padding-top: .5rem; }
+}
