@@ -8,12 +8,12 @@
   </div>
   <div class="wrap relative z-10">
     <p class="label mb-4"><span class="text-ochre">08</span> &mdash; Contact</p>
-    <h2 id="contact-title" class="text-hero max-w-6xl" data-split>{{ contact_headline }}</h2>
+    <h2 id="contact-title" class="text-hero max-w-6xl">{{ contact_headline }}</h2>
     <ul class="mt-12 flex flex-wrap gap-3">
-      <li><a class="btn btn-primary" href="{{ person.github }}" target="_blank" rel="noopener noreferrer" data-btn>GitHub {% icon "arrow-up-right" %}</a></li>
-      <li><a class="btn" href="{{ person.linkedin }}" target="_blank" rel="noopener noreferrer" data-btn>LinkedIn {% icon "arrow-up-right" %}</a></li>
-      {% if contact_email %}<li><a class="btn" href="mailto:{{ contact_email }}" data-btn>{% icon "mail" %} {{ contact_email }}</a></li>{% endif %}
-      {% if cv_url %}<li><a class="btn" href="{{ cv_url }}" target="_blank" rel="noopener noreferrer" data-btn>{% icon "file-text" %} Résumé</a></li>{% endif %}
+      <li><a class="btn btn-primary" href="{{ person.github }}" target="_blank" rel="noopener noreferrer">GitHub {% icon "arrow-up-right" %}</a></li>
+      <li><a class="btn" href="{{ person.linkedin }}" target="_blank" rel="noopener noreferrer">LinkedIn {% icon "arrow-up-right" %}</a></li>
+      {% if contact_email %}<li><a class="btn" href="mailto:{{ contact_email }}">{% icon "mail" %} {{ contact_email }}</a></li>{% endif %}
+      {% if cv_url %}<li><a class="btn" href="{{ cv_url }}" target="_blank" rel="noopener noreferrer">{% icon "file-text" %} Résumé</a></li>{% endif %}
     </ul>
   </div>
 </section>

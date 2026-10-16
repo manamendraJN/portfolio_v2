@@ -5,7 +5,7 @@
     {% section_heading "02" "Technical skills" "A working" "toolbox" "grouped by purpose" "skills-title" %}
     <ul class="list-none p-0">
       {% for group in skill_groups %}
-      <li class="nrow" tabindex="0" data-reveal-row>
+      <li class="nrow" tabindex="0">
         <span class="num" aria-hidden="true">{{ group.number }}</span>
         <h3 class="text-h3">{{ group.name }}</h3>
         <ul class="flex flex-wrap gap-2" aria-label="{{ group.name }} skills">

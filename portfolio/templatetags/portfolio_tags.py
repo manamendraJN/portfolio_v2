@@ -3,7 +3,6 @@ from pathlib import Path
 
 from django import template
 from django.conf import settings
-from django.utils.html import format_html
 from django.utils.safestring import mark_safe
 
 register = template.Library()
@@ -54,7 +53,3 @@ def project_card(project, total):
 def certificate_card(cert, number):
     return {"cert": cert, "number": number, "image_url": imagekit_url(cert.image_path)}
 
-
-@register.simple_tag
-def external_attrs():
-    return format_html('target="_blank" rel="noopener noreferrer"')
