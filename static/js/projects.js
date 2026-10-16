@@ -1,21 +1,11 @@
-/* Projects: intro drift + pinned stack (desktop only).
-   Owners: GSAP owns .drift-row transform, each plate's yPercent (stack) and plate-art clip-path.
+/* Projects: pinned stack (desktop only).
+   Owners: GSAP owns each plate's yPercent (stack) and plate-art clip-path.
    On mobile and under reduced motion the plates stay plain stacked cards. */
 import { gsap } from "../vendor/gsap.js";
 import { MEDIA } from "./media.js";
 
 export function initProjects(mm) {
   const stack = document.querySelector("[data-stack]");
-  const drift = document.querySelector("[data-drift]");
-
-  mm.add({ motion: MEDIA.motion }, (ctx) => {
-    if (!ctx.conditions.motion || !drift) return;
-    gsap.fromTo(drift, { x: () => window.innerWidth * 0.15 }, {
-      x: () => -(drift.scrollWidth - window.innerWidth * 0.85),
-      ease: "none",
-      scrollTrigger: { trigger: drift, start: "top bottom", end: "bottom top", scrub: true, invalidateOnRefresh: true },
-    });
-  });
 
   mm.add({ pin: MEDIA.pin }, (ctx) => {
     if (!ctx.conditions.pin || !stack) return;

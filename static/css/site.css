@@ -105,9 +105,6 @@ body.scroll-locked { overflow: hidden; }
 .stack.is-pinned { position: relative; height: 100vh; }
 .stack.is-pinned .plate { overflow: hidden; padding-top: 3.5rem; position: absolute; inset: 0; border-radius: 0; border-left: 0; border-right: 0; display: flex; align-items: center; } /* yPercent owner: GSAP (projects.js) */
 .plate-art { clip-path: inset(0 0 0 0); } /* clip-path owner: GSAP (projects.js) when pinned; static otherwise */
-.drift-row { display: flex; gap: 3rem; white-space: nowrap; will-change: transform; } /* transform owner: GSAP (projects.js) */
-.drift-row span { font-family: "Instrument Serif", serif; font-size: clamp(3rem, 9vw, 8rem); color: transparent; -webkit-text-stroke: 1.2px var(--ink); line-height: 1; }
-.drift-row span:nth-child(3n) { -webkit-text-stroke-color: var(--vermilion); }
 
 /* ---- Numbered lists with hover detail (CSS owns opacity/transform of .detail) ---- */
 .nrow { position: relative; display: grid; gap: .75rem 2rem; grid-template-columns: 1fr; padding: 1.5rem 0; border-top: 1.5px solid var(--ink); }
