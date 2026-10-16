@@ -209,12 +209,15 @@ html.is-reduced .btn { transition: none; }
   .layer, .hero-track:not(.is-staged) { position: relative; top: auto; }
 }
 
-/* ---- Mouse tailer: paint-brush trail (canvas + tip created by cursor.js on fine pointers only) ---- */
-.paint-trail { position: fixed; inset: 0; width: 100vw; height: 100vh; z-index: 190; pointer-events: none; }
-.cursor-dot { position: fixed; left: 0; top: 0; z-index: 200; width: 10px; height: 10px; margin: -5px 0 0 -5px; border-radius: 50%;
-  background: var(--ink); border: 2px solid var(--surface); pointer-events: none; opacity: 0; will-change: transform; }
-.cursor-dot.is-dark { background: var(--paper); border-color: var(--ink); }
-html.has-cursor .cursor-dot { opacity: 1; }
+/* ---- Mouse tailer (created by cursor.js on fine pointers only) ---- */
+.cursor-ring, .cursor-dot { position: fixed; left: 0; top: 0; z-index: 200; pointer-events: none; opacity: 0; will-change: transform; }
+.cursor-ring { width: 40px; height: 40px; margin: -20px 0 0 -20px; color: var(--vermilion); }
+.cursor-ring svg { display: block; }
+.cursor-ring.is-dark { color: var(--ochre); }
+.cursor-dot { width: 6px; height: 6px; margin: -3px 0 0 -3px; border-radius: 50%; background: var(--vermilion); }
+html.has-cursor .cursor-ring, html.has-cursor .cursor-dot { opacity: 1; }
+.cursor-dot { transition: opacity .2s; }
+.cursor-ring { transition: opacity .2s; }
 
 /* ---- Depth veil over a layer that is being covered (opacity driven by sheets.js) ---- */
 .layer-shade { position: absolute; inset: 0; z-index: 30; background: #0A0D14; opacity: 0; pointer-events: none; will-change: opacity; }
