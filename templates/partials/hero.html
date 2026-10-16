@@ -30,11 +30,11 @@
 
         <div class="mt-10 max-w-xl lg:mt-12" data-hero-intro data-hero-line="-8">
           <p class="text-lead">{{ hero.intro }}</p>
-          <div class="mt-7 flex flex-wrap gap-3">
+          <div class="hero-ctas mt-7 flex flex-wrap gap-3">
             <a class="btn btn-primary" href="#work">Explore My Work {% icon "arrow-up-right" %}</a>
             <a class="btn" href="#contact">Get in Touch {% icon "mail" %}</a>
           </div>
-          <ul class="mt-5 flex flex-wrap gap-x-6 gap-y-2 font-mono text-xs uppercase tracking-widest">
+          <ul class="hero-social mt-5 flex flex-wrap gap-x-6 gap-y-2 font-mono text-xs uppercase tracking-widest" aria-label="Profiles">
             <li><a class="underline underline-offset-4" href="{{ person.github }}" target="_blank" rel="noopener noreferrer">GitHub</a></li>
             <li><a class="underline underline-offset-4" href="{{ person.linkedin }}" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
           </ul>
