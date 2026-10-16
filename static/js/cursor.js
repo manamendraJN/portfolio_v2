@@ -1,11 +1,11 @@
 /* Mouse tailer: a small dot plus a lagging ring that grows over interactive elements.
-   Fine pointers only, never under reduced motion, and the native cursor stays visible.
+   Mouse pointers only (never touch); the native cursor is hidden while it runs.
    Owner of the transform on the two cursor elements: this module. The loop runs only while the
    ring is still catching up with the pointer, so nothing runs when the mouse is idle. */
 export function initCursor() {
-  const fine = window.matchMedia("(hover: hover) and (pointer: fine)");
-  const reduced = window.matchMedia("(prefers-reduced-motion: reduce)");
-  if (!fine.matches || reduced.matches) return;
+  // Any mouse-like pointer (also on hybrid laptops). The follower is a soft, small movement, so it stays on even
+  // when the system asks for reduced motion; it never appears for touch.
+  if (!window.matchMedia("(any-hover: hover) and (any-pointer: fine)").matches) return;
 
   const ring = document.createElement("div");
   const dot = document.createElement("div");
