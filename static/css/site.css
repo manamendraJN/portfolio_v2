@@ -463,3 +463,12 @@ html.past-hero .index { opacity: 1; visibility: visible; transition-delay: 0s; }
   .hero-frags span:nth-child(3) { bottom: 32%; }
 }
 @media (max-width: 899px) { .hero-frags ~ .hero-frags span { right: auto !important; left: 5%; } .hero-frags ~ .hero-frags span:nth-child(1) { bottom: 17%; } .hero-frags ~ .hero-frags span:nth-child(2) { bottom: 27%; } }
+/* Phones: floating code aligned to the page gutters, below the caption */
+@media (max-width: 899px) {
+  .hero-frags span, .hero-frags ~ .hero-frags span { left: 1.25rem !important; right: auto !important; }
+  .hero-frags span:nth-child(1) { bottom: 8% !important; }
+  .hero-frags span:nth-child(2) { left: auto !important; right: 1.25rem !important; bottom: 16% !important; }
+  .hero-frags span:nth-child(3) { bottom: 24% !important; }
+  .hero-frags ~ .hero-frags span:nth-child(1) { left: auto !important; right: 1.25rem !important; bottom: 8% !important; }
+  .hero-frags ~ .hero-frags span:nth-child(2) { left: 1.25rem !important; right: auto !important; bottom: 16% !important; }
+}
