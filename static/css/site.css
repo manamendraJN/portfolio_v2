@@ -62,7 +62,7 @@ html:not(.js) .scene-toggle { display: none; }
 .scenery > * { position: absolute; left: 0; width: 100%; will-change: transform; }
 
 /* ---- Thread (narrative line) ---- */
-.thread { position: absolute; inset: 0; z-index: 1; pointer-events: none; overflow: visible; }
+.thread { position: absolute; inset: 0; z-index: 15; pointer-events: none; overflow: visible; }
 .thread-path { fill: none; stroke: var(--vermilion); stroke-width: 1.6; stroke-linecap: round; opacity: .6; }
 .thread-ghost { fill: none; stroke: var(--ink); stroke-width: 1; stroke-dasharray: 2 7; stroke-linecap: round; opacity: .25; }
 .thread-marker { color: var(--ink); }
@@ -172,3 +172,31 @@ html.is-reduced .pill { transition: none; }
 }
 
 section[id] { scroll-margin-top: 2rem; }
+
+/* ---- Hero track / stage (staged = pinned, desktop only; class added by JS) ---- */
+.hero-track { position: relative; z-index: 0; }
+.hero-stage { position: relative; isolation: isolate; overflow: hidden; padding: 7rem 0 4rem; }
+.hero-title { font-family: "Instrument Serif", Georgia, serif; font-size: clamp(3.4rem, 10.5vw, 10rem); line-height: .92; letter-spacing: -.02em; }
+.hero-figure { margin-top: 2.5rem; width: 100%; max-width: 46rem; }
+@media (min-width: 1024px) { .hero-figure { margin-left: auto; } }
+.hero-wash { position: absolute; inset: 0; background: var(--wash-blue); opacity: 0; } /* opacity owner: GSAP (parallax.js) */
+.hero-track.is-staged { height: 260vh; margin-bottom: -100vh; }
+.hero-track.is-staged .hero-stage { position: sticky; top: 0; height: 100vh; padding: 5.5rem 0 0; }
+.hero-track.is-staged .hero-title { font-size: clamp(3.4rem, min(9vw, 15vh), 9rem); }
+.hero-track.is-staged .hero-wrap { height: 100%; }
+.hero-track.is-staged .hero-figure { position: absolute; right: clamp(1.5rem, 5vw, 5rem); bottom: 2.5rem; width: min(42vw, 600px); margin: 0; } /* yPercent owner: GSAP */
+
+/* ---- Paper sheets with torn edges that slide over the previous layer ---- */
+.sheet { position: relative; z-index: 10; background: var(--sheet-bg, var(--paper)); }
+.sheet--ink { --sheet-bg: var(--ink); }
+.sheet-edge { position: absolute; left: 0; right: 0; top: -23px; height: 24px; pointer-events: none;
+  filter: drop-shadow(0 -5px 6px rgba(27, 36, 56, .16)); }
+.sheet-edge::before { content: ""; position: absolute; inset: 0; background: var(--sheet-bg, var(--paper));
+  -webkit-mask: url("../img/torn.svg") repeat-x bottom / 700px 100%; mask: url("../img/torn.svg") repeat-x bottom / 700px 100%; }
+
+/* ---- Dark sheet (contact + footer) ---- */
+.on-dark { background: var(--ink); color: var(--paper); }
+.on-dark .label { color: rgba(245, 240, 230, .78); }
+.on-dark .btn { border-color: var(--paper); color: var(--paper); }
+.on-dark .btn-primary { background: var(--vermilion); border-color: var(--vermilion); color: var(--surface); }
+.on-dark :focus-visible { outline-color: var(--ochre); }

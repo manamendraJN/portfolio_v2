@@ -31,7 +31,7 @@ export function initHero(mm) {
 
   toggle.addEventListener("click", () => apply(mode === "day" ? "night" : "day", true));
 
-  mm.add({ motion: MEDIA.motion, reduce: MEDIA.reduce }, (ctx) => {
+  mm.add({ motion: MEDIA.motion, reduce: MEDIA.reduce, flat: MEDIA.flat }, (ctx) => {
     reduced = !!ctx.conditions.reduce;
     if (reduced) { apply(mode, false); return; }
 
@@ -39,7 +39,8 @@ export function initHero(mm) {
     gsap.set(night, { opacity: 1 });
     gsap.to(night, { opacity: 0, duration: 1.8, delay: 0.5, ease: "power2.inOut" });
 
-    gsap.from("[data-hero-scene]", { clipPath: "inset(0 0 100% 0)", duration: 1.2, ease: "power3.out", delay: 0.2 });
+    // Staged hero: the scene rises on scroll instead (parallax.js).
+    if (ctx.conditions.flat) gsap.from("[data-hero-scene]", { clipPath: "inset(0 0 100% 0)", duration: 1.2, ease: "power3.out", delay: 0.2 });
     gsap.from("[data-hero-intro]", { opacity: 0, y: 24, duration: 0.9, ease: "power2.out", delay: 0.5 });
   });
 }

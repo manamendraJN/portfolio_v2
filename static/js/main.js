@@ -8,6 +8,7 @@ import { runPreloader } from "./preloader.js";
 import { initReveal } from "./reveal.js";
 import { initHero } from "./hero.js";
 import { initParallax } from "./parallax.js";
+import { initSheets } from "./sheets.js";
 import { initThread } from "./thread.js";
 import { initIndex } from "./index-nav.js";
 import { initProjects } from "./projects.js";
@@ -38,6 +39,7 @@ const start = () => {
   initHero(mm);
   initParallax(mm);
   initProjects(mm);
+  initSheets(mm);
   initIndex(); // created after the pin so positions include its spacer
   initPill();
   initResearch(mm);

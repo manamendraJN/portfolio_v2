@@ -29,11 +29,11 @@ export function initThread(mm) {
     svg.setAttribute("height", H);
     svg.setAttribute("viewBox", `0 0 ${W} ${H}`);
 
-    const caption = document.querySelector("#hero .marginalia");
+    // Start where the first paper sheet begins: the pinned hero cannot anchor a scrolling line.
     const sections = [...document.querySelectorAll("[data-section]")].slice(1);
-    const cap = caption ? rel(caption) : { x: W * 0.05, y: 180, h: 0 };
-    const pts = [{ x: Math.max(cap.x - 14, 8), y: cap.y + 4 }];
+    const first = rel(sections[0]);
     const edge = Math.min(Math.max(W * 0.025, 6), 40);
+    const pts = [{ x: edge, y: first.y - 10 }];
     sections.forEach((s, i) => {
       const r = rel(s);
       pts.push({ x: i % 2 === 0 ? W - edge : edge, y: r.y + Math.min(r.h * 0.35, 520) });
