@@ -1,127 +1,109 @@
-/* The storyline: one continuous line fixed to the viewport edge, "from first sketch to software people rely on".
-   It is drawn as you read (stroke-dashoffset), a pencil-nib marker travels along it, and a numbered node
-   lights up for every chapter. Progress is the sum of how far each section has been read, so it stays correct
-   with the pinned hero and the stacking sections.
-   Owners: GSAP owns stroke-dashoffset on the path and the marker transform/opacity; node state is plain classes. */
+/* One continuous narrative line, drawn from the very top of the page to the very end.
+   The SVG path is built from the section positions (starting in the hero). Its drawn tip is kept at a fixed
+   place in the viewport that drifts from the top to near the bottom as you scroll, so you always see the pencil
+   drawing where you are reading. Owners: GSAP owns stroke-dashoffset on the path and the marker transform/opacity. */
 import { gsap, ScrollTrigger } from "../vendor/gsap.js";
 import { MEDIA } from "./media.js";
-
-const NS = "http://www.w3.org/2000/svg";
 
 export function initThread(mm) {
   const svg = document.querySelector("[data-thread]");
   const path = svg && svg.querySelector("[data-thread-path]");
   const ghost = svg && svg.querySelector("[data-thread-ghost]");
   const marker = svg && svg.querySelector("[data-thread-marker]");
-  const nodesG = svg && svg.querySelector("[data-thread-nodes]");
-  const sections = [...document.querySelectorAll("[data-section]")];
-  if (!svg || !path || !marker || !nodesG || sections.length < 2) return;
+  const main = document.getElementById("main");
+  if (!svg || !path || !main) return;
 
-  const N = sections.length;
-  const labels = ["Start", ...[...document.querySelectorAll("[data-index-link] .idx-label")].map((n) => n.textContent)];
-  const scratch = document.createElementNS(NS, "path");
-  const read = new Array(N).fill(0);
-  let cum = [];
-  let total = 0;
+  let len = 0;
+  let progress = 0;
   let animated = false;
-  let nodes = [];
+  let yStart = 0;
 
-  function build() {
-    const W = window.innerWidth;
-    const H = window.innerHeight;
-    svg.setAttribute("viewBox", `0 0 ${W} ${H}`);
-    const small = W < 768;
-    const xa = small ? 9 : 20;
-    const xb = small ? 20 : 46;
-    const y0 = small ? 84 : 92;
-    const y1 = H - 56;
-    const pts = sections.map((_, i) => ({ x: i % 2 ? xb : xa, y: y0 + ((y1 - y0) * i) / (N - 1) }));
-
-    let d = `M${pts[0].x} ${pts[0].y}`;
-    cum = [0];
-    for (let i = 1; i < N; i++) {
-      const a = pts[i - 1];
-      const b = pts[i];
-      const dy = (b.y - a.y) * 0.5;
-      d += ` C${a.x} ${a.y + dy} ${b.x} ${b.y - dy} ${b.x} ${b.y}`;
-      scratch.setAttribute("d", d);
-      cum.push(scratch.getTotalLength());
-    }
-    // Closing flourish: the line loops once and settles at the end of the page.
-    d += " c 22 -4 44 -24 26 -40 c -16 -14 -46 8 -20 30 c 16 12 40 4 58 -10";
-    path.setAttribute("d", d);
-    ghost.setAttribute("d", d);
-    total = path.getTotalLength();
-    cum.push(total);
-    path.style.strokeDasharray = total;
-
-    nodesG.replaceChildren();
-    nodes = pts.map((pt, i) => {
-      const g = document.createElementNS(NS, "g");
-      g.setAttribute("class", "thread-node");
-      const c = document.createElementNS(NS, "circle");
-      c.setAttribute("cx", pt.x);
-      c.setAttribute("cy", pt.y);
-      c.setAttribute("r", 5);
-      const t = document.createElementNS(NS, "text");
-      t.setAttribute("x", pt.x + 14);
-      t.setAttribute("y", pt.y + 3.5);
-      t.textContent = `${String(i).padStart(2, "0")} ${labels[i] || ""}`;
-      g.append(c, t);
-      nodesG.append(g);
-      return g;
-    });
-    place(progress());
-  }
-
-  const progress = () => read.reduce((a, b) => a + b, 0) / N;
-  const lengthAt = (p) => {
-    const s = p * N;
-    const k = Math.min(N - 1, Math.floor(s));
-    return cum[k] + (cum[k + 1] - cum[k]) * (s - k);
+  const rel = (el) => {
+    const r = el.getBoundingClientRect();
+    const m = main.getBoundingClientRect();
+    return { x: r.left - m.left, y: r.top - m.top, w: r.width, h: r.height };
   };
 
-  function place(p) {
-    if (!total) return;
-    const L = animated ? lengthAt(p) : total;
-    path.style.strokeDashoffset = total - L;
-    let current = 0;
-    nodes.forEach((g, i) => {
-      const lit = L >= cum[i] - 0.5;
-      g.classList.toggle("is-lit", lit);
-      if (lit) current = i;
+  function build() {
+    const W = main.clientWidth;
+    const H = main.scrollHeight;
+    const vh = window.innerHeight;
+    svg.setAttribute("width", W);
+    svg.setAttribute("height", H);
+    svg.setAttribute("viewBox", `0 0 ${W} ${H}`);
+
+    const sections = [...document.querySelectorAll("[data-section]")].slice(1);
+    const edge = Math.min(Math.max(W * 0.025, 6), 40);
+    yStart = 96; // just under the header, in the hero
+    const pts = [{ x: edge, y: yStart }];
+    sections.forEach((s, i) => {
+      const r = rel(s);
+      pts.push({ x: i % 2 === 0 ? W - edge : edge, y: r.y + Math.min(r.h * 0.3, 480) });
     });
-    nodes.forEach((g, i) => g.classList.toggle("is-current", animated && i === current));
-    if (!animated) return;
-    const at = Math.max(0.01, L);
-    const a = path.getPointAtLength(at);
-    const b = path.getPointAtLength(Math.min(total, at + 2));
-    const angle = (Math.atan2(b.y - a.y, b.x - a.x) * 180) / Math.PI;
-    gsap.set(marker, { x: a.x, y: a.y, rotation: angle, transformOrigin: "0 0" });
+    // The path must end where the tip sits at the bottom of the page, leaving room for the flourish.
+    const endY = H - vh * 0.3 - 70;
+    const last = pts[pts.length - 1];
+    last.y = Math.min(last.y, endY - 40);
+    pts.push({ x: W * 0.5, y: endY });
+
+    let d = `M${pts[0].x.toFixed(1)} ${pts[0].y.toFixed(1)}`;
+    for (let i = 1; i < pts.length; i++) {
+      const a = pts[i - 1], b = pts[i];
+      const dy = (b.y - a.y) * 0.55;
+      d += ` C${a.x.toFixed(1)} ${(a.y + dy).toFixed(1)} ${b.x.toFixed(1)} ${(b.y - dy).toFixed(1)} ${b.x.toFixed(1)} ${b.y.toFixed(1)}`;
+    }
+    // Closing flourish: the line loops once and settles at the end of the page.
+    d += " c 70 12 110 -40 60 -58 c -50 -16 -92 38 -18 70 c 60 24 150 4 220 -14";
+    path.setAttribute("d", d);
+    ghost.setAttribute("d", d);
+
+    len = path.getTotalLength();
+    path.style.strokeDasharray = len;
+    place();
+  }
+
+  // Length at which the path reaches a given y (the path runs downward, so y grows with length).
+  function lengthAtY(y) {
+    let lo = 0;
+    let hi = len;
+    for (let i = 0; i < 18; i++) {
+      const mid = (lo + hi) / 2;
+      if (path.getPointAtLength(mid).y < y) lo = mid; else hi = mid;
+    }
+    return hi;
+  }
+
+  function place() {
+    if (!len) return;
+    if (!animated) { path.style.strokeDashoffset = 0; return; }
+    const vh = window.innerHeight;
+    // Tip height in the viewport: near the top at the start, about 70% down at the end.
+    const tipY = window.scrollY + vh * (0.12 + 0.58 * progress);
+    const at = progress >= 0.999 ? len : Math.max(1, Math.min(len, lengthAtY(Math.max(yStart, tipY))));
+    path.style.strokeDashoffset = len - at;
+    const p = path.getPointAtLength(at);
+    const q = path.getPointAtLength(Math.min(len, at + 2));
+    const angle = (Math.atan2(q.y - p.y, q.x - p.x) * 180) / Math.PI;
+    gsap.set(marker, { x: p.x, y: p.y, rotation: angle, transformOrigin: "0 0" });
   }
 
   mm.add({ motion: MEDIA.motion }, (ctx) => {
     animated = !!ctx.conditions.motion;
-    if (!animated) {
-      build();
-      gsap.set(marker, { opacity: 0 });
-      return;
-    }
-    gsap.set(marker, { opacity: 1 });
-    const triggers = sections.map((section, i) => {
-      const update = (self) => { read[i] = self.progress; place(progress()); };
-      return ScrollTrigger.create({
-        trigger: section, start: i === 0 ? "top top" : "top 55%", end: "bottom 55%",
-        onUpdate: update, onRefresh: update,
-      });
-    });
     build();
-    const onRefresh = () => build();
+    if (!animated) { gsap.set(marker, { opacity: 0 }); return; }
+
+    gsap.set(marker, { opacity: 1 });
+    const st = ScrollTrigger.create({
+      start: 0, end: "max",
+      onUpdate: (self) => { progress = self.progress; place(); },
+    });
+    const onRefresh = () => { build(); progress = st.progress; place(); };
     ScrollTrigger.addEventListener("refresh", onRefresh);
     return () => {
       ScrollTrigger.removeEventListener("refresh", onRefresh);
-      triggers.forEach((t) => t.kill());
       animated = false;
+      progress = 0;
+      st.kill();
       build();
     };
   });

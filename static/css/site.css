@@ -63,9 +63,9 @@ html:not(.js) .scene-toggle { display: none; }
 .scenery > * { position: absolute; left: 0; width: 100%; will-change: transform; }
 
 /* ---- Thread (narrative line) ---- */
-.thread { position: fixed; inset: 0; width: 100vw; height: 100vh; z-index: 35; pointer-events: none; overflow: visible; }
-.thread-path { fill: none; stroke: var(--vermilion); stroke-width: 2.2; stroke-linecap: round; opacity: .9; }
-.thread-ghost { fill: none; stroke: var(--ink); stroke-width: 1.2; stroke-dasharray: 2 7; stroke-linecap: round; opacity: .35; }
+.thread { position: absolute; inset: 0; z-index: 15; pointer-events: none; overflow: visible; }
+.thread-path { fill: none; stroke: var(--vermilion); stroke-width: 1.6; stroke-linecap: round; opacity: .6; }
+.thread-ghost { fill: none; stroke: var(--ink); stroke-width: 1; stroke-dasharray: 2 7; stroke-linecap: round; opacity: .25; }
 .thread-marker { color: var(--ink); }
 .js .thread-marker { opacity: 0; } /* revealed by thread.js */
 
@@ -224,10 +224,3 @@ html.has-cursor .cursor-ring, html.has-cursor .cursor-dot { opacity: 1; }
 
 /* Native cursor hidden only while the tailer is active (fine pointer, motion allowed, pointer inside page). */
 html.has-cursor, html.has-cursor * { cursor: none !important; }
-
-/* ---- Storyline nodes ---- */
-.thread-node circle { fill: var(--surface); stroke: var(--ink); stroke-width: 1.6; }
-.thread-node text { font: 500 10px "JetBrains Mono", monospace; letter-spacing: .08em; fill: var(--ink); paint-order: stroke; stroke: var(--surface); stroke-width: 4px; stroke-linejoin: round; display: none; text-transform: uppercase; }
-.thread-node.is-lit circle { fill: var(--vermilion); stroke: var(--vermilion); }
-.thread-node.is-current text { display: block; }
-@media (max-width: 767px) { .thread-node text { display: none !important; } }
