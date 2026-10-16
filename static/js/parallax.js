@@ -65,10 +65,12 @@ function stagedHero(track) {
   });
 
   // Scene 1 (introduction): the desk scene rises in, then everything lifts away at its own speed.
-  tl.fromTo(figure, { yPercent: 135 }, { yPercent: 0, ease: "power2.out", duration: 0.09 }, 0);
+  // On phones the desk scene takes the place of the copy instead of sitting beside it, so it rises a little later.
+  const narrow = window.innerWidth < 900;
+  tl.fromTo(figure, { yPercent: 135 }, { yPercent: 0, ease: "power2.out", duration: narrow ? 0.07 : 0.09 }, narrow ? 0.07 : 0);
   stage.querySelectorAll("[data-hero-line]").forEach((el) =>
     tl.to(el, { y: vh(parseFloat(el.dataset.heroLine)), ease: "power1.in", duration: 0.09 }, 0.1));
-  tl.to(copy, { autoAlpha: 0, duration: 0.07 }, 0.11)
+  tl.to(copy, { autoAlpha: 0, duration: 0.07 }, narrow ? 0.07 : 0.11)
     .to(figure, { autoAlpha: 0, yPercent: -16, duration: 0.07 }, 0.11)
     .to(dark, { autoAlpha: 0.55, duration: 0.09 }, 0.12); // dims the scenery but keeps its depth layers visible
 
