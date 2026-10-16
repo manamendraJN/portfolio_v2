@@ -211,10 +211,13 @@ html.is-reduced .btn { transition: none; }
 
 /* ---- Mouse tailer: paint-brush trail (canvas + tip created by cursor.js on fine pointers only) ---- */
 .paint-trail { position: fixed; inset: 0; width: 100vw; height: 100vh; z-index: 190; pointer-events: none; }
-.cursor-dot { position: fixed; left: 0; top: 0; z-index: 200; width: 8px; height: 8px; margin: -4px 0 0 -4px; border-radius: 50%;
+.cursor-dot { position: fixed; left: 0; top: 0; z-index: 200; width: 10px; height: 10px; margin: -5px 0 0 -5px; border-radius: 50%;
   background: var(--ink); border: 2px solid var(--surface); pointer-events: none; opacity: 0; will-change: transform; }
 .cursor-dot.is-dark { background: var(--paper); border-color: var(--ink); }
 html.has-cursor .cursor-dot { opacity: 1; }
 
 /* ---- Depth veil over a layer that is being covered (opacity driven by sheets.js) ---- */
 .layer-shade { position: absolute; inset: 0; z-index: 30; background: #0A0D14; opacity: 0; pointer-events: none; will-change: opacity; }
+
+/* Native cursor hidden only while the tailer is active (fine pointer, motion allowed, pointer inside page). */
+html.has-cursor, html.has-cursor * { cursor: none !important; }
