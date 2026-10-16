@@ -13,6 +13,7 @@ import { initRail } from "./rail.js";
 import { initResearch } from "./research.js";
 import { initPill } from "./pill.js";
 import { initNav } from "./nav.js";
+import { initLayers } from "./layers.js";
 
 const root = document.documentElement;
 const reducedQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -26,6 +27,7 @@ ScrollTrigger.config({ ignoreMobileResize: true });
 const mm = gsap.matchMedia();
 
 initNav();
+initLayers();
 initHero();
 initRail();
 

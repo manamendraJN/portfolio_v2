@@ -200,3 +200,14 @@ section[id] { scroll-margin-top: 2rem; }
 .btn { transition: transform .2s; }
 .btn:hover { transform: translateY(-2px); }
 html.is-reduced .btn { transition: none; }
+
+/* ---- Stacking sections: every section is a sticky layer; the next one slides over it ----
+   --stick-top is set by layers.js to min(0, viewport - height): short sections stick at the top,
+   tall ones stick by their bottom edge once fully read. Later siblings paint on top (same z-index, DOM order). */
+.layer { position: sticky; top: var(--stick-top, auto); }
+.layer.sheet:not(#contact) { padding-bottom: clamp(4rem, 8vw, 7rem); min-height: 80svh; }
+.hero-track:not(.is-staged) { position: sticky; top: var(--stick-top, auto); }
+.hero-track.is-staged { position: relative; }
+@media (prefers-reduced-motion: reduce) {
+  .layer, .hero-track:not(.is-staged) { position: relative; top: auto; }
+}
