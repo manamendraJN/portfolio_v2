@@ -399,3 +399,23 @@ html.past-hero .index { opacity: 1; visibility: visible; transition-delay: 0s; }
   .hero-track.is-staged [data-hero-intro] .hand { margin-top: .6rem; font-size: 1.15rem; }
   .hero-sun { opacity: .4; }
 }
+
+/* Phones: the depth layers stay visible enough to read as 3D (they are dimmed on the large dark hero). */
+@media (max-width: 899px) {
+  .hero-stage .scenery [data-fly="-20,260,0.3"] { opacity: .6; }
+  .hero-stage .scenery [data-fly="-38,650,0"] { opacity: .7; }
+  .hero-ridge { opacity: .6; }
+  .hero-stage .scenery .hero-ridge { left: -60% !important; width: 220% !important; }
+}
+/* Very short viewports (small landscape phones): compact hero so the pinned story still fits */
+@media (max-height: 560px) {
+  .hero-track.is-staged .hero-title { font-size: clamp(1.9rem, min(8vw, 12svh), 3.2rem); }
+  .hero-track.is-staged .hero-stage { padding-top: 4rem; }
+  .hero-track.is-staged [data-hero-intro] { margin-top: .5rem; }
+  .hero-track.is-staged [data-hero-intro] .text-lead { font-size: .85rem; line-height: 1.35; }
+  .hero-track.is-staged [data-hero-intro] ul, .hero-track.is-staged [data-hero-intro] .hand { display: none; }
+  .hero-track.is-staged .story-scene { padding-top: 4rem; }
+  .hero-track.is-staged .story-line { font-size: clamp(1.5rem, 5vw, 2.2rem); }
+  .story-visual { height: 10rem; min-height: 0; }
+}
+@media (max-width: 899px) { .hero-sun { opacity: .5; } } /* keeps text readable when the sun drifts behind it */

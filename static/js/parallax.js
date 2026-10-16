@@ -50,18 +50,24 @@ function stagedHero(track) {
   const ground = (el) => (el.hasAttribute("data-ground") ? "50% 100%" : "50% 50%"); // ground layers grow upward from the horizon
   gsap.set([...flyers, ...emergers], { transformPerspective: 900 });
   // Layers present from the start rise and come toward the viewer (nearer layers travel further and grow more).
+  // Phones get a stronger travel so the depth reads clearly on a small screen.
+  const boost = window.innerWidth < 900 ? 1.5 : 1;
   flyers.forEach((el) => {
-    const [y, z, k] = el.dataset.fly.split(",").map(Number);
+    let [y, z, k] = el.dataset.fly.split(",").map(Number);
+    y *= boost;
+    z *= boost;
     const base = parseFloat(getComputedStyle(el).opacity) || 1;
     const x = el.dataset.layerX ? () => (parseFloat(el.dataset.layerX) * window.innerWidth) / 100 : 0;
     gsap.set(el, { transformOrigin: ground(el) });
-    tl.to(el, { y: vh(y), z, x, opacity: base * k, duration: 1 }, 0);
+    // Front-loaded: most of the rush toward the viewer happens in the first scroll, then it keeps drifting.
+    tl.to(el, { y: vh(y * 0.6), z: z * 0.6, x: typeof x === "function" ? () => x() * 0.6 : 0, opacity: base + (base * k - base) * 0.5, ease: "power2.out", duration: 0.2 }, 0)
+      .to(el, { y: vh(y), z, x, opacity: base * k, duration: 0.8 }, 0.2);
   });
   // Distant ridges start small, faint and low in the background, then rise out of it and move forward.
   emergers.forEach((el) => {
     const [y0, z0, finalOpacity] = el.dataset.emerge.split(",").map(Number);
     gsap.set(el, { transformOrigin: "50% 100%" });
-    tl.fromTo(el, { y: vh(y0), z: z0, opacity: 0 }, { y: vh(-2), z: 0, opacity: finalOpacity, ease: "power1.out", duration: 0.66 }, 0.12);
+    tl.fromTo(el, { y: vh(y0), z: z0, opacity: 0 }, { y: vh(-2), z: 0, opacity: finalOpacity, ease: "power1.out", duration: 0.6 }, 0.04);
   });
 
   // Scene 1 (introduction): the desk scene rises in, then everything lifts away at its own speed.
