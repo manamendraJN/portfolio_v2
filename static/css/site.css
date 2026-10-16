@@ -211,9 +211,10 @@ html.is-reduced .btn { transition: none; }
 
 /* ---- Mouse tailer (created by cursor.js on fine pointers only) ---- */
 .cursor-ring, .cursor-dot { position: fixed; left: 0; top: 0; z-index: 200; pointer-events: none; opacity: 0; will-change: transform; }
-.cursor-ring { width: 36px; height: 36px; margin: -18px 0 0 -18px; border: 1.5px solid var(--vermilion); border-radius: 50%; }
-.cursor-ring.is-dark { border-color: var(--ochre); }
+.cursor-ring { width: 40px; height: 40px; margin: -20px 0 0 -20px; color: var(--vermilion); }
+.cursor-ring svg { display: block; }
+.cursor-ring.is-dark { color: var(--ochre); }
 .cursor-dot { width: 6px; height: 6px; margin: -3px 0 0 -3px; border-radius: 50%; background: var(--vermilion); }
 html.has-cursor .cursor-ring, html.has-cursor .cursor-dot { opacity: 1; }
 .cursor-dot { transition: opacity .2s; }
-.cursor-ring { transition: opacity .2s, border-color .2s; }
+.cursor-ring { transition: opacity .2s; }

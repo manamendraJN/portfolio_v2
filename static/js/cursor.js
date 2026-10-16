@@ -11,6 +11,8 @@ export function initCursor() {
   const dot = document.createElement("div");
   ring.className = "cursor-ring";
   dot.className = "cursor-dot";
+  // Hand-drawn, slightly open ring: the stroke overshoots its start like a pen circle.
+  ring.innerHTML = '<svg viewBox="0 0 40 40" width="40" height="40" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 3.5C31 4 37.5 11 36.5 21.5C35.5 31 28 37 19 36.5C10 36 3.5 29 4.5 19.5C5.5 11 12 5 20.5 4.5C24 4.3 27 5.5 29.5 7.5"/></svg>';
   [ring, dot].forEach((n) => n.setAttribute("aria-hidden", "true"));
   document.body.append(ring, dot);
 
