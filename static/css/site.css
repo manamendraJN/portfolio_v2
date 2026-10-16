@@ -171,7 +171,7 @@ section[id] { scroll-margin-top: 2rem; }
 .hero-title { font-family: "Instrument Serif", Georgia, serif; font-size: clamp(3.4rem, 10.5vw, 10rem); line-height: .92; letter-spacing: -.02em; }
 .hero-figure { margin-top: 2.5rem; width: 100%; max-width: 46rem; }
 @media (min-width: 1024px) { .hero-figure { margin-left: auto; } }
-.hero-wash { position: absolute; inset: 0; background: var(--wash-blue); opacity: 0; } /* opacity owner: GSAP (parallax.js) */
+.hero-wash { display: none; }
 .hero-track.is-staged { height: 640vh; margin-bottom: -100vh; } /* four story scenes, then the next sheet slides over */
 .hero-track.is-staged .hero-stage { position: sticky; top: 0; height: 100vh; padding: 5.5rem 0 0; }
 .hero-track.is-staged .hero-title { font-size: clamp(3.4rem, min(8.5vw, 13.5vh), 9rem); }
@@ -301,3 +301,19 @@ html.has-cursor, html.has-cursor * { cursor: none !important; }
 .hero-track.is-staged .story-scene { position: absolute; inset: 0; padding-top: 6rem; padding-bottom: 2.5rem; pointer-events: auto; } /* autoAlpha owner: GSAP */
 .hero-track.is-staged .story-scene--end { place-items: center; }
 @media (max-width: 899px) { .frag { display: none; } }
+
+/* ---- Dark hero: the whole hero uses the ink scheme from scene 1 onward ---- */
+.hero-stage .scenery { color: var(--paper); }
+.hero-stage .hero-kicker, .on-dark .hand { color: var(--ochre); }
+.hero-stage .hero-frags span { color: rgba(245, 240, 230, .6); }
+.hero-stage .scene { border-color: rgba(245, 240, 230, .35); }
+.hero-stage .marginalia { border-left-color: var(--ochre); }
+.hero-stage .scene-toggle { border-color: var(--paper); color: var(--paper); }
+.hero-stage :focus-visible { outline-color: var(--ochre); }
+/* The section index would sit on the dark hero with poor contrast, so it appears once the hero is passed. */
+.js .index { opacity: 0; visibility: hidden; transition: opacity .3s, visibility 0s .3s; }
+html.past-hero .index { opacity: 1; visibility: visible; transition-delay: 0s; }
+/* Keep hero text legible where it crosses the hills and plants on the dark hero. */
+.hero-stage .scenery [data-layer="16"] { opacity: .4; }
+.hero-stage .scenery [data-layer="40"] { opacity: .5; }
+.hero-stage .scenery [data-layer-x] { left: 48% !important; width: 52% !important; } /* clouds stay clear of the headline */

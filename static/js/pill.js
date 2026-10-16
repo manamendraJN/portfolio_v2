@@ -13,8 +13,8 @@ export function initPill() {
   const apply = () => pill.classList.toggle("is-visible", pastHero && !nearContact && !inGallery);
   ScrollTrigger.create({
     trigger: hero, start: "bottom 20%",
-    onEnter: () => { pastHero = true; apply(); },
-    onLeaveBack: () => { pastHero = false; apply(); },
+    onEnter: () => { pastHero = true; document.documentElement.classList.add("past-hero"); apply(); },
+    onLeaveBack: () => { pastHero = false; document.documentElement.classList.remove("past-hero"); apply(); },
   });
   ScrollTrigger.create({
     trigger: contact, start: "top 75%",

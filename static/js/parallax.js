@@ -24,7 +24,6 @@ function stagedHero(track) {
   const stage = track.querySelector("[data-hero-stage]");
   const story = track.querySelector("[data-hero-story]");
   const layers = [...stage.querySelectorAll(".scenery [data-layer]")];
-  const wash = stage.querySelector("[data-hero-wash]");
   const copy = stage.querySelector("[data-hero-copy]");
   const figure = stage.querySelector("[data-hero-scene]");
   const dark = story.querySelector("[data-hero-dark]");
@@ -51,7 +50,6 @@ function stagedHero(track) {
     const x = el.dataset.layerX ? () => (parseFloat(el.dataset.layerX) * window.innerWidth) / 100 : 0;
     tl.to(el, { y: vh(parseFloat(el.dataset.layer)), x, duration: 1 }, 0);
   });
-  tl.to(wash, { opacity: 0.35, duration: 0.12 }, 0);
 
   // Scene 1 (introduction): the desk scene rises in, then everything lifts away at its own speed.
   tl.fromTo(figure, { yPercent: 135 }, { yPercent: 0, ease: "power2.out", duration: 0.09 }, 0);
@@ -59,7 +57,7 @@ function stagedHero(track) {
     tl.to(el, { y: vh(parseFloat(el.dataset.heroLine)), ease: "power1.in", duration: 0.09 }, 0.1));
   tl.to(copy, { autoAlpha: 0, duration: 0.07 }, 0.11)
     .to(figure, { autoAlpha: 0, yPercent: -16, duration: 0.07 }, 0.11)
-    .to(dark, { autoAlpha: 0.94, duration: 0.09 }, 0.12);
+    .to(dark, { autoAlpha: 0.55, duration: 0.09 }, 0.12); // dims the scenery but keeps its depth layers visible
 
   // Scene windows: [in-start, in-end, out-start, out-end]. Layers inside move at their own data-depth speed.
   const parallaxIn = (scene, from, to) =>

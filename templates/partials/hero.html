@@ -2,17 +2,18 @@
 {% comment %}Hero track: on tall desktop screens JS adds .is-staged, pinning the stage (sticky) while layers move at different speeds
    and the next paper sheet slides over it. Everywhere else it is a plain, readable hero.{% endcomment %}
 <section id="hero" class="hero-track" aria-labelledby="hero-title" data-section data-hero-track>
-  <div class="hero-stage" data-hero-stage>
+  <div class="hero-stage on-dark" data-hero-stage>
     {# Layered scenery. transform owner: GSAP (parallax.js: staged scrub on desktop, plain scroll parallax elsewhere). #}
     <div class="scenery" aria-hidden="true">
       <div data-parallax="-0.12" data-layer="6" class="-top-[10%] h-[120%]">{% include "illustrations/contours.html" %}</div>
-      <div data-hero-wash class="hero-wash"></div>
+      <div data-parallax="-0.04" data-layer="3" class="-top-[10%] h-[120%]">{% include "illustrations/stars_far.html" %}</div>
+      <div data-parallax="-0.09" data-layer="9" class="-top-[10%] h-[120%]">{% include "illustrations/stars_near.html" %}</div>
       <div data-parallax="-0.16" data-layer-x="-12" data-layer="8" class="!top-[6%] h-[28%]">{% include "illustrations/clouds.html" %}</div>
       <div data-parallax="-0.1" data-layer="38" class="hero-sun">{% include "illustrations/sun.html" %}</div>
       <div class="hero-frags" data-parallax="-0.28" data-layer="26"><span style="top:16%;left:56%">const idea = build();</span><span style="top:34%;left:72%">&lt;Product /&gt;</span><span style="top:8%;left:34%">await api.create()</span></div>
       <div class="hero-frags" data-parallax="-0.18" data-layer="12"><span style="top:26%;left:44%">git commit -m "ship it"</span><span style="top:46%;left:84%">return ship(app);</span></div>
-      <div data-parallax="-0.22" data-layer="16" class="-bottom-[10%] h-[44%]">{% include "illustrations/hills.html" %}</div>
-      <div data-parallax="-0.34" data-layer="40" class="-bottom-[10%] h-[34%]">{% include "illustrations/botanical.html" %}</div>
+      <div data-parallax="-0.22" data-layer="16" class="-bottom-[10%] h-[31%]">{% include "illustrations/hills.html" %}</div>
+      <div data-parallax="-0.34" data-layer="40" class="-bottom-[10%] h-[24%]">{% include "illustrations/botanical.html" %}</div>
     </div>
 
     <div class="wrap hero-wrap relative z-10">
@@ -39,13 +40,13 @@
       </div>
 
       <figure class="hero-figure" data-hero-scene>
-        <div class="scene" data-scene data-mode="day">
+        <div class="scene" data-scene data-mode="night">
           {% include "illustrations/hero_scene.html" %}
         </div>
         <figcaption class="mt-3 flex flex-wrap items-center justify-between gap-x-4 gap-y-2">
           <span class="label">Illustration &mdash; an engineer's desk and landscape</span>
-          <button type="button" class="scene-toggle btn whitespace-nowrap !py-1.5 !px-4 !text-sm" data-scene-toggle aria-pressed="false">
-            {% icon "moon" %} <span data-scene-toggle-label>View by night</span>
+          <button type="button" class="scene-toggle btn whitespace-nowrap !py-1.5 !px-4 !text-sm" data-scene-toggle aria-pressed="true">
+            {% icon "moon" %} <span data-scene-toggle-label>View by day</span>
           </button>
         </figcaption>
       </figure>
