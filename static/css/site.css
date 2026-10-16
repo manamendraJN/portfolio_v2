@@ -224,3 +224,7 @@ html.has-cursor .cursor-ring, html.has-cursor .cursor-dot { opacity: 1; }
 
 /* Native cursor hidden only while the tailer is active (fine pointer, motion allowed, pointer inside page). */
 html.has-cursor, html.has-cursor * { cursor: none !important; }
+
+/* ---- Scroll-driven certificate rail (class added by certificates.js) ---- */
+.is-driven .rail-viewport { overflow: hidden; }
+.is-driven .rail { overflow: visible; width: max-content; scroll-snap-type: none; cursor: auto; will-change: transform; } /* x owner: GSAP */

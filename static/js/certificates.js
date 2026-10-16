@@ -1,6 +1,6 @@
-/* Certificate gallery: vertical scroll drives the rail sideways (pinned, desktop only).
-   Owner of the rail transform: GSAP (scrubbed). On touch, small screens and reduced motion the rail
-   stays a native scroll-snap row (see rail.js), so keyboard and swipe keep working. */
+/* Certificate gallery: vertical scroll drives the rail sideways (pinned, every screen size).
+   Owner of the rail transform: GSAP (scrubbed). Under reduced motion the rail stays a native scroll-snap row
+   (see rail.js). The distance is measured from the real track width, never hardcoded. */
 import { gsap, ScrollTrigger } from "../vendor/gsap.js";
 import { MEDIA } from "./media.js";
 
@@ -11,7 +11,7 @@ export function initCertificates(mm) {
   if (!pinEl || !rail) return;
   const nativeHint = hint ? hint.textContent : "";
 
-  mm.add({ driven: MEDIA.pin }, (ctx) => {
+  mm.add({ driven: MEDIA.motion }, (ctx) => {
     if (!ctx.conditions.driven) return;
     const viewport = rail.parentElement;
     const distance = () => Math.max(0, rail.scrollWidth - viewport.clientWidth);
