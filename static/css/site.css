@@ -541,3 +541,24 @@ html.past-hero .index { opacity: 1; visibility: visible; transition-delay: 0s; }
 }
 @media (max-width: 380px) { .hero-ctas .btn .icon { display: none; } }
 @media (max-width: 899px) { .hero-stage .hero-sun, .hero-sun { display: none !important; } }
+
+/* ================= Fluid sizing (responsive audit, 320px-1920px) =================
+   Size/spacing only; no animation, effect or scroll behaviour is touched here. */
+body { font-size: clamp(1rem, .96rem + .18vw, 1.125rem); }
+.label { font-size: clamp(.68rem, .64rem + .12vw, .75rem); }
+.tag { font-size: clamp(.64rem, .6rem + .12vw, .7rem); }
+.nrow .num { font-size: clamp(2.4rem, 1.6rem + 3.6vw, 5.5rem); }
+.focus-card, .plate { border-radius: clamp(6px, .8vw, 8px); }
+.layer.sheet:not(#contact) { padding-bottom: clamp(3.5rem, 8vw, 7rem); }
+.story-line { font-size: clamp(1.8rem, 1.2rem + 3.2vw, 4.2rem); }
+.contact-title, #contact-title { font-size: clamp(2.5rem, 1.2rem + 6.6vw, 9rem); line-height: .96; text-wrap: balance; }
+.text-h2 { text-wrap: balance; }
+@media (max-width: 359px) {
+  .wrap { padding-inline: 1rem; }
+  [data-header] .menu-btn { padding: .4rem .85rem; }
+  .btn { padding: .65rem .95rem; }
+  .pill { right: .5rem; bottom: .5rem; font-size: .85rem; padding: .5rem .85rem; }
+  .plate-frame figcaption { font-size: .6rem; }
+  .nrow .tag { margin: 0; }
+}
+@media (min-width: 1920px) { .wrap { max-width: 96rem; } }
