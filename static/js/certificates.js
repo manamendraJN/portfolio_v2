@@ -1,6 +1,5 @@
 /* Certificate gallery: vertical scroll drives the cards from right to left (pinned, every screen size),
-   with layered parallax: each card enters from a different depth and settles into line, and every
-   certificate illustration drifts slightly against its card.
+   with layered parallax: every certificate illustration drifts against its card while the row stays aligned.
    Everything is scroll-linked and user-controlled (no autonomous motion), so it also runs when the system
    asks for reduced motion. Owner of these transforms: GSAP (scrubbed). The distance is measured from the real
    track width, never hardcoded. Without JavaScript the rail stays a native scroll-snap row. */
@@ -16,7 +15,12 @@ export function initCertificates(mm) {
   mm.add("(min-width: 0px)", () => {
     const viewport = rail.parentElement;
     const cards = [...rail.children];
-    const distance = () => Math.max(0, rail.scrollWidth - viewport.clientWidth);
+    // Layout-based track width (ignores the parallax transforms): last card edge plus the end padding.
+    const distance = () => {
+      const last = cards[cards.length - 1];
+      const padEnd = parseFloat(getComputedStyle(rail).paddingRight) || 0;
+      return Math.max(0, last.offsetLeft + last.offsetWidth + padEnd - viewport.clientWidth);
+    };
     pinEl.classList.add("is-driven");
     if (hint) hint.textContent = "Scroll to explore";
 
@@ -29,12 +33,11 @@ export function initCertificates(mm) {
     });
     // The whole track moves right to left in step with the scroll.
     tl.to(rail, { x: () => -distance(), duration: 1 }, 0);
-    // Parallax depth: cards start offset by different amounts and glide into line by the end.
+    // Parallax depth: the cards stay in one clean row; each certificate illustration drifts against its card.
     cards.forEach((card, i) => {
-      const depth = [1, 2, 3][i % 3];
-      tl.fromTo(card, { x: depth * 14, y: i % 2 ? 28 : -28 }, { x: 0, y: 0, duration: 1 }, 0);
-      const art = card.querySelector("figure > svg, figure > img");
-      if (art) tl.fromTo(art, { x: -16 * depth, scale: 1.2 }, { x: 16 * depth, scale: 1.2, duration: 1 }, 0);
+      const depth = i % 3;
+      const art = card.querySelector(".cert-art > svg, .cert-art > img");
+      if (art) tl.fromTo(art, { x: -16 * (depth + 1), scale: 1.2 }, { x: 16 * (depth + 1), scale: 1.2, duration: 1 }, 0);
     });
 
     // Keyboard: focusing an off-screen card scrolls the page to the matching position.

@@ -228,4 +228,9 @@ html.has-cursor, html.has-cursor * { cursor: none !important; }
 /* ---- Scroll-driven certificate rail (class added by certificates.js) ---- */
 .is-driven .rail-viewport { overflow: hidden; }
 .is-driven .rail { overflow: visible; width: max-content; scroll-snap-type: none; cursor: auto; will-change: transform; } /* x owner: GSAP */
-.is-driven .rail figure { overflow: hidden; border-radius: 4px; }
+/* Align the first and last card with the heading's content edges (same gutters as .wrap). */
+.is-driven .rail { padding-inline: 1.5rem; }
+@media (min-width: 768px) { .is-driven .rail { padding-inline: 3rem; } }
+@media (min-width: 1280px) { .is-driven .rail { padding-inline: 5rem; } }
+.cert-art { overflow: hidden; border-radius: 4px; }
+.is-driven .rail { padding-block: .5rem; }
