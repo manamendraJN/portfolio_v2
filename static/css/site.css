@@ -172,9 +172,9 @@ section[id] { scroll-margin-top: 2rem; }
 .hero-figure { margin-top: 2.5rem; width: 100%; max-width: 46rem; }
 @media (min-width: 1024px) { .hero-figure { margin-left: auto; } }
 .hero-wash { position: absolute; inset: 0; background: var(--wash-blue); opacity: 0; } /* opacity owner: GSAP (parallax.js) */
-.hero-track.is-staged { height: 260vh; margin-bottom: -100vh; }
+.hero-track.is-staged { height: 640vh; margin-bottom: -100vh; } /* four story scenes, then the next sheet slides over */
 .hero-track.is-staged .hero-stage { position: sticky; top: 0; height: 100vh; padding: 5.5rem 0 0; }
-.hero-track.is-staged .hero-title { font-size: clamp(3.4rem, min(9vw, 15vh), 9rem); }
+.hero-track.is-staged .hero-title { font-size: clamp(3.4rem, min(8.5vw, 13.5vh), 9rem); }
 .hero-track.is-staged .hero-wrap { height: 100%; }
 .hero-track.is-staged .hero-figure { position: absolute; right: clamp(1.5rem, 5vw, 5rem); bottom: 2.5rem; width: min(42vw, 600px); margin: 0; } /* yPercent owner: GSAP */
 
@@ -248,3 +248,56 @@ html.has-cursor, html.has-cursor * { cursor: none !important; }
   .is-driven .rail .font-display { font-size: 1.35rem; }
   .is-driven .rail article > div:last-child { padding-top: .5rem; }
 }
+
+/* ---- Hero storytelling: kicker, floating code, and scenes 2-4 ---- */
+.hero-kicker { margin-top: 1.1rem; font-family: "Instrument Serif", Georgia, serif; font-style: italic; font-size: clamp(1.25rem, 2.2vw, 1.9rem); color: var(--vermilion); }
+.hero-frags { top: 0 !important; height: 100%; display: none; }
+@media (min-width: 1024px) { .hero-frags { display: block; } }
+.hero-frags span { position: absolute; font: 400 .75rem/1 "JetBrains Mono", monospace; letter-spacing: .02em; color: var(--ink-soft); opacity: .65; white-space: nowrap; }
+
+.hero-story { position: relative; background: var(--ink); color: var(--paper); padding: 3.5rem 0 4rem; }
+.hero-dark { display: none; }
+.story-scene { display: grid; gap: 2.5rem; align-items: center; max-width: 88rem; margin: 0 auto; padding: 3rem clamp(1.5rem, 5vw, 5rem); }
+@media (min-width: 900px) { .story-scene { grid-template-columns: 1fr 1.1fr; } .story-scene--end { grid-template-columns: 1fr; } }
+.story-scene .label { color: rgba(245, 240, 230, .78); }
+.story-scene .tag { border-color: rgba(245, 240, 230, .5); color: var(--paper); }
+.story-scene .btn { border-color: var(--paper); color: var(--paper); }
+.story-scene .btn-primary { background: var(--vermilion); border-color: var(--vermilion); color: var(--surface); }
+.story-scene :focus-visible { outline-color: var(--ochre); }
+.story-line { font-family: "Instrument Serif", Georgia, serif; font-weight: 400; font-size: clamp(2rem, 4.6vw, 4.2rem); line-height: 1.02; letter-spacing: -.01em; margin-top: 1rem; }
+.story-line--big { font-size: clamp(2.4rem, 6vw, 5.4rem); max-width: 18ch; margin-inline: auto; }
+.story-center { text-align: center; }
+.story-chips { display: flex; flex-wrap: wrap; justify-content: center; gap: .5rem; margin-top: 1.5rem; list-style: none; padding: 0; }
+
+.story-visual { position: relative; min-height: 17rem; height: clamp(15rem, 46vh, 30rem); }
+.panel { background: var(--dusk); border: 1px solid rgba(245, 240, 230, .16); border-radius: 10px; box-shadow: 0 22px 50px rgba(0, 0, 0, .35); overflow: hidden; will-change: transform; }
+.panel-bar { display: flex; align-items: center; gap: .35rem; padding: .55rem .75rem; border-bottom: 1px solid rgba(245, 240, 230, .12); font: 400 .7rem/1 "JetBrains Mono", monospace; color: rgba(245, 240, 230, .6); }
+.panel-bar i { width: .55rem; height: .55rem; border-radius: 50%; background: var(--vermilion); }
+.panel-bar i:nth-child(2) { background: var(--ochre); } .panel-bar i:nth-child(3) { background: var(--sage); }
+.panel-bar span { margin-left: .6rem; }
+.code { margin: 0; padding: .9rem 1rem 1.1rem; font: 400 clamp(.68rem, .95vw, .8rem)/1.65 "JetBrains Mono", monospace; color: rgba(245, 240, 230, .9); white-space: pre; overflow: hidden; }
+.code .k { color: #9DB4C8; } .code .s { color: var(--ochre); } .code .f { color: #A9C4A1; } .code .c { color: #8C97AE; }
+.panel-editor { position: absolute; left: 0; top: 0; width: min(100%, 30rem); }
+.panel-terminal { position: absolute; right: 0; bottom: 0; width: min(72%, 20rem); }
+.frag { position: absolute; font: 400 .78rem/1 "JetBrains Mono", monospace; color: var(--ochre); opacity: .85; white-space: nowrap; will-change: transform; }
+.frag-a { top: 0; right: 8%; } .frag-b { bottom: 4%; left: 4%; color: #9DB4C8; }
+
+.story-stack { aspect-ratio: 520 / 360; width: min(100%, calc(46vh * 1.444)); height: auto; min-height: 0; justify-self: center; }
+.story-links { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+.story-links path { stroke: var(--ochre); stroke-width: 2; }
+.panel-browser { position: absolute; left: 0; top: 0; width: 46%; background: var(--surface); border-color: rgba(27, 36, 56, .3); }
+.panel-browser .panel-bar { color: var(--ink-soft); border-color: rgba(27, 36, 56, .12); }
+.ui { padding: .7rem; display: grid; gap: .5rem; }
+.ui b { display: block; height: 1.6rem; border-radius: 4px; background: var(--wash-blue); }
+.ui-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: .4rem; }
+.ui-row u { display: block; height: 2.6rem; border-radius: 4px; background: rgba(157, 180, 200, .45); }
+.ui s { display: block; height: .5rem; width: 70%; border-radius: 3px; background: rgba(27, 36, 56, .25); }
+.node { position: absolute; transform: translate(-50%, -50%); padding: .45rem .9rem; border-radius: 999px; background: var(--dusk); border: 1.5px solid var(--ochre); font: 500 .72rem/1 "JetBrains Mono", monospace; letter-spacing: .08em; text-transform: uppercase; color: var(--paper); will-change: transform; }
+.node-api { left: 51.9%; top: 52.8%; } .node-db { left: 78.8%; top: 72.8%; }
+
+/* Staged (pinned) layout: the story lives inside the stage and is scrubbed by scroll (parallax.js) */
+.hero-track.is-staged .hero-story { position: absolute; inset: 0; z-index: 11; background: transparent; padding: 0; pointer-events: none; }
+.hero-track.is-staged .hero-dark { display: block; position: absolute; inset: 0; background: var(--ink); } /* opacity owner: GSAP */
+.hero-track.is-staged .story-scene { position: absolute; inset: 0; padding-top: 6rem; padding-bottom: 2.5rem; pointer-events: auto; } /* autoAlpha owner: GSAP */
+.hero-track.is-staged .story-scene--end { place-items: center; }
+@media (max-width: 899px) { .frag { display: none; } }

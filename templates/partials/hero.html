@@ -1,6 +1,6 @@
 {% load portfolio_tags %}
-{# Hero track: on tall desktop screens JS adds .is-staged, pinning the stage (sticky) while layers move at different speeds
-   and the next paper sheet slides over it. Everywhere else it is a plain, readable hero. #}
+{% comment %}Hero track: on tall desktop screens JS adds .is-staged, pinning the stage (sticky) while layers move at different speeds
+   and the next paper sheet slides over it. Everywhere else it is a plain, readable hero.{% endcomment %}
 <section id="hero" class="hero-track" aria-labelledby="hero-title" data-section data-hero-track>
   <div class="hero-stage" data-hero-stage>
     {# Layered scenery. transform owner: GSAP (parallax.js: staged scrub on desktop, plain scroll parallax elsewhere). #}
@@ -9,6 +9,8 @@
       <div data-hero-wash class="hero-wash"></div>
       <div data-parallax="-0.16" data-layer-x="-12" data-layer="8" class="!top-[6%] h-[28%]">{% include "illustrations/clouds.html" %}</div>
       <div data-parallax="-0.1" data-layer="38" class="hero-sun">{% include "illustrations/sun.html" %}</div>
+      <div class="hero-frags" data-parallax="-0.28" data-layer="26"><span style="top:16%;left:56%">const idea = build();</span><span style="top:34%;left:72%">&lt;Product /&gt;</span><span style="top:8%;left:34%">await api.create()</span></div>
+      <div class="hero-frags" data-parallax="-0.18" data-layer="12"><span style="top:26%;left:44%">git commit -m "ship it"</span><span style="top:46%;left:84%">return ship(app);</span></div>
       <div data-parallax="-0.22" data-layer="16" class="-bottom-[10%] h-[44%]">{% include "illustrations/hills.html" %}</div>
       <div data-parallax="-0.34" data-layer="40" class="-bottom-[10%] h-[34%]">{% include "illustrations/botanical.html" %}</div>
     </div>
@@ -20,6 +22,7 @@
           <span class="block" data-hero-line="-16"><em>{{ hero.line_emphasis }}</em></span>
           <span class="block" data-hero-line="-23">{{ hero.line_three }}</span>
         </h1>
+        <p class="hero-kicker">Turning ideas into digital experiences.</p>
 
         <div class="mt-10 max-w-xl lg:mt-12" data-hero-intro data-hero-line="-8">
           <p class="text-lead">{{ hero.intro }}</p>
@@ -48,4 +51,5 @@
       </figure>
     </div>
   </div>
+{% include "partials/hero_story.html" %}
 </section>
