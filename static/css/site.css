@@ -446,3 +446,20 @@ html.past-hero .index { opacity: 1; visibility: visible; transition-delay: 0s; }
   .is-driven .rail .font-display { font-size: 1.2rem; }
   .is-driven .rail article > div:last-child { padding-top: .4rem; }
 }
+
+/* Phones: show the floating code fragments and brighter depth layers so the 3D movement reads on a small screen */
+@media (max-width: 899px) {
+  .hero-frags { display: block; }
+  .hero-frags span { font-size: .62rem; opacity: .85; left: auto !important; right: 4%; }
+  .hero-frags span:nth-child(2) { right: 30% !important; }
+  .hero-stage .scenery [data-fly="-4,300,1"], .hero-stage .scenery [data-fly="-10,650,1"] { color: #fff; }
+  .hero-stage .scenery [data-fly="-12,160,1"] { display: none; }
+}
+@media (max-width: 899px) and (max-height: 720px) { .hero-sun { display: block !important; top: 58% !important; width: 3.2rem !important; opacity: .55; } }
+/* Phones: keep the floating code in the open lower area, clear of the text */
+@media (max-width: 899px) {
+  .hero-frags span { top: auto !important; bottom: 12%; }
+  .hero-frags span:nth-child(2) { bottom: 22%; }
+  .hero-frags span:nth-child(3) { bottom: 32%; }
+}
+@media (max-width: 899px) { .hero-frags ~ .hero-frags span { right: auto !important; left: 5%; } .hero-frags ~ .hero-frags span:nth-child(1) { bottom: 17%; } .hero-frags ~ .hero-frags span:nth-child(2) { bottom: 27%; } }

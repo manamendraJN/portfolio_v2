@@ -51,7 +51,7 @@ function stagedHero(track) {
   gsap.set([...flyers, ...emergers], { transformPerspective: 900 });
   // Layers present from the start rise and come toward the viewer (nearer layers travel further and grow more).
   // Phones get a stronger travel so the depth reads clearly on a small screen.
-  const boost = window.innerWidth < 900 ? 1.5 : 1;
+  const boost = window.innerWidth < 900 ? 2.2 : 1;
   flyers.forEach((el) => {
     let [y, z, k] = el.dataset.fly.split(",").map(Number);
     y *= boost;
@@ -67,7 +67,7 @@ function stagedHero(track) {
   emergers.forEach((el) => {
     const [y0, z0, finalOpacity] = el.dataset.emerge.split(",").map(Number);
     gsap.set(el, { transformOrigin: "50% 100%" });
-    tl.fromTo(el, { y: vh(y0), z: z0, opacity: 0 }, { y: vh(-2), z: 0, opacity: finalOpacity, ease: "power1.out", duration: 0.6 }, 0.04);
+    tl.fromTo(el, { y: vh(y0 * (window.innerWidth < 900 ? 0.5 : 1)), z: z0, opacity: window.innerWidth < 900 ? 0.15 : 0 }, { y: vh(-2), z: 0, opacity: window.innerWidth < 900 ? Math.min(1, finalOpacity + 0.3) : finalOpacity, ease: "power1.out", duration: window.innerWidth < 900 ? 0.4 : 0.6 }, 0.02);
   });
 
   // Scene 1 (introduction): the desk scene rises in, then everything lifts away at its own speed.
