@@ -23,7 +23,8 @@ function plainParallax(scenery) {
 function stagedHero(track) {
   const stage = track.querySelector("[data-hero-stage]");
   const story = track.querySelector("[data-hero-story]");
-  const layers = [...stage.querySelectorAll(".scenery [data-layer]")];
+  const flyers = [...stage.querySelectorAll(".scenery [data-fly]")];
+  const emergers = [...stage.querySelectorAll(".scenery [data-emerge]")];
   const copy = stage.querySelector("[data-hero-copy]");
   const figure = stage.querySelector("[data-hero-scene]");
   const dark = story.querySelector("[data-hero-dark]");
@@ -45,10 +46,22 @@ function stagedHero(track) {
     },
   });
 
-  // Background: foreground layers sink fastest all the way through (depth from different speeds).
-  layers.forEach((el) => {
+  // Background, 3D depth: every layer has its own perspective so z reads as distance from the viewer.
+  const ground = (el) => (el.hasAttribute("data-ground") ? "50% 100%" : "50% 50%"); // ground layers grow upward from the horizon
+  gsap.set([...flyers, ...emergers], { transformPerspective: 900 });
+  // Layers present from the start rise and come toward the viewer (nearer layers travel further and grow more).
+  flyers.forEach((el) => {
+    const [y, z, k] = el.dataset.fly.split(",").map(Number);
+    const base = parseFloat(getComputedStyle(el).opacity) || 1;
     const x = el.dataset.layerX ? () => (parseFloat(el.dataset.layerX) * window.innerWidth) / 100 : 0;
-    tl.to(el, { y: vh(parseFloat(el.dataset.layer)), x, duration: 1 }, 0);
+    gsap.set(el, { transformOrigin: ground(el) });
+    tl.to(el, { y: vh(y), z, x, opacity: base * k, duration: 1 }, 0);
+  });
+  // Distant ridges start small, faint and low in the background, then rise out of it and move forward.
+  emergers.forEach((el) => {
+    const [y0, z0, finalOpacity] = el.dataset.emerge.split(",").map(Number);
+    gsap.set(el, { transformOrigin: "50% 100%" });
+    tl.fromTo(el, { y: vh(y0), z: z0, opacity: 0 }, { y: vh(-2), z: 0, opacity: finalOpacity, ease: "power1.out", duration: 0.66 }, 0.12);
   });
 
   // Scene 1 (introduction): the desk scene rises in, then everything lifts away at its own speed.
@@ -63,7 +76,9 @@ function stagedHero(track) {
   const parallaxIn = (scene, from, to) =>
     scene.querySelectorAll("[data-depth]").forEach((el) => {
       const d = parseFloat(el.dataset.depth);
-      tl.fromTo(el, { y: vh(d * 9) }, { y: vh(-d * 9), duration: to - from }, from);
+      gsap.set(el, { transformPerspective: 1000 });
+      // Panels rise out of the depth: small and far at first, larger and closer as the scene plays.
+      tl.fromTo(el, { y: vh(d * 9), z: -Math.abs(d) * 200 }, { y: vh(-d * 9), z: Math.abs(d) * 140, duration: to - from }, from);
     });
 
   // Scene 2 (the craft): editor and terminal panels glide at different speeds.

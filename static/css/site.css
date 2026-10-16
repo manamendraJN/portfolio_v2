@@ -314,6 +314,9 @@ html.has-cursor, html.has-cursor * { cursor: none !important; }
 .js .index { opacity: 0; visibility: hidden; transition: opacity .3s, visibility 0s .3s; }
 html.past-hero .index { opacity: 1; visibility: visible; transition-delay: 0s; }
 /* Keep hero text legible where it crosses the hills and plants on the dark hero. */
-.hero-stage .scenery [data-layer="16"] { opacity: .4; }
-.hero-stage .scenery [data-layer="40"] { opacity: .5; }
+.hero-stage .scenery [data-fly="-38,650,0"] { opacity: .5; }
 .hero-stage .scenery [data-layer-x] { left: 48% !important; width: 52% !important; } /* clouds stay clear of the headline */
+.hero-ridge { opacity: .4; } /* static look when not staged; scrubbed by GSAP when staged */
+.hero-stage .scenery [data-fly="-20,260,0.3"] { opacity: .4; }
+.hero-stage .scenery .hero-ridge { left: -25% !important; width: 150% !important; } /* wide enough that scaling in depth never shows an edge */
+.hero-stage .scenery [data-fly="-20,260,0.3"] { opacity: .45; }
