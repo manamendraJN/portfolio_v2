@@ -14,6 +14,7 @@ import { initResearch } from "./research.js";
 import { initPill } from "./pill.js";
 import { initNav } from "./nav.js";
 import { initLayers } from "./layers.js";
+import { initCursor } from "./cursor.js";
 
 const root = document.documentElement;
 const reducedQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -28,6 +29,7 @@ const mm = gsap.matchMedia();
 
 initNav();
 initLayers();
+initCursor();
 initHero();
 initRail();
 
