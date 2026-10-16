@@ -1,0 +1,92 @@
+{# Original illustration: an engineer's desk in front of a window onto a landscape. Day and night are two stacked states; opacity is owned by GSAP (hero.js). #}
+<div class="scene-state scene-day" data-scene-state="day">
+  <svg class="ill" viewBox="0 0 800 520" role="img" aria-label="Illustration, by day: an engineer's desk with a laptop, lamp, plant and notebook in front of a window showing hills, a sun and a winding river.">
+    <defs>
+      <clipPath id="win-clip"><rect x="70" y="40" width="660" height="290" rx="3"/></clipPath>
+      <g id="desk-art">
+        <g clip-path="url(#win-clip)">
+          <g class="wobble">
+            <path class="fw" d="M70 235 C150 190 230 200 300 225 C380 250 440 190 520 185 C600 180 660 215 730 200 V330 H70Z"/>
+            <path class="s" d="M70 235 C150 190 230 200 300 225 C380 250 440 190 520 185 C600 180 660 215 730 200"/>
+            <path class="fs" d="M70 285 C160 250 250 262 340 280 C430 298 520 245 610 250 C660 253 700 268 730 262 V330 H70Z"/>
+            <path class="s" d="M70 285 C160 250 250 262 340 280 C430 298 520 245 610 250 C660 253 700 268 730 262"/>
+            <path class="s2" d="M90 300 C170 276 250 286 330 298 M400 296 C470 270 560 276 640 288 M120 316 C220 300 300 306 380 312"/>
+            {# circuit-like terrain on the far hill #}
+            <path class="sv" d="M420 205 h30 v-14 h26 M470 214 h40 v10 h24" stroke-width="1.2"/>
+            <circle class="fv" cx="476" cy="191" r="3"/><circle class="fv" cx="534" cy="224" r="3"/><circle class="fp s" cx="420" cy="205" r="3.5"/>
+            {# winding river #}
+            <path d="M160 330 C190 308 150 300 200 288 C250 276 230 262 290 258" fill="none" stroke="#9DB4C8" stroke-width="6" stroke-linecap="round" opacity=".8"/>
+            {# trees #}
+            <g class="s"><path d="M610 262v-30M610 246l-12-12M610 240l12-10"/><path d="M650 268v-22M650 256l-9-9M650 252l9-8"/></g>
+            <circle class="fs" cx="610" cy="226" r="14"/><circle class="fs" cx="650" cy="240" r="11"/>
+          </g>
+        </g>
+        {# window frame #}
+        <rect class="s" x="70" y="40" width="660" height="290" rx="3"/>
+        <path class="s" d="M400 40V330M70 185H730"/>
+        <rect class="s2" x="62" y="332" width="676" height="10" rx="2"/>
+
+        {# desk #}
+        <path class="fp s" d="M40 392H760V410H40Z"/>
+        <path class="s" d="M80 410V500M720 410V500M80 450H720" opacity=".9"/>
+        <path class="s2" d="M60 505l14-12M100 505l14-12M140 505l14-12M660 505l14-12M700 505l14-12M740 505l14-12"/>
+
+        {# laptop #}
+        <rect class="fscreen s" x="290" y="262" width="230" height="130" rx="6"/>
+        <path class="s" d="M268 392 L290 378 H520 L542 392Z"/>
+        <g class="sink" style="stroke-width:1.1"><path d="M310 284h60M310 300h90M326 316h70M326 332h100M310 348h50"/></g>
+        <path class="sv" d="M310 284h26M326 332h30"/>
+        <path class="sink" style="stroke-width:1.8" d="M455 282 L440 296 L455 310M475 282 L490 296 L475 310"/>
+        <rect class="fo" x="458" y="344" width="22" height="8" rx="2"/>
+
+        {# plant #}
+        <g class="wobble">
+          <path class="fp s" d="M110 392 L118 350 H170 L178 392Z"/>
+          <path class="s" d="M144 350 C140 320 120 300 100 280 M144 350 C146 316 168 296 188 270 M144 350 C144 320 140 290 144 250"/>
+          <path class="fs s" d="M100 280 C86 272 80 258 84 246 C98 250 106 264 100 280Z M188 270 C204 266 214 254 214 242 C198 244 188 256 188 270Z M144 250 C132 240 132 224 140 212 C152 222 152 238 144 250Z"/>
+        </g>
+
+        {# lamp #}
+        <g class="s">
+          <path d="M640 392 H700 M670 392 V350 L640 300 L680 262"/>
+          <path class="fo" d="M662 244 L710 232 L722 270 L682 282Z"/>
+          <circle class="fp" cx="640" cy="300" r="5"/>
+        </g>
+
+        {# mug, books, camera, notebook #}
+        <g class="s">
+          <path class="fp" d="M560 392 V362 H592 V392Z"/><path d="M592 370 q14 0 14 10 t-14 10"/>
+          <path class="s2" d="M570 352 q-6 -8 0 -14 M582 352 q-6 -8 0 -14"/>
+          <rect class="fw" x="215" y="372" width="60" height="10" rx="1"/><rect class="fv" x="221" y="362" width="52" height="10" rx="1" opacity=".85"/><rect class="fp" x="217" y="352" width="56" height="10" rx="1"/>
+        </g>
+      </g>
+    </defs>
+
+    {# day-specific layers #}
+    <rect width="800" height="520" fill="#FFFDF8"/>
+    <rect x="70" y="40" width="660" height="290" fill="#9DB4C8" opacity=".28"/>
+    <g class="wobble"><circle cx="575" cy="112" r="30" fill="#D9A441"/><circle cx="575" cy="112" r="40" fill="none" stroke="#D9A441" stroke-width="1.5" stroke-dasharray="3 6"/></g>
+    <path d="M150 100 q14 -22 40 -10 q18 -22 44 -2 q22 -4 24 14 h-110z" fill="#FFFDF8" stroke="#1B2438" stroke-width="1.4" stroke-linejoin="round" opacity=".95"/>
+    <path d="M440 78 q10 -16 28 -8 q14 -14 32 0 q16 0 16 12 h-76z" fill="#FFFDF8" stroke="#1B2438" stroke-width="1.4" stroke-linejoin="round" opacity=".95"/>
+    <use href="#desk-art"/>
+  </svg>
+</div>
+
+<div class="scene-state scene-night" data-scene-state="night" aria-hidden="true">
+  <svg class="ill" viewBox="0 0 800 520" focusable="false">
+    <rect width="800" height="520" fill="#232C4A"/>
+    <rect x="70" y="40" width="660" height="290" fill="#1B2438"/>
+    <g fill="#F5F0E6">
+      <circle cx="140" cy="80" r="1.8"/><circle cx="220" cy="120" r="1.3"/><circle cx="300" cy="68" r="2"/><circle cx="360" cy="140" r="1.3"/>
+      <circle cx="460" cy="90" r="1.8"/><circle cx="520" cy="60" r="1.3"/><circle cx="640" cy="150" r="1.8"/><circle cx="690" cy="78" r="1.3"/>
+      <circle cx="250" cy="170" r="1.3"/><circle cx="590" cy="170" r="1.3"/>
+    </g>
+    <g class="wobble">
+      <circle cx="575" cy="112" r="28" fill="#F5F0E6"/>
+      <circle cx="588" cy="104" r="24" fill="#1B2438"/>
+    </g>
+    <circle cx="690" cy="262" r="140" fill="#D9A441" opacity=".10"/> {# lamp glow, ochre kept tiny and soft #}
+    <use href="#desk-art"/>
+    <path d="M662 244 L710 232 L722 270 L682 282Z" fill="#D9A441" opacity=".9"/>
+  </svg>
+</div>

@@ -1,0 +1,33 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html { scroll-behavior: auto; background: theme("colors.paper"); }
+  body {
+    @apply bg-paper font-sans text-ink antialiased;
+    font-size: 1.0625rem;
+    line-height: 1.65;
+    overflow-x: clip;
+  }
+  h1, h2, h3, h4 { @apply font-display font-normal; }
+  a { color: inherit; }
+  :focus-visible { outline: 3px solid theme("colors.vermilion"); outline-offset: 3px; border-radius: 2px; }
+  ::selection { background: theme("colors.ochre"); color: theme("colors.ink"); }
+}
+
+@layer components {
+  .wrap { @apply mx-auto w-full max-w-page px-6 md:px-12 xl:px-20; }
+  .label { @apply font-mono text-xs uppercase tracking-[0.14em] text-ink-soft; }
+  .tag {
+    @apply inline-block rounded-full border border-ink/40 px-3 py-0.5 font-mono text-[0.7rem] uppercase tracking-wider text-ink;
+  }
+  .btn {
+    @apply inline-flex items-center gap-2 rounded-full border border-ink px-6 py-3 font-semibold text-ink;
+    will-change: transform; /* transform owned by Motion (buttons.js) */
+  }
+  .btn-primary { @apply border-vermilion bg-vermilion text-surface; }
+  .btn .icon { @apply h-4 w-4; }
+  .link-line { @apply relative inline-flex items-center gap-1.5 font-semibold; }
+  .icon { @apply h-5 w-5 shrink-0; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+}

@@ -1,0 +1,23 @@
+{% load portfolio_tags %}
+<article class="plate flex h-full flex-col p-4" aria-labelledby="cert-{{ number }}">
+  <figure class="mb-4">
+    {% if image_url %}
+      <img src="{{ image_url }}" alt="{{ cert.title }} certificate from {{ cert.issuer }}" width="600" height="420" loading="lazy" class="h-auto w-full rounded border border-ink/30">
+      <figcaption class="label mt-2">Certificate image</figcaption>
+    {% else %}
+      {% include "illustrations/certificate_placeholder.html" %}
+      <figcaption class="label mt-2">Illustration placeholder &middot; not the certificate</figcaption>
+    {% endif %}
+  </figure>
+  <p class="label">{{ cert.issuer }}</p>
+  <h3 id="cert-{{ number }}" class="mt-1 font-display text-2xl leading-tight">{{ cert.title }}</h3>
+  {% if cert.issued %}<p class="mt-2 text-sm">Issued {{ cert.issued }}</p>{% endif %}
+  {% if cert.detail %}<p class="mt-1 break-all text-sm text-ink-soft">{{ cert.detail }}</p>{% endif %}
+  <div class="mt-auto pt-4">
+    {% if cert.verify_url %}
+      <a class="link-line underline underline-offset-4" href="{{ cert.verify_url }}" target="_blank" rel="noopener noreferrer" draggable="false">Verify<span class="sr-only"> {{ cert.title }} from {{ cert.issuer }}</span> {% icon "external-link" %}</a>
+    {% else %}
+      <p class="label">No verification link supplied</p>
+    {% endif %}
+  </div>
+</article>

@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block content %}
+  {# Narrative thread: one SVG path drawn on scroll (thread.js builds the path from the section positions). #}
+  <svg class="thread" aria-hidden="true" focusable="false" data-thread>
+    <path class="thread-ghost" data-thread-ghost d=""/>
+    <path class="thread-path" data-thread-path d=""/>
+    <g class="thread-marker" data-thread-marker>
+      {# Pencil nib, pointing along +x #}
+      <path d="M0 0 L-14 -5 L-30 -5 L-30 5 L-14 5 Z" fill="#FFFDF8" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+      <path d="M0 0 L-8 -3 L-8 3 Z" fill="#C2411F"/>
+      <path d="M-14 -5 V5" stroke="currentColor" stroke-width="1.2"/>
+    </g>
+  </svg>
+
+  {% include "partials/hero.html" %}
+  {% include "partials/projects.html" %}
+  {% include "partials/skills.html" %}
+  {% include "partials/about.html" %}
+  {% include "partials/experience.html" %}
+  {% include "partials/education.html" %}
+  {% include "partials/research.html" %}
+  {% include "partials/certificates.html" %}
+  {% include "partials/contact.html" %}
+{% endblock %}

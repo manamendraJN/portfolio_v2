@@ -1,0 +1,39 @@
+<svg class="ill" viewBox="0 0 600 420" role="img" aria-label="{{ project.illustration_alt }}">
+  <rect width="600" height="420" class="fw2" opacity=".4"/>
+  <text class="tx" x="24" y="34">BOARD / ISSUES</text>
+  <g class="wobble">
+    {# three columns #}
+    <g>
+      <rect class="fp s" x="24" y="52" width="170" height="330" rx="6"/><text class="tx" x="38" y="76">TO DO</text>
+      <rect class="fp s" x="215" y="52" width="170" height="330" rx="6"/><text class="tx" x="229" y="76">IN PROGRESS</text>
+      <rect class="fp s" x="406" y="52" width="170" height="330" rx="6"/><text class="tx" x="420" y="76">DONE</text>
+    </g>
+    {# cards #}
+    <g class="s">
+      <rect class="fp" x="38" y="92" width="142" height="62" rx="4"/><path class="s2" d="M50 110h90M50 124h60"/><circle class="fo" cx="160" cy="138" r="6"/>
+      <rect class="fp" x="38" y="168" width="142" height="62" rx="4"/><path class="s2" d="M50 186h100M50 200h70"/><circle class="fw" cx="160" cy="214" r="6"/>
+      <rect class="fp" x="38" y="244" width="142" height="62" rx="4"/><path class="s2" d="M50 262h80M50 276h96"/>
+      <rect class="fp" x="229" y="92" width="142" height="62" rx="4"/><path class="s2" d="M241 110h96M241 124h50"/><circle class="fs" cx="351" cy="138" r="6"/>
+      <rect class="fp" x="229" y="168" width="142" height="62" rx="4"/><path class="s2" d="M241 186h70M241 200h100"/>
+      <rect class="fp" x="420" y="92" width="142" height="62" rx="4"/><path class="s2" d="M432 110h100M432 124h66"/><path class="sv" d="M538 134l5 5 10-12"/>
+      <rect class="fp" x="420" y="168" width="142" height="62" rx="4"/><path class="s2" d="M432 186h84M432 200h92"/><path class="sv" d="M538 210l5 5 10-12"/>
+    </g>
+    {# a card being dragged between columns #}
+    <g transform="rotate(-5 200 300)">
+      <rect class="fp sv" x="150" y="262" width="150" height="66" rx="4" style="stroke-width:2.2"/>
+      <path class="s2" d="M164 282h100M164 298h70"/>
+    </g>
+    <path class="sv" stroke-dasharray="4 6" d="M180 300 C 195 330, 215 330, 232 300"/>
+  </g>
+  {# ticket thread #}
+  <g class="s">
+    <path class="s2" stroke-dasharray="2 5" d="M300 240 V345"/>
+    <circle class="fp" cx="300" cy="352" r="4"/>
+    <rect class="fw" x="320" y="330" width="230" height="36" rx="10"/><path class="s2" d="M336 343h110M336 355h70"/>
+  </g>
+  <g>
+    <rect class="fp s" x="404" y="372" width="0" height="0"/>
+  </g>
+  <text class="tx" x="24" y="404" style="opacity:.8">TICKET THREAD</text>
+  <g transform="translate(450 392)"><rect class="fp s" x="0" y="-16" width="126" height="24" rx="12"/><path class="sv" d="M12 -4 l5 5 9-11"/><text class="tx" x="34" y="0">SAVED</text></g>
+</svg>

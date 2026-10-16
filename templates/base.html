@@ -1,0 +1,59 @@
+{% load static portfolio_tags %}<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}Navodya Manamendra | Software Engineer and Full-Stack Developer{% endblock %}</title>
+  <meta name="description" content="{% block description %}Portfolio of Navodya Manamendra, a Software Engineer and Full-Stack Developer building practical web applications and exploring intelligent solutions through AI and computer vision.{% endblock %}">
+  <meta name="theme-color" content="#F5F0E6">
+  <link rel="canonical" href="{{ site_base_url }}/">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Navodya Manamendra | Software Engineer and Full-Stack Developer">
+  <meta property="og:description" content="Thoughtful code. Intelligent ideas. Useful software.">
+  <meta property="og:url" content="{{ site_base_url }}/">
+  <meta property="og:image" content="{{ site_base_url }}{% static 'img/og.svg' %}">
+  <meta name="twitter:card" content="summary">
+  <link rel="icon" href="{% static 'img/favicon.svg' %}" type="image/svg+xml">
+  <link rel="preload" href="{% static 'fonts/instrument-serif-latin-400-normal.woff2' %}" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="{% static 'fonts/manrope-latin-wght-normal.woff2' %}" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="{% static 'css/tailwind.css' %}">
+  <link rel="stylesheet" href="{% static 'css/site.css' %}">
+  <script>
+    /* JS-only state flags. Without JavaScript none of these classes exist, so all content stays visible. */
+    (function () {
+      var root = document.documentElement;
+      root.classList.add('js');
+      try {
+        if (matchMedia('(prefers-reduced-motion: reduce)').matches) root.classList.add('is-reduced');
+        else if (!sessionStorage.getItem('nm-seen')) root.classList.add('js-preload');
+      } catch (e) {}
+    })();
+  </script>
+</head>
+<body>
+  <a class="skip-link sr-only-focusable" href="#main">Skip to content</a>
+
+  {# Shared hand-drawn wobble filter used sparingly by illustrations. #}
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+    <filter id="wobble" x="-2%" y="-2%" width="104%" height="104%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.018" numOctaves="2" seed="4" result="n"/>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="3.2" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+  </svg>
+
+  {% include "partials/preloader.html" %}
+  {% include "partials/nav.html" %}
+
+  <main id="main" class="relative">
+    {% block content %}{% endblock %}
+  </main>
+
+  {% include "partials/footer.html" %}
+
+  <a class="pill btn btn-primary shadow-[3px_3px_0_#1B2438]" href="#contact" data-pill>
+    Get in touch {% icon "arrow-up-right" %}
+  </a>
+
+  <script type="module" src="{% static 'js/main.js' %}"></script>
+</body>
+</html>

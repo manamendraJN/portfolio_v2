@@ -1,0 +1,64 @@
+{% load portfolio_tags %}
+<section id="research" class="relative z-10 pt-24 md:pt-40" aria-labelledby="research-title" data-section>
+  <div class="wrap">
+    {% section_heading "06" "Featured academic research" "Measuring fit from" "two photographs" "" "research-title" %}
+
+    <article class="mb-10 max-w-4xl">
+      <h3 class="text-h3">{{ research.title }}</h3>
+      <p class="mt-4">{{ research.venue }}</p>
+      <dl class="mt-4 grid gap-x-8 gap-y-1 text-sm sm:grid-cols-[auto_1fr]">
+        <dt class="label">DOI</dt>
+        <dd><a class="underline underline-offset-4" href="{{ research.doi_url }}" target="_blank" rel="noopener noreferrer">{{ research.doi }}</a></dd>
+        <dt class="label">ISBN</dt><dd>{{ research.isbn }}</dd>
+        <dt class="label">Supervisor</dt><dd>{{ research.supervisor }}</dd>
+      </dl>
+    </article>
+
+    <div class="grid gap-8 lg:grid-cols-12">
+      <div class="lg:col-span-7">
+        <div class="plate border-vermilion p-6 md:p-8" style="border-color:var(--vermilion)">
+          <p class="label !text-vermilion">My contribution</p>
+          <h4 class="mt-2 font-display text-3xl">{{ research.contribution_title }}</h4>
+          <p class="mt-3">{{ research.contribution }}</p>
+        </div>
+      </div>
+      <div class="lg:col-span-5">
+        <div class="rounded-lg border-[1.5px] border-dashed border-ink/45 p-6 text-ink-soft md:p-8">
+          <p class="label">Wider group research</p>
+          <h4 class="mt-2 font-display text-2xl">{{ research.group_title }}</h4>
+          <ul class="mt-3 list-disc space-y-1 pl-5">
+            {% for m in research.group_modules %}<li>{{ m }}</li>{% endfor %}
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    {# Pipeline: arrows draw on scroll at lg+ (stroke-dashoffset owner: GSAP, research.js). #}
+    <figure class="mt-14" data-pipeline>
+      <figcaption class="label mb-4">Pipeline of my module &middot; Illustration (diagram, not a result)</figcaption>
+      <ol class="pipe row list-none p-0" aria-label="Pipeline of the author's module">
+        {% for step in research.pipeline %}
+        <li class="pipe-node mine">
+          <span class="label !text-vermilion">Step {{ forloop.counter }}</span>
+          <p class="mt-1 font-semibold">{{ step }}</p>
+          {% if not forloop.last %}
+          <svg class="pipe-link" viewBox="0 0 40 24" aria-hidden="true" focusable="false"><path data-pipe-path d="M2 12 C 12 2, 24 22, 36 12 M30 7 L37 12 L30 17"/></svg>
+          <div class="pipe-arrow lg:hidden" aria-hidden="true"></div>
+          {% endif %}
+        </li>
+        {% endfor %}
+      </ol>
+
+      <ul class="pipe row mt-10 list-none p-0 lg:[&>li]:col-span-1" aria-label="Wider group modules, not the author's contribution">
+        {% for m in research.group_modules %}
+        <li class="pipe-node group"><span class="label">Group module</span><p class="mt-1 font-semibold">{{ m }}</p></li>
+        {% endfor %}
+      </ul>
+
+      <p class="mt-6 flex flex-wrap items-center gap-x-6 gap-y-2 text-sm" aria-label="Legend">
+        <span class="inline-flex items-center gap-2"><span class="inline-block h-3 w-6 rounded-sm border-2 border-vermilion"></span> My module</span>
+        <span class="inline-flex items-center gap-2 text-ink-soft"><span class="inline-block h-3 w-6 rounded-sm border-2 border-dashed border-ink/45"></span> Wider group modules</span>
+      </p>
+    </figure>
+  </div>
+</section>

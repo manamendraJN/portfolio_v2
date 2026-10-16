@@ -1,0 +1,26 @@
+{% load portfolio_tags %}
+<section id="about" class="relative z-10 pt-24 md:pt-40" aria-labelledby="about-title" data-section>
+  <div class="wrap grid gap-12 lg:grid-cols-12">
+    <div class="lg:col-span-6">
+      {% section_heading "03" "About" "Turning complex problems into" "practical" "software" "about-title" %}
+      <div class="space-y-5 text-lead max-w-xl">
+        {% for para in about %}<p>{{ para }}</p>{% endfor %}
+      </div>
+    </div>
+    <div class="lg:col-span-6">
+      <h3 class="sr-only">Three themes</h3>
+      <div class="grid gap-6 pb-24 md:pb-40" data-focus-stack>
+        {% for card in focus_cards %}
+        <article class="focus-card" data-focus-card>
+          <div class="flex items-start justify-between gap-4">
+            <span class="font-display text-6xl leading-none text-vermilion" aria-hidden="true">{{ card.number }}</span>
+            <span class="rounded-full bg-sage/25 p-3 text-ink">{% icon card.icon %}</span>
+          </div>
+          <h4 class="mt-4 font-display text-3xl">{{ card.title }}</h4>
+          <p class="mt-2 text-ink-soft">{{ card.text }}</p>
+        </article>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</section>

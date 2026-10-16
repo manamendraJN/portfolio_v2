@@ -1,0 +1,33 @@
+<svg class="ill" viewBox="0 0 600 420" role="img" aria-label="{{ project.illustration_alt }}">
+  <rect width="600" height="420" class="fw2" opacity=".4"/>
+  <text class="tx" x="24" y="34">PATH / LEARNING</text>
+  {# contour hills behind the path #}
+  <g class="s2" opacity=".6"><path d="M30 380 C120 300 200 330 300 280 S470 200 580 230"/><path d="M30 396 C130 330 210 356 310 306 S480 226 580 254"/></g>
+  <g class="wobble">
+    {# winding path with milestones #}
+    <path class="s" stroke-dasharray="1 0" d="M50 370 C 150 360, 150 300, 230 300 S 330 340, 360 270 S 300 200, 360 160 S 470 150, 500 90" style="stroke-width:3"/>
+    <path class="sv" stroke-dasharray="4 8" d="M50 370 C 150 360, 150 300, 230 300 S 330 340, 360 270"/>
+  </g>
+  <g class="s">
+    <circle class="fp" cx="50" cy="370" r="9"/><circle class="fp" cx="230" cy="300" r="9"/><circle class="fp" cx="360" cy="270" r="9"/>
+    <circle class="fp" cx="360" cy="160" r="9"/><circle class="fo" cx="500" cy="90" r="11"/>
+    <path d="M500 79V52L520 60L500 68"/>
+  </g>
+  <g class="tx"><text class="tx" x="30" y="396">START</text><text class="tx" x="206" y="326">PATH 1</text><text class="tx" x="336" y="298">PATH 2</text></g>
+  {# video-call frame #}
+  <g class="s">
+    <rect class="fp" x="40" y="60" width="210" height="140" rx="8"/>
+    <rect class="fw" x="52" y="72" width="88" height="56" rx="4"/><rect class="fs" x="150" y="72" width="88" height="56" rx="4"/>
+    <circle cx="96" cy="94" r="9"/><path d="M80 120c2-14 30-14 32 0"/>
+    <circle cx="194" cy="94" r="9"/><path d="M178 120c2-14 30-14 32 0"/>
+    <path class="s2" d="M52 150h120M52 164h80"/>
+    <circle class="fv" cx="214" cy="170" r="9"/><path d="M210 170l8 0" stroke="#FFFDF8"/>
+  </g>
+  <text class="tx" x="40" y="222">LIVE SESSION</text>
+  {# progress ring and badge #}
+  <g class="s">
+    <circle cx="450" cy="300" r="34" class="fp"/><path class="sv" d="M450 266 A34 34 0 1 1 418 312" style="stroke-width:5"/>
+    <text class="tx" x="429" y="304">PROGRESS</text>
+    <path class="fo" d="M530 270l7 15 16 2-12 11 3 16-14-8-14 8 3-16-12-11 16-2z"/>
+  </g>
+</svg>

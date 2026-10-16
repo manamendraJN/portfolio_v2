@@ -1,0 +1,37 @@
+{% load portfolio_tags %}
+<article class="plate mb-8 lg:mb-0" data-plate aria-labelledby="proj-{{ project.slug }}">
+  <div class="wrap grid gap-8 py-8 lg:grid-cols-12 lg:items-center lg:gap-14 lg:py-10">
+    <div class="lg:col-span-6" data-plate-text>
+      <p class="label mb-3">Project {{ project.number }} / {{ total|stringformat:"02d" }}</p>
+      <div class="flex items-start gap-5">
+        <span class="font-display text-7xl leading-[0.8] text-vermilion md:text-8xl" aria-hidden="true">{{ project.number }}</span>
+        <h3 id="proj-{{ project.slug }}" class="text-h3">{{ project.title }}</h3>
+      </div>
+      <p class="mt-5 max-w-xl">{{ project.summary }}</p>
+
+      {% if project.contribution %}
+      <p class="marginalia mt-4 max-w-xl"><strong>Navodya's contribution:</strong> {{ project.contribution }}</p>
+      {% endif %}
+      {% if project.features %}
+      <p class="mt-4 max-w-xl text-sm text-ink-soft"><span class="label mr-2">Features</span>{{ project.features|join:" · " }}</p>
+      {% endif %}
+      {% if project.reported_outcome %}
+      <p class="mt-4 max-w-xl text-sm italic">{{ project.reported_outcome }}</p>
+      {% endif %}
+
+      <ul class="mt-5 flex flex-wrap gap-2" aria-label="Technologies used in {{ project.title }}">
+        {% for t in project.tech %}<li class="tag">{{ t }}</li>{% endfor %}
+      </ul>
+      <ul class="mt-6 flex flex-wrap gap-x-6 gap-y-2">
+        {% for link in project.links %}
+        <li><a class="link-line underline underline-offset-4" href="{{ link.url }}" target="_blank" rel="noopener noreferrer">{{ link.label }}<span class="sr-only"> for {{ project.title }}</span> {% icon "arrow-up-right" %}</a></li>
+        {% endfor %}
+      </ul>
+    </div>
+
+    <figure class="plate-frame plate-art lg:col-span-6" data-plate-art>
+      {% with "illustrations/plate_"|add:project.illustration|add:".html" as tpl %}{% include tpl %}{% endwith %}
+      <figcaption><span>Illustration</span><span>Plate {{ project.number }}</span></figcaption>
+    </figure>
+  </div>
+</article>

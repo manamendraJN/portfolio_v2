@@ -1,0 +1,39 @@
+<svg class="ill" viewBox="0 0 600 420" role="img" aria-label="{{ project.illustration_alt }}">
+  <rect width="600" height="420" class="fw2" opacity=".4"/>
+  <text class="tx" x="24" y="34">BALANCER / WORKLOAD</text>
+  <g class="wobble">
+    {# connected nodes: team members #}
+    <g class="s2">
+      <path d="M90 110L210 150M90 110L120 250M210 150L120 250M210 150L330 90M330 90L450 130M210 150L300 250M300 250L120 250"/>
+    </g>
+    <g class="s">
+      <circle class="fp" cx="90" cy="110" r="22"/><circle class="fp" cx="210" cy="150" r="22"/><circle class="fp" cx="120" cy="250" r="22"/>
+      <circle class="fp" cx="330" cy="90" r="22"/><circle class="fp" cx="300" cy="250" r="22"/><circle class="fw" cx="450" cy="130" r="22"/>
+    </g>
+    <g class="s">
+      <circle cx="90" cy="102" r="6"/><path d="M78 122c2-10 22-10 24 0"/>
+      <circle cx="210" cy="142" r="6"/><path d="M198 162c2-10 22-10 24 0"/>
+      <circle cx="120" cy="242" r="6"/><path d="M108 262c2-10 22-10 24 0"/>
+      <circle cx="330" cy="82" r="6"/><path d="M318 102c2-10 22-10 24 0"/>
+      <circle cx="300" cy="242" r="6"/><path d="M288 262c2-10 22-10 24 0"/>
+    </g>
+    {# balance scale #}
+    <g class="s">
+      <path d="M450 190V330M410 330H490"/>
+      <path d="M390 220L510 200"/>
+      <circle class="fp" cx="450" cy="210" r="5"/>
+      <path d="M390 220L372 262H408Z M510 200L492 242H528Z" class="fp"/>
+      <path class="fs" d="M376 262h28l-2 8h-24z M496 242h28l-2 8h-24z"/>
+    </g>
+  </g>
+  {# workload bars #}
+  <g class="s">
+    <text class="tx" x="24" y="300">WORKLOAD</text>
+    <rect class="fp" x="24" y="312" width="260" height="14" rx="3"/><rect class="fw" x="24" y="312" width="200" height="14" rx="3"/>
+    <rect class="fp" x="24" y="336" width="260" height="14" rx="3"/><rect class="fw" x="24" y="336" width="120" height="14" rx="3"/>
+    <rect class="fp" x="24" y="360" width="260" height="14" rx="3"/><rect class="fw" x="24" y="360" width="160" height="14" rx="3"/>
+    <path class="sv" d="M232 318 C 262 330, 262 344, 236 342"/><path class="sv" d="M236 342l7 -3M236 342l3 7"/>
+  </g>
+  <g class="tx"><text class="tx" x="320" y="326">DEADLINE</text><text class="tx" x="320" y="346">COMPLEXITY</text><text class="tx" x="320" y="366">WORKLOAD</text></g>
+  <path class="s2" d="M312 322H300M312 342H300M312 362H300M300 322V362M300 342H290" stroke-dasharray="2 4"/>
+</svg>

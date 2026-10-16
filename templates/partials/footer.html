@@ -1,0 +1,11 @@
+{% load portfolio_tags %}
+<footer class="relative z-10 border-t-[1.5px] border-ink bg-paper">
+  <div class="wrap flex flex-col items-start justify-between gap-6 py-10 md:flex-row md:items-center">
+    <p class="font-display text-2xl">Drawn and coded by {{ person.name }}</p>
+    <ul class="flex flex-wrap items-center gap-x-6 gap-y-2 font-mono text-xs uppercase tracking-widest">
+      <li><a class="underline underline-offset-4" href="{{ person.github }}" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+      <li><a class="underline underline-offset-4" href="{{ person.linkedin }}" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+      <li><a class="inline-flex items-center gap-1 underline underline-offset-4" href="#hero">Back to top {% icon "arrow-up" %}</a></li>
+    </ul>
+  </div>
+</footer>

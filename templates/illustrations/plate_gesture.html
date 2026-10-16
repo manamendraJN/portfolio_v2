@@ -1,0 +1,43 @@
+<svg class="ill" viewBox="0 0 600 420" role="img" aria-label="{{ project.illustration_alt }}">
+  <rect width="600" height="420" class="fw2" opacity=".4"/>
+  <text class="tx" x="24" y="34">TRACKING / RIGHT HAND</text>
+  {# webcam frame #}
+  <rect class="fp s" x="40" y="56" width="330" height="320" rx="8"/>
+  <path class="s2" d="M40 216H370M205 56V376" stroke-dasharray="3 6"/>
+  <circle class="fs" cx="354" cy="72" r="4"/>
+  {# hand: wash silhouette, then landmark skeleton #}
+  <g class="wobble">
+    <g fill="none" stroke="#9DB4C8" stroke-opacity=".6" stroke-width="22" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M262 325L235 290L218 258L205 230"/>
+      <path d="M278 270L268 222L262 185L258 152"/>
+      <path d="M310 262L310 208L310 168L310 132"/>
+      <path d="M340 270L350 222L354 188L357 158"/>
+      <path d="M366 288L384 248L395 222L404 198"/>
+    </g>
+    <path d="M300 350 L262 325 L278 270 L310 262 L340 270 L366 288Z" fill="#9DB4C8" fill-opacity=".6" stroke="#9DB4C8" stroke-width="22" stroke-linejoin="round" stroke-opacity=".6"/>
+  </g>
+  <g class="s2" style="opacity:1">
+    <path d="M300 350L262 325L235 290L218 258L205 230"/>
+    <path d="M300 350L278 270L268 222L262 185L258 152"/>
+    <path d="M300 350L310 262L310 208L310 168L310 132"/>
+    <path d="M300 350L340 270L350 222L354 188L357 158"/>
+    <path d="M300 350L366 288L384 248L395 222L404 198"/>
+    <path d="M278 270L310 262L340 270L366 288"/>
+  </g>
+  <g class="fp s">
+    <circle cx="300" cy="350" r="4.5"/>
+    <circle cx="262" cy="325" r="3.5"/><circle cx="235" cy="290" r="3.5"/><circle cx="218" cy="258" r="3.5"/><circle cx="205" cy="230" r="3.5"/>
+    <circle cx="278" cy="270" r="3.5"/><circle cx="268" cy="222" r="3.5"/><circle cx="262" cy="185" r="3.5"/>
+    <circle cx="310" cy="262" r="3.5"/><circle cx="310" cy="208" r="3.5"/><circle cx="310" cy="168" r="3.5"/><circle cx="310" cy="132" r="3.5"/>
+    <circle cx="340" cy="270" r="3.5"/><circle cx="350" cy="222" r="3.5"/><circle cx="354" cy="188" r="3.5"/><circle cx="357" cy="158" r="3.5"/>
+    <circle cx="366" cy="288" r="3.5"/><circle cx="384" cy="248" r="3.5"/><circle cx="395" cy="222" r="3.5"/><circle cx="404" cy="198" r="3.5"/>
+  </g>
+  <circle class="fv" cx="258" cy="152" r="6"/>
+  {# cursor trail from the index fingertip to the screen #}
+  <path class="sv" stroke-dasharray="3 7" d="M258 152 C 230 100, 300 90, 380 120 S 470 130, 500 110"/>
+  <rect class="fp s" x="394" y="70" width="180" height="120" rx="6"/><path class="s2" d="M394 90H574"/><circle class="fo" cx="406" cy="80" r="3"/>
+  <path class="s2" d="M410 110h70M410 126h100M410 142h50"/>
+  <path class="fi" d="M500 110 l0 26 l7 -6 l5 11 l5 -2 l-5 -11 l9 -1Z" transform="translate(0 -2)"/>
+  <text class="tx" x="40" y="396">LANDMARKS &#183; CALIBRATION &#183; CURSOR</text>
+  <text class="tx" x="394" y="212" style="fill:#C2411F">INDEX TIP &#8594; CURSOR</text>
+</svg>

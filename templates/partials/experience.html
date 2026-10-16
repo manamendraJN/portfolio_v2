@@ -1,0 +1,28 @@
+{% load portfolio_tags %}
+<section id="experience" class="relative z-10 pt-12 md:pt-24" aria-labelledby="experience-title" data-section>
+  <div class="wrap">
+    {% section_heading "04" "Professional experience" "Roles, described" "plainly" "" "experience-title" %}
+    <ul class="list-none p-0">
+      {% for role in experience %}
+      <li class="nrow" tabindex="0" data-reveal-row>
+        <span class="num" aria-hidden="true">{{ role.number }}</span>
+        <div>
+          <h3 class="text-h3">{{ role.title }}</h3>
+          <p class="mt-2 font-semibold">{{ role.organisation }}</p>
+          <p class="label mt-1">{{ role.period }}</p>
+        </div>
+        <div>
+          <p>{{ role.description }}</p>
+          {% if role.note %}<p class="marginalia mt-3 text-sm font-semibold">{{ role.note }}</p>{% endif %}
+          {% if role.tech %}
+          <ul class="mt-3 flex flex-wrap gap-2" aria-label="Technologies">{% for t in role.tech %}<li class="tag">{{ t }}</li>{% endfor %}</ul>
+          {% endif %}
+        </div>
+        <div class="detail" aria-hidden="true">
+          {% with "illustrations/role_"|add:role.illustration|add:".html" as tpl %}{% include tpl %}{% endwith %}
+        </div>
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+</section>
