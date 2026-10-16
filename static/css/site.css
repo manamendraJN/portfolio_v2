@@ -218,6 +218,5 @@ html.has-cursor .cursor-ring, html.has-cursor .cursor-dot { opacity: 1; }
 .cursor-dot { transition: opacity .2s; }
 .cursor-ring { transition: opacity .2s, border-color .2s; }
 
-/* ---- Scroll-driven certificate rail (class added by certificates.js) ---- */
-.is-driven .rail-viewport { overflow: hidden; }
-.is-driven .rail { overflow: visible; width: max-content; scroll-snap-type: none; cursor: auto; will-change: transform; } /* x owner: GSAP */
+/* ---- Depth veil over a layer that is being covered (opacity driven by sheets.js) ---- */
+.layer-shade { position: absolute; inset: 0; z-index: 30; background: #0A0D14; opacity: 0; pointer-events: none; will-change: opacity; }

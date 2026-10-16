@@ -1,17 +1,15 @@
 {% load portfolio_tags %}
 <section id="certificates" class="layer sheet pt-24 md:pt-40" aria-labelledby="certificates-title" data-section>
   <div class="sheet-edge" aria-hidden="true"></div>
-  <div data-cert-pin>
   <div class="wrap">
     {% section_heading "07" "Certificate gallery" "Credentials, with" "links" "to verify" "certificates-title" %}
-    <p class="label rail-hint mb-4" data-rail-hint>{% icon "move-horizontal" %} <span data-rail-hint-text>Drag to explore</span></p>
+    <p class="label rail-hint mb-4" data-rail-hint>{% icon "move-horizontal" %} Drag to explore</p>
   </div>
-  <div class="rail-viewport mx-auto max-w-page">
+  <div class="mx-auto max-w-page">
     <ul class="rail list-none" tabindex="0" role="region" aria-label="Certificates, scrollable" data-rail>
       {% for cert in certificates %}
       <li>{% certificate_card cert forloop.counter %}</li>
       {% endfor %}
     </ul>
-  </div>
   </div>
 </section>

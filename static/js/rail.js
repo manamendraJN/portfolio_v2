@@ -9,7 +9,7 @@ export function initRail() {
   let startScroll = 0;
 
   rail.addEventListener("pointerdown", (e) => {
-    if (e.pointerType !== "mouse" || e.button !== 0 || rail.closest(".is-driven")) return;
+    if (e.pointerType !== "mouse" || e.button !== 0) return;
     down = true;
     moved = false;
     startX = e.clientX;
