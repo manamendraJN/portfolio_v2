@@ -18,17 +18,7 @@
   <link rel="preload" href="{% static 'fonts/manrope-latin-wght-normal.woff2' %}" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="{% static 'css/tailwind.css' %}">
   <link rel="stylesheet" href="{% static 'css/site.css' %}">
-  <script>
-    /* JS-only state flags. Without JavaScript none of these classes exist, so all content stays visible. */
-    (function () {
-      var root = document.documentElement;
-      root.classList.add('js');
-      try {
-        if (matchMedia('(prefers-reduced-motion: reduce)').matches) root.classList.add('is-reduced');
-        else if (!sessionStorage.getItem('nm-seen')) root.classList.add('js-preload');
-      } catch (e) {}
-    })();
-  </script>
+  <script>document.documentElement.classList.add('js');</script>
 </head>
 <body>
   <a class="skip-link sr-only-focusable" href="#main">Skip to content</a>
@@ -41,7 +31,6 @@
     </filter>
   </svg>
 
-  {% include "partials/preloader.html" %}
   {% include "partials/nav.html" %}
 
   <main id="main" class="relative">

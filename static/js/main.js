@@ -1,11 +1,8 @@
-/* Entry point. Animation ownership (one owner per animated property):
-   - GSAP + ScrollTrigger: all scroll-driven motion, preloader, headline reveals, hero scene opacity.
-   - Motion: navigation overlay (clip-path, item opacity/transform) and [data-btn] scale.
-   - CSS: floating pill show/hide, list-row detail reveal, link underline states. */
+/* Entry point. Only scroll-driven motion runs on this site (GSAP ScrollTrigger, scrubbed transforms,
+   opacity, clip-path and stroke-dashoffset). No timed or load animations, no animation library besides GSAP.
+   Ownership: GSAP owns scroll-driven transforms; CSS owns the nav overlay, pill and list-row hover states. */
 import { gsap, ScrollTrigger } from "../vendor/gsap.js";
-import { MEDIA } from "./media.js";
-import { runPreloader } from "./preloader.js";
-import { initReveal } from "./reveal.js";
+import "./media.js";
 import { initHero } from "./hero.js";
 import { initParallax } from "./parallax.js";
 import { initSheets } from "./sheets.js";
@@ -16,7 +13,6 @@ import { initRail } from "./rail.js";
 import { initResearch } from "./research.js";
 import { initPill } from "./pill.js";
 import { initNav } from "./nav.js";
-import { initButtons } from "./buttons.js";
 
 const root = document.documentElement;
 const reducedQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -29,25 +25,18 @@ ScrollTrigger.config({ ignoreMobileResize: true });
 // gsap.matchMedia() separates desktop, mobile and reduced-motion behaviour (see media.js).
 const mm = gsap.matchMedia();
 
-// Accessibility-first modules that work regardless of motion preference.
 initNav();
-initButtons();
+initHero();
 initRail();
 
-const start = () => {
-  initReveal(mm);
-  initHero(mm);
-  initParallax(mm);
-  initProjects(mm);
-  initSheets(mm);
-  initIndex(); // created after the pin so positions include its spacer
-  initPill();
-  initResearch(mm);
-  initThread(mm); // last: its path is measured from the final layout
-  ScrollTrigger.refresh();
-};
-
-runPreloader().then(start);
+initParallax(mm);
+initProjects(mm);
+initSheets(mm);
+initIndex(); // created after the pin so positions include its spacer
+initPill();
+initResearch(mm);
+initThread(mm); // last: its path is measured from the final layout
+ScrollTrigger.refresh();
 
 // Layout shifts after fonts and images load move every trigger.
 const refresh = () => ScrollTrigger.refresh();

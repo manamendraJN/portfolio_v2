@@ -55,4 +55,4 @@ Deploy: `gunicorn config.wsgi` with WhiteNoise serving `staticfiles/`.
 
 ## Vendored libraries
 
-GSAP 3.15 + ScrollTrigger and Motion are bundled as ES modules in `static/vendor/` (no CDN). Lucide icons are static SVGs in `static/icons/`. Fonts (Instrument Serif, Manrope, JetBrains Mono) are self-hosted in `static/fonts/`. GSAP is used under its standard no-charge licence.
+GSAP 3.15 + ScrollTrigger are bundled as ES modules in `static/vendor/` (no CDN). Lucide icons are static SVGs in `static/icons/`. Fonts (Instrument Serif, Manrope, JetBrains Mono) are self-hosted in `static/fonts/`. GSAP is used under its standard no-charge licence.

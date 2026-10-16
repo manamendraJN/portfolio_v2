@@ -6,7 +6,7 @@
 import { gsap } from "../vendor/gsap.js";
 import { MEDIA } from "./media.js";
 
-const SCRUB = 1.2; // smoothing: the layers ease toward the scroll position
+const SCRUB = 0.8; // light smoothing: layers ease toward the scroll position
 
 function plainParallax(scenery) {
   const section = scenery.parentElement;
@@ -22,7 +22,7 @@ function plainParallax(scenery) {
 
 function stagedHero(track) {
   const stage = track.querySelector("[data-hero-stage]");
-  const layers = [...stage.querySelectorAll("[data-layer]")];
+  const layers = [...stage.querySelectorAll(".scenery [data-layer]")];
   const wash = stage.querySelector("[data-hero-wash]");
   const copy = stage.querySelector("[data-hero-copy]");
   const figure = stage.querySelector("[data-hero-scene]");
@@ -37,11 +37,17 @@ function stagedHero(track) {
     },
   });
   // Foreground layers sink fastest: depth from different speeds.
-  layers.forEach((el) => tl.to(el, { y: vh(parseFloat(el.dataset.layer)), duration: 1 }, 0));
+  layers.forEach((el) => {
+    const x = el.dataset.layerX ? () => (parseFloat(el.dataset.layerX) * window.innerWidth) / 100 : 0;
+    tl.to(el, { y: vh(parseFloat(el.dataset.layer)), x, duration: 1 }, 0);
+  });
   tl.to(wash, { opacity: 0.4, duration: 1 }, 0);
   tl.fromTo(figure, { yPercent: 135 }, { yPercent: 0, ease: "power2.out", duration: 0.5 }, 0)
     .to(figure, { yPercent: -10, duration: 0.4 }, 0.6)
-    .to(copy, { y: vh(-14), opacity: 0, ease: "power1.in", duration: 0.45 }, 0.5);
+    .to(copy, { opacity: 0, ease: "power1.in", duration: 0.4 }, 0.55);
+  // Each headline line and the intro leave at their own speed: layered text.
+  stage.querySelectorAll("[data-hero-line]").forEach((el) =>
+    tl.to(el, { y: vh(parseFloat(el.dataset.heroLine)), ease: "power1.in", duration: 0.55 }, 0.4));
   return () => track.classList.remove("is-staged");
 }
 

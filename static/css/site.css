@@ -53,8 +53,9 @@ body::before {
 /* ---- Hero day / night scene ---- */
 .scene { position: relative; border: 1.5px solid var(--ink); border-radius: 6px; overflow: hidden; background: var(--surface); }
 .scene .scene-state { display: block; width: 100%; height: auto; }
-/* Initial state only; opacity of both states is animated solely by GSAP (hero.js). */
-.scene .scene-night { position: absolute; inset: 0; opacity: 0; --line: var(--paper); --fill-surface: #2E3860; }
+/* Day/night is a plain state swap (no animation). */
+.scene .scene-night { position: absolute; inset: 0; opacity: 0; visibility: hidden; --line: var(--paper); --fill-surface: #2E3860; }
+.scene[data-mode="night"] .scene-night { opacity: 1; visibility: visible; }
 html:not(.js) .scene-toggle { display: none; }
 
 /* ---- Parallax scenery wrappers (transform owner: GSAP, parallax.js) ---- */
@@ -81,9 +82,13 @@ html:not(.js) .scene-toggle { display: none; }
 .index a[aria-current="true"] .idx-label { color: var(--vermilion); border-color: var(--vermilion); }
 .index a[aria-current="true"]::after, .index a:hover::after, .index a:focus-visible::after { transform: scaleX(1); }
 
-/* ---- Navigation overlay (clip-path owner: Motion, nav.js) ---- */
-.overlay { position: fixed; inset: 0; z-index: 80; background: var(--ink); color: var(--paper); display: none; overflow-y: auto; }
-.overlay[data-open="true"] { display: block; }
+/* ---- Navigation overlay: CSS clip-path transition (compositor-friendly, no JS animation library) ---- */
+.overlay { position: fixed; inset: 0; z-index: 80; background: var(--ink); color: var(--paper); overflow-y: auto;
+  visibility: hidden; clip-path: circle(0% at calc(100% - 3rem) 2.5rem); transition: clip-path .5s cubic-bezier(.76,0,.24,1), visibility 0s .5s; }
+.overlay[data-open="true"] { visibility: visible; clip-path: circle(150% at calc(100% - 3rem) 2.5rem); transition: clip-path .65s cubic-bezier(.76,0,.24,1), visibility 0s; }
+.overlay [data-overlay-item] { opacity: 0; transform: translateY(18px); transition: opacity .4s, transform .4s; }
+.overlay[data-open="true"] [data-overlay-item] { opacity: 1; transform: none; transition-delay: calc(.2s + var(--i, 0) * .05s); }
+html.is-reduced .overlay, html.is-reduced .overlay [data-overlay-item] { transition: none; }
 .overlay a { text-decoration: none; }
 .overlay-link { display: flex; align-items: baseline; gap: 1rem; font-family: "Instrument Serif", serif;
   font-size: clamp(2.2rem, 7vw, 5rem); line-height: 1.1; padding: .15rem 0; }
@@ -94,16 +99,6 @@ html:not(.js) .scene-toggle { display: none; }
 html:not(.js) .menu-btn { display: none; }
 .nojs-links a { font-weight: 600; text-decoration: none; margin-left: 1rem; }
 body.scroll-locked { overflow: hidden; }
-
-/* ---- Preloader (shown only when the head script opts in) ---- */
-.preloader { position: fixed; inset: 0; z-index: 120; background: var(--paper); display: none; place-items: center;
-  clip-path: inset(0 0 0 0); } /* clip-path owner: GSAP (preloader.js) */
-html.js-preload .preloader { display: grid; }
-.preloader-count { font-family: "Instrument Serif", serif; font-size: clamp(5rem, 18vw, 12rem); line-height: 1; font-variant-numeric: tabular-nums; }
-
-/* ---- Headline reveal masks (applied by JS only) ---- */
-.mask-line { display: inline-block; vertical-align: top; overflow: hidden; padding: .12em .08em .16em; margin: -.12em -.08em -.16em; }
-.mask-word { display: inline-block; will-change: transform; } /* transform owner: GSAP (reveal.js) */
 
 /* ---- Project stack ---- */
 .plate { background: var(--surface); border: 1.5px solid var(--ink); border-radius: 8px; }
@@ -200,3 +195,8 @@ section[id] { scroll-margin-top: 2rem; }
 .on-dark .btn { border-color: var(--paper); color: var(--paper); }
 .on-dark .btn-primary { background: var(--vermilion); border-color: var(--vermilion); color: var(--surface); }
 .on-dark :focus-visible { outline-color: var(--ochre); }
+
+.hero-sun { top: 14% !important; right: 12%; left: auto !important; width: clamp(5rem, 11vw, 10rem) !important; height: auto; }
+.btn { transition: transform .2s; }
+.btn:hover { transform: translateY(-2px); }
+html.is-reduced .btn { transition: none; }

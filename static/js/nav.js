@@ -1,7 +1,5 @@
-/* Full-screen navigation overlay. Owner of the overlay clip-path and item opacity/transform: Motion.
-   Focus trap, Escape to close, aria-expanded and body scroll lock. */
-import { animate, stagger } from "../vendor/motion.js";
-
+/* Full-screen navigation overlay. Open/close motion is a CSS clip-path transition (site.css).
+   JS handles focus trap, Escape to close, aria-expanded and body scroll lock. */
 const FOCUSABLE = 'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])';
 
 export function initNav() {
@@ -10,44 +8,29 @@ export function initNav() {
   const closer = document.querySelector("[data-menu-close]");
   if (!overlay || !opener || !closer) return;
 
+  const items = [...overlay.querySelectorAll("[data-overlay-item]")];
+  items.forEach((n, i) => n.style.setProperty("--i", i));
   const reduced = () => window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  const items = overlay.querySelectorAll("[data-overlay-item]");
-  const ease = [0.76, 0, 0.24, 1];
-  const hiddenClip = "circle(0% at calc(100% - 3rem) 2.5rem)";
-  const shownClip = "circle(150% at calc(100% - 3rem) 2.5rem)";
+  const wait = () => new Promise((r) => setTimeout(r, reduced() ? 0 : 550));
   let open = false;
-  let busy = false;
 
   function show() {
-    if (open || busy) return;
+    if (open) return;
     open = true;
     overlay.dataset.open = "true";
     opener.setAttribute("aria-expanded", "true");
     document.body.classList.add("scroll-locked");
-    if (!reduced()) {
-      overlay.style.clipPath = hiddenClip;
-      items.forEach((n) => { n.style.opacity = "0"; });
-      animate(overlay, { clipPath: [hiddenClip, shownClip] }, { duration: 0.7, ease });
-      animate(items, { opacity: [0, 1], transform: ["translateY(24px)", "translateY(0px)"] },
-        { duration: 0.5, delay: stagger(0.06, { startDelay: 0.3 }), ease: "easeOut" });
-    }
     closer.focus({ preventScroll: true });
   }
 
   async function hide({ restoreFocus = true } = {}) {
-    if (!open || busy) return;
-    busy = true;
-    if (!reduced()) {
-      await animate(overlay, { clipPath: [shownClip, hiddenClip] }, { duration: 0.55, ease }).finished;
-    }
+    if (!open) return;
     open = false;
     delete overlay.dataset.open;
-    overlay.style.clipPath = "";
-    items.forEach((n) => { n.style.opacity = ""; n.style.transform = ""; });
     opener.setAttribute("aria-expanded", "false");
     document.body.classList.remove("scroll-locked");
+    await wait();
     if (restoreFocus) opener.focus({ preventScroll: true });
-    busy = false;
   }
 
   opener.addEventListener("click", show);
