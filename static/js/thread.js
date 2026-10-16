@@ -1,6 +1,5 @@
-/* One continuous narrative line, drawn from the very top of the page to the very end.
-   The SVG path is built from the section positions (starting in the hero). Its drawn tip is kept at a fixed
-   place in the viewport that drifts from the top to near the bottom as you scroll, so you always see the pencil
+/* One continuous narrative line. It starts at the Selected projects section (not in the hero) and is drawn to the
+   very end of the page. Its drawn tip is kept at a fixed height in the viewport, so you always see the pencil
    drawing where you are reading. Owners: GSAP owns stroke-dashoffset on the path and the marker transform/opacity. */
 import { gsap, ScrollTrigger } from "../vendor/gsap.js";
 import { MEDIA } from "./media.js";
@@ -34,14 +33,14 @@ export function initThread(mm) {
 
     const sections = [...document.querySelectorAll("[data-section]")].slice(1);
     const edge = Math.min(Math.max(W * 0.025, 6), 40);
-    yStart = 96; // just under the header, in the hero
+    yStart = rel(sections[0]).y + 56; // beside the Selected projects heading
     const pts = [{ x: edge, y: yStart }];
     sections.forEach((s, i) => {
       const r = rel(s);
-      pts.push({ x: i % 2 === 0 ? W - edge : edge, y: r.y + Math.min(r.h * 0.3, 480) });
+      pts.push({ x: i % 2 === 0 ? W - edge : edge, y: r.y + Math.min(r.h * 0.3, 480) + (i === 0 ? 200 : 0) });
     });
     // The path must end where the tip sits at the bottom of the page, leaving room for the flourish.
-    const endY = H - vh * 0.3 - 70;
+    const endY = H - vh * 0.4;
     const last = pts[pts.length - 1];
     last.y = Math.min(last.y, endY - 40);
     pts.push({ x: W * 0.5, y: endY });
@@ -77,8 +76,13 @@ export function initThread(mm) {
     if (!len) return;
     if (!animated) { path.style.strokeDashoffset = 0; return; }
     const vh = window.innerHeight;
-    // Tip height in the viewport: near the top at the start, about 70% down at the end.
-    const tipY = window.scrollY + vh * (0.12 + 0.58 * progress);
+    if (progress <= 0) {
+      path.style.strokeDashoffset = len; // nothing drawn before the projects section
+      gsap.set(marker, { opacity: 0 });
+      return;
+    }
+    gsap.set(marker, { opacity: 1 });
+    const tipY = window.scrollY + vh * 0.6;
     const at = progress >= 0.999 ? len : Math.max(1, Math.min(len, lengthAtY(Math.max(yStart, tipY))));
     path.style.strokeDashoffset = len - at;
     const p = path.getPointAtLength(at);
@@ -92,9 +96,9 @@ export function initThread(mm) {
     build();
     if (!animated) { gsap.set(marker, { opacity: 0 }); return; }
 
-    gsap.set(marker, { opacity: 1 });
     const st = ScrollTrigger.create({
-      start: 0, end: "max",
+      trigger: document.getElementById("work"),
+      start: "top 60%", end: "max",
       onUpdate: (self) => { progress = self.progress; place(); },
     });
     const onRefresh = () => { build(); progress = st.progress; place(); };
