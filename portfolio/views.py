@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.shortcuts import render
 
 import content
@@ -17,6 +18,7 @@ SECTIONS = (
 def home(request):
     context = {
         "person": content.PERSON,
+        "profile_image_path": settings.PROFILE_IMAGE_PATH or content.PERSON.image_path,
         "hero": content.HERO,
         "projects": content.PROJECTS,
         "skill_groups": content.SKILL_GROUPS,

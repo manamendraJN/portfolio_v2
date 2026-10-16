@@ -101,3 +101,16 @@ class HomeTests(TestCase):
 
     def test_404_page(self):
         self.assertEqual(self.client.get("/missing/").status_code, 404)
+
+
+class ProfilePhotoTests(TestCase):
+    @override_settings(IMAGEKIT_URL_ENDPOINT="", PROFILE_IMAGE_PATH="")
+    def test_placeholder_when_unset(self):
+        html = self.client.get("/").content.decode()
+        self.assertIn("Photo placeholder", html)
+        self.assertNotIn("Portrait of", html)
+
+    @override_settings(IMAGEKIT_URL_ENDPOINT="https://ik.imagekit.io/demo", PROFILE_IMAGE_PATH="me.jpg")
+    def test_imagekit_url_used_when_set(self):
+        html = self.client.get("/").content.decode()
+        self.assertIn('src="https://ik.imagekit.io/demo/me.jpg"', html)

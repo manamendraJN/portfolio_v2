@@ -53,3 +53,8 @@ def project_card(project, total):
 def certificate_card(cert, number):
     return {"cert": cert, "number": number, "image_url": imagekit_url(cert.image_path)}
 
+
+
+@register.inclusion_tag("partials/profile_photo.html")
+def profile_photo(path, name):
+    return {"image_url": imagekit_url(path), "name": name}

@@ -7,6 +7,7 @@ class Person:
     role: str
     github: str
     linkedin: str
+    image_path: str = ""  # appended to IMAGEKIT_URL_ENDPOINT, e.g. "portfolio/navodya.jpg"; empty shows a placeholder
 
 
 PERSON = Person(

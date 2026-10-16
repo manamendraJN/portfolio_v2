@@ -1,0 +1,15 @@
+<figure class="profile-photo">
+  <div class="profile-frame">
+    {% if image_url %}
+      <img src="{{ image_url }}" alt="Portrait of {{ name }}" width="480" height="600" loading="lazy" decoding="async">
+    {% else %}
+      <svg class="ill" viewBox="0 0 240 300" role="img" aria-label="Placeholder for a portrait of {{ name }}" preserveAspectRatio="xMidYMid slice">
+        <rect width="240" height="300" fill="#9DB4C8" opacity=".35"/>
+        <path d="M0 230 C60 200 120 215 240 190 V300 H0Z" fill="#7F9477" opacity=".45"/>
+        <circle cx="120" cy="112" r="40" fill="#FFFDF8" stroke="#1B2438" stroke-width="2"/>
+        <path d="M44 300 C48 220 84 188 120 188 C156 188 192 220 196 300Z" fill="#FFFDF8" stroke="#1B2438" stroke-width="2"/>
+      </svg>
+    {% endif %}
+  </div>
+  <figcaption class="label">{% if image_url %}{{ name }}{% else %}Photo placeholder &middot; image coming soon{% endif %}</figcaption>
+</figure>

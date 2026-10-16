@@ -25,7 +25,8 @@ Settings: `config.settings.dev` (default for `manage.py`) and `config.settings.p
 | `CONTACT_EMAIL` | Renders a `mailto:` button when set; hidden otherwise. |
 | `CV_URL` | Renders a résumé button when set; hidden otherwise. |
 | `GRADUATION_DATE` | Shown in Education when set; hidden otherwise. |
-| `IMAGEKIT_URL_ENDPOINT` | Base URL for certificate images (see below). |
+| `IMAGEKIT_URL_ENDPOINT` | Base URL for certificate and portrait images (see below). |
+| `PROFILE_IMAGE_PATH` | Your portrait's path under the ImageKit endpoint (e.g. `portfolio/me.jpg`). Empty shows a labelled placeholder. |
 
 ## Editing content
 

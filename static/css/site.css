@@ -562,3 +562,10 @@ body { font-size: clamp(1rem, .96rem + .18vw, 1.125rem); }
   .nrow .tag { margin: 0; }
 }
 @media (min-width: 1920px) { .wrap { max-width: 96rem; } }
+
+/* ---- About portrait (ImageKit image or placeholder) ---- */
+.profile-photo { margin: 0 0 2rem; width: min(100%, 15rem); }
+.profile-frame { aspect-ratio: 4 / 5; overflow: hidden; border: 1.5px solid var(--ink); border-radius: 8px; background: var(--surface); box-shadow: 5px 5px 0 var(--vermilion); }
+.profile-frame img, .profile-frame svg { display: block; width: 100%; height: 100%; object-fit: cover; }
+.profile-photo figcaption { margin-top: .75rem; }
+@media (min-width: 1024px) { .profile-photo { width: min(100%, 17rem); } }
