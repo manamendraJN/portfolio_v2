@@ -419,3 +419,30 @@ html.past-hero .index { opacity: 1; visibility: visible; transition-delay: 0s; }
   .story-visual { height: 10rem; min-height: 0; }
 }
 @media (max-width: 899px) { .hero-sun { opacity: .5; } } /* keeps text readable when the sun drifts behind it */
+
+/* ---- Phones with a short visible viewport (browser toolbars shown, ~560-700px): everything must fit ---- */
+@media (max-width: 899px) and (max-height: 720px) {
+  .hero-track.is-staged .hero-title { font-size: clamp(2rem, min(11.5vw, 8svh), 3.1rem); }
+  .hero-track.is-staged .hero-stage { padding-top: 4.2rem; }
+  .hero-kicker { font-size: 1.05rem; margin-top: .35rem; }
+  .hero-track.is-staged [data-hero-intro] { margin-top: .6rem; }
+  .hero-track.is-staged [data-hero-intro] .text-lead { font-size: .88rem; line-height: 1.4; }
+  .hero-track.is-staged [data-hero-intro] .btn { padding: .45rem .9rem; font-size: .85rem; min-height: 38px; }
+  .hero-track.is-staged [data-hero-intro] .btn .icon { width: .85rem; height: .85rem; }
+  .hero-track.is-staged [data-hero-intro] .mt-7 { margin-top: .6rem; flex-wrap: nowrap; gap: .5rem; }
+  .hero-track.is-staged [data-hero-intro] ul { margin-top: .5rem; }
+  .hero-track.is-staged [data-hero-intro] .hand { margin-top: .5rem; font-size: 1rem; line-height: 1.2; padding-left: .6rem; }
+  .hero-sun { display: none; }
+  /* Certificates: the pinned gallery fits the visible height */
+  .is-driven h2 { font-size: clamp(1.6rem, 5.4svh, 2.2rem); line-height: 1; }
+  .is-driven .wrap > div:first-child { margin-bottom: .5rem; }
+  .is-driven .wrap .label { margin-bottom: .35rem; }
+  .is-driven .rail-hint { display: none; }
+  .is-driven .cert-art { height: 13svh; }
+  .is-driven .rail > li { flex-basis: min(15.5rem, 74vw); }
+  .is-driven .rail article { padding: .6rem; }
+  .is-driven .rail article figure { margin-bottom: .4rem; }
+  .is-driven .rail .label { font-size: .62rem; letter-spacing: .08em; }
+  .is-driven .rail .font-display { font-size: 1.2rem; }
+  .is-driven .rail article > div:last-child { padding-top: .4rem; }
+}
