@@ -678,3 +678,15 @@ html { -webkit-tap-highlight-color: transparent; }
 .project-note { font-size: .85rem; line-height: 1.5; }
 .project-tags { display: flex; flex-wrap: wrap; gap: .35rem; list-style: none; padding: 0; margin: .2rem 0 0; }
 .project-links { display: flex; flex-wrap: wrap; gap: .4rem 1.25rem; list-style: none; padding: 0; margin: auto 0 0; padding-top: .4rem; }
+/* Smaller project cards: three columns on desktop, tighter text */
+@media (min-width: 1024px) { .project-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.1rem; } }
+@media (min-width: 720px) and (max-width: 1023px) { .project-grid { gap: 1rem; } }
+@media (max-width: 719px) { .project-card { max-width: 26rem; margin-inline: auto; width: 100%; } }
+.project-body { padding: .8rem .9rem .95rem; gap: .45rem; }
+.project-title { font-size: clamp(1.25rem, 1rem + .5vw, 1.5rem); }
+.project-summary { font-size: .88rem; line-height: 1.5; }
+.project-note { font-size: .78rem; line-height: 1.45; }
+.project-tags { gap: .3rem; } .project-tags .tag { padding: .1rem .5rem; font-size: .58rem; }
+.project-links { font-size: .88rem; gap: .3rem 1rem; }
+.project-art figcaption { font-size: .55rem; bottom: .35rem; }
+@media (max-width: 719px) { .project-card { max-width: 20.5rem; } .project-art svg { max-height: 12.5rem; } .project-body { padding: .7rem .8rem .85rem; } }
