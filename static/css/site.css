@@ -800,3 +800,38 @@ body::before { mix-blend-mode: normal; opacity: .2; }
   .hero-stage .scenery [data-layer-x] { left: 8% !important; width: 92% !important; opacity: .55; }
   .hero-stage .scenery [data-fly="-6,200,1"] { opacity: .6; }
 }
+
+/* ---- Hero: floating symbols, terminal and node network (slow, transform-only, GPU-friendly) ---- */
+@keyframes float-a { 0%, 100% { transform: translate3d(0, 0, 0); } 50% { transform: translate3d(0, -14px, 0); } }
+@keyframes float-b { 0%, 100% { transform: translate3d(0, 0, 0); } 50% { transform: translate3d(10px, 10px, 0); } }
+@keyframes float-c { 0%, 100% { transform: translate3d(0, 0, 0); } 50% { transform: translate3d(-12px, -8px, 0); } }
+.float { animation: float-a 11s ease-in-out infinite; }
+.float.f2 { animation-name: float-b; animation-duration: 14s; animation-delay: -4s; }
+.float.f3 { animation-name: float-c; animation-duration: 12s; animation-delay: -7s; }
+.float.f4 { animation-duration: 15s; animation-delay: -2s; }
+.float.f5 { animation-name: float-b; animation-duration: 13s; animation-delay: -9s; }
+.drift-slow { animation: float-a 18s ease-in-out infinite; transform-box: fill-box; }
+@media (prefers-reduced-motion: reduce) { .float, .drift-slow { animation: none !important; } }
+.hero-symbols, .hero-nodes, .hero-term { color: var(--paper); }
+.hero-symbols { top: 0 !important; height: 100%; }
+.hero-symbols span { position: absolute; font: 400 clamp(1.6rem, 3.2vw, 3rem)/1 "JetBrains Mono", monospace; color: rgba(245, 240, 230, .16); }
+.hero-nodes { right: -4%; left: auto !important; width: 62% !important; bottom: 4%; height: 38%; opacity: .75; }
+.hero-term { position: absolute; right: clamp(1.5rem, 6vw, 6rem); bottom: 9%; left: auto !important; width: min(21rem, 34vw) !important; background: rgba(35, 44, 74, .55); border: 1px solid rgba(245, 240, 230, .16); border-radius: 8px; overflow: hidden; opacity: .8; }
+.hero-term pre { margin: 0; padding: .7rem .85rem .85rem; font: 400 .72rem/1.6 "JetBrains Mono", monospace; color: rgba(245, 240, 230, .8); white-space: pre; }
+.hero-term .term-bar { display: flex; align-items: center; gap: .3rem; padding: .4rem .6rem; border-bottom: 1px solid rgba(245, 240, 230, .12); font: 400 .62rem/1 "JetBrains Mono", monospace; color: rgba(245, 240, 230, .55); }
+.hero-term .term-bar i { width: .45rem; height: .45rem; border-radius: 50%; background: var(--vermilion); }
+.hero-term .term-bar i:nth-child(2) { background: var(--ochre); } .hero-term .term-bar i:nth-child(3) { background: var(--sage); }
+.hero-term .term-bar span { margin-left: .4rem; }
+.hero-term .k, .hero-term .y { color: var(--ochre); } .hero-term .g { color: #A9C4A1; } .hero-term .cur { color: var(--paper); opacity: .7; }
+@media (max-width: 899px) { .hero-term { display: none; } .hero-nodes { width: 120% !important; right: -10%; bottom: 2%; height: 30%; opacity: .6; } .hero-symbols span { font-size: 1.5rem; } .hero-symbols span:nth-child(n+4) { display: none; } }
+
+/* ---- Contact: grid + network lines with a faint terminal ---- */
+#contact .contact-term { top: auto !important; bottom: 14%; right: clamp(1rem, 6vw, 6rem); left: auto !important; width: min(30rem, 42vw) !important; opacity: .35; color: var(--paper); }
+@media (max-width: 899px) { #contact .contact-term { width: 86vw !important; right: 7vw; bottom: 3%; opacity: .22; } }
+/* Contact terminal: tucked below the headline and buttons so it never sits under the text */
+#contact .contact-term { bottom: 2%; width: min(24rem, 30vw) !important; opacity: .24; right: clamp(1rem, 5vw, 5rem); }
+@media (max-width: 899px) { #contact .contact-term { width: 78vw !important; right: auto; left: 11vw; bottom: 1.5%; opacity: .18; } }
+#contact { padding-bottom: clamp(14rem, 22vw, 17rem) !important; }
+#contact .contact-term { bottom: 3.5%; width: min(22rem, 28vw) !important; }
+@media (max-width: 899px) { #contact { padding-bottom: 12.5rem !important; } #contact .contact-term { width: min(78vw, 20rem) !important; left: 50%; margin-left: min(-39vw, -10rem); bottom: 2.5%; } }
+@media (max-width: 899px) { #contact .contact-term { left: calc(50% - min(39vw, 10rem)) !important; margin-left: 0 !important; right: auto !important; } }
