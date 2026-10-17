@@ -11,9 +11,9 @@ export function initSheets(mm) {
     // overlap (scrubbed opacity, owner: GSAP). The incoming section stays bright until it is covered itself.
     const sections = [...document.querySelectorAll("[data-section]")];
     const shades = [];
-    const FLAT = new Set(["skills", "about", "experience", "education", "research"]); // shown as normal sections
+    const SHADED = new Set(["hero", "certificates"]); // only these get darkened: the hero (by Selected projects) and the section above Contact
     sections.slice(0, -1).forEach((section, i) => {
-      if (FLAT.has(section.id)) return;
+      if (!SHADED.has(section.id)) return;
       const host = section.querySelector(".hero-stage") || section;
       const shade = document.createElement("div");
       shade.className = "layer-shade";

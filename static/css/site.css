@@ -730,3 +730,8 @@ html { -webkit-tap-highlight-color: transparent; }
 /* Sections 02-06 read as one continuous layer: no torn edge or extra gap between them */
 #about, #experience, #education, #research { padding-top: clamp(1.5rem, 3vw, 2.5rem); }
 #skills, #about, #experience, #education { padding-bottom: clamp(1rem, 2vw, 1.5rem) !important; }
+
+/* Sections 01-07 form one layer: contiguous, one torn edge (over the hero), no per-section stacking */
+#skills, #about, #experience, #education, #research, #certificates { padding-top: clamp(1.5rem, 3vw, 2.5rem); }
+#work, #skills, #about, #experience, #education, #research { padding-bottom: clamp(1rem, 2vw, 1.5rem) !important; }
+#certificates { padding-bottom: clamp(2.5rem, 4vw, 3.5rem) !important; }
