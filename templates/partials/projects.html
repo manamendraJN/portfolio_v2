@@ -6,9 +6,11 @@
   </div>
 
 
-  <div class="stack mt-12 md:mt-16" data-stack>
+  <div class="wrap">
+  <div class="project-grid">
     {% for project in projects %}
       {% project_card project projects|length %}
     {% endfor %}
+  </div>
   </div>
 </section>

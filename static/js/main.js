@@ -7,7 +7,6 @@ import { initParallax } from "./parallax.js";
 import { initSheets } from "./sheets.js";
 import { initThread } from "./thread.js";
 import { initIndex } from "./index-nav.js";
-import { initProjects } from "./projects.js";
 import { initRail } from "./rail.js";
 import { initPill } from "./pill.js";
 import { initNav } from "./nav.js";
@@ -32,7 +31,6 @@ initCursor();
 initRail();
 
 initParallax(mm);
-initProjects(mm);
 initCertificates(mm);
 initSheets(mm);
 initIndex(); // created after the pin so positions include its spacer

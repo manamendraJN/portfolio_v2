@@ -102,8 +102,6 @@ body.scroll-locked { overflow: hidden; }
 
 /* ---- Project stack ---- */
 .plate { background: var(--surface); border: 1.5px solid var(--ink); border-radius: 8px; }
-.stack.is-pinned { position: relative; height: 100vh; }
-.stack.is-pinned .plate { overflow: hidden; padding-top: 3.5rem; position: absolute; inset: 0; border-radius: 0; border-left: 0; border-right: 0; display: flex; align-items: center; } /* yPercent owner: GSAP (projects.js) */
 .plate-art { clip-path: inset(0 0 0 0); } /* clip-path owner: GSAP (projects.js) when pinned; static otherwise */
 
 /* ---- Numbered lists with hover detail (CSS owns opacity/transform of .detail) ---- */
@@ -309,7 +307,6 @@ html.past-hero .index { opacity: 1; visibility: visible; transition-delay: 0s; }
    while the mobile browser toolbar shows and hides. */
 .hero-track.is-staged { height: 500svh; margin-bottom: -100svh; }
 .hero-track.is-staged .hero-stage { height: 100svh; }
-.stack.is-pinned { height: 100svh; }
 
 @media (max-width: 899px) {
   .hero-track.is-staged .hero-title { font-size: clamp(2.6rem, min(15vw, 11.5svh), 5rem); }
@@ -666,3 +663,18 @@ html { -webkit-tap-highlight-color: transparent; }
   .is-driven .rail > li { flex-basis: min(17rem, 76vw); }
 }
 @media (max-height: 560px) { .is-driven .cert-art { height: 16svh; } }
+
+/* ---- Projects: card grid ---- */
+.project-grid { display: grid; gap: 1.25rem; grid-template-columns: minmax(0, 1fr); align-items: stretch; }
+@media (min-width: 720px) { .project-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.5rem; } }
+@media (min-width: 1280px) { .project-grid { gap: 1.75rem; } }
+.project-card { display: flex; flex-direction: column; background: var(--surface); border: 1.5px solid var(--ink); border-radius: 8px; overflow: hidden; }
+.project-art { position: relative; margin: 0; border-bottom: 1.5px solid var(--ink); background: var(--surface); }
+.project-art svg { display: block; width: 100%; height: auto; }
+.project-art figcaption { position: absolute; left: .7rem; right: .7rem; bottom: .45rem; display: flex; justify-content: space-between; font: 500 .62rem/1 "JetBrains Mono", monospace; text-transform: uppercase; letter-spacing: .12em; color: var(--ink-soft); }
+.project-body { display: flex; flex-direction: column; gap: .6rem; padding: 1.1rem 1.25rem 1.25rem; flex: 1; }
+.project-title { font-size: clamp(1.5rem, 1.1rem + 1vw, 2rem); line-height: 1.05; }
+.project-summary { font-size: .98rem; line-height: 1.55; }
+.project-note { font-size: .85rem; line-height: 1.5; }
+.project-tags { display: flex; flex-wrap: wrap; gap: .35rem; list-style: none; padding: 0; margin: .2rem 0 0; }
+.project-links { display: flex; flex-wrap: wrap; gap: .4rem 1.25rem; list-style: none; padding: 0; margin: auto 0 0; padding-top: .4rem; }
