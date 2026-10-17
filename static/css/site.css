@@ -747,3 +747,18 @@ html { -webkit-tap-highlight-color: transparent; }
 @media (max-width: 899px) { .rail-btn { width: 2.5rem; height: 2.5rem; } .rail > li { flex-basis: min(17.5rem, 78vw); } }
 .rail-bar, .rail-arrows { position: relative; z-index: 3; }
 .rail-btn { touch-action: manipulation; }
+
+/* Phones: two certificate cards per view, sliding two at a time */
+@media (max-width: 719px) {
+  .rail { gap: .6rem; padding-inline: 1.25rem; scroll-padding-inline: 1.25rem; }
+  .rail > li { flex: 0 0 calc((100vw - 2.5rem - .6rem) / 2); }
+  .rail article { padding: .5rem; }
+  .rail article figure { margin-bottom: .4rem; }
+  .rail .cert-art { height: auto; }
+  .rail figcaption { font-size: .5rem; letter-spacing: .04em; line-height: 1.3; }
+  .rail .label { font-size: .54rem; letter-spacing: .06em; }
+  .rail .font-display { font-size: 1.05rem; line-height: 1.1; }
+  .rail article p.text-sm { font-size: .68rem; }
+  .rail .link-line { font-size: .78rem; }
+  .rail article > div:last-child { padding-top: .4rem; }
+}

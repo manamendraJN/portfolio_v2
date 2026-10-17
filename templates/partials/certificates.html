@@ -29,7 +29,8 @@
       function step() {
         var card = rail.querySelector("li");
         var gap = parseFloat(getComputedStyle(rail).columnGap) || 0;
-        return card ? card.getBoundingClientRect().width + gap : rail.clientWidth * 0.8;
+        var one = card ? card.getBoundingClientRect().width + gap : rail.clientWidth * 0.8;
+        return window.matchMedia("(max-width: 719px)").matches ? one * 2 : one; // phones: two cards per slide
       }
       function sync() {
         prev.disabled = rail.scrollLeft <= 2;
