@@ -6,17 +6,16 @@
     {# Layered scenery. transform owner: GSAP (parallax.js: staged scrub on desktop, plain scroll parallax elsewhere). #}
     <div class="scenery" aria-hidden="true">
       {# data-fly="y(vh), z(px), final opacity factor": layers approach the viewer and rise. data-emerge: layers that rise out of the background. #}
-      <div data-parallax="-0.12" data-fly="-6,200,1" class="-top-[10%] h-[120%]">{% include "illustrations/contours.html" %}</div>
+      <div data-parallax="-0.12" data-fly="-6,200,1" class="-top-[10%] h-[120%]">{% include "illustrations/bg_circuit.html" %}</div>
       <div data-parallax="-0.04" data-fly="-4,300,1" class="-top-[10%] h-[120%]">{% include "illustrations/stars_far.html" %}</div>
       <div data-parallax="-0.09" data-fly="-10,650,1" class="-top-[10%] h-[120%]">{% include "illustrations/stars_near.html" %}</div>
-      <div data-parallax="-0.16" data-layer-x="-12" data-fly="-16,300,1" class="!top-[6%] h-[28%]">{% include "illustrations/clouds.html" %}</div>
+      <div data-parallax="-0.16" data-layer-x="-12" data-fly="-16,300,1" class="!top-[6%] h-[28%]">{% include "illustrations/bg_code.html" %}</div>
       <div class="hero-frags" data-parallax="-0.28" data-fly="-14,380,1"><span style="top:16%;left:56%">const idea = build();</span><span style="top:34%;left:72%">&lt;Product /&gt;</span><span style="top:8%;left:34%">await api.create()</span></div>
       <div class="hero-frags" data-parallax="-0.18" data-fly="-8,220,1"><span style="top:26%;left:44%">git commit -m "ship it"</span><span style="top:46%;left:84%">return ship(app);</span></div>
-      <div data-parallax="-0.1" data-fly="-12,160,1" class="hero-sun">{% include "illustrations/sun.html" %}</div>
-      <div data-parallax="-0.14" data-emerge="46,-950,0.55" class="hero-ridge -bottom-[10%] h-[48%]">{% include "illustrations/hills.html" %}</div>
-      <div data-parallax="-0.2" data-emerge="56,-650,0.7" class="hero-ridge -bottom-[10%] h-[44%]">{% include "illustrations/hills.html" %}</div>
-      <div data-parallax="-0.22" data-fly="-20,260,0.3" data-ground class="-bottom-[10%] h-[46%]">{% include "illustrations/hills.html" %}</div>
-      <div data-parallax="-0.34" data-fly="-38,650,0" data-ground class="-bottom-[10%] h-[24%]">{% include "illustrations/botanical.html" %}</div>
+      <div data-parallax="-0.14" data-emerge="46,-950,0.55" class="hero-ridge -bottom-[10%] h-[48%]">{% include "illustrations/bg_neural.html" %}</div>
+      <div data-parallax="-0.2" data-emerge="56,-650,0.7" class="hero-ridge -bottom-[10%] h-[44%]">{% include "illustrations/bg_neural.html" %}</div>
+      <div data-parallax="-0.22" data-fly="-20,260,0.3" data-ground class="-bottom-[10%] h-[46%]">{% include "illustrations/bg_chips.html" %}</div>
+      <div data-parallax="-0.34" data-fly="-38,650,0" data-ground class="-bottom-[10%] h-[24%]">{% include "illustrations/bg_chips.html" %}</div>
     </div>
 
     <div class="wrap hero-wrap relative z-10">

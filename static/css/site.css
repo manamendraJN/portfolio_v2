@@ -789,3 +789,14 @@ html { -webkit-tap-highlight-color: transparent; }
 body::before { mix-blend-mode: normal; opacity: .2; }
 [data-header] { -webkit-backdrop-filter: none; backdrop-filter: none; background: rgba(245, 240, 230, .96); }
 .thread { will-change: transform; contain: layout paint; }
+
+/* Software / AI backgrounds (hero and contact): circuit traces, source code, neural network, chips */
+#contact .scenery { color: var(--paper); }
+#contact .scenery [data-parallax] { opacity: .8; }
+#contact .scenery [class*="h-[44%]"] { opacity: .55; }
+.hero-stage .scenery [data-fly="-20,260,0.3"] { opacity: .5; }
+.hero-stage .scenery [data-fly="-38,650,0"] { opacity: .55; }
+@media (max-width: 899px) {
+  .hero-stage .scenery [data-layer-x] { left: 8% !important; width: 92% !important; opacity: .55; }
+  .hero-stage .scenery [data-fly="-6,200,1"] { opacity: .6; }
+}
