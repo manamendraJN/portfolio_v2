@@ -22,9 +22,7 @@ export function initSheets(mm) {
       shades.push(shade);
       gsap.fromTo(shade, { opacity: 0 }, {
         opacity: 0.72, ease: "none",
-        scrollTrigger: section.id === "hero" && section.querySelector(".hero-stage") && section.classList.contains("is-staged")
-          ? { start: () => window.__workNaturalTop() - 2 * window.innerHeight, end: () => window.__workNaturalTop(), scrub: 2, invalidateOnRefresh: true } // matches the slow entry of 01
-          : { trigger: sections[i + 1], start: "top 120%", end: "top -10%", scrub: 2 },
+        scrollTrigger: { trigger: sections[i + 1], start: "top 120%", end: "top -10%", scrub: 2 },
       });
     });
 
