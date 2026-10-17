@@ -11,7 +11,7 @@ export function initNav() {
   const items = [...overlay.querySelectorAll("[data-overlay-item]")];
   items.forEach((n, i) => n.style.setProperty("--i", i));
   const reduced = () => window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  const wait = () => new Promise((r) => setTimeout(r, reduced() ? 0 : 550));
+  const wait = () => new Promise((r) => setTimeout(r, reduced() ? 0 : 900));
   let open = false;
 
   function show() {

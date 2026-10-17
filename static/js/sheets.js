@@ -20,7 +20,7 @@ export function initSheets(mm) {
       shades.push(shade);
       gsap.fromTo(shade, { opacity: 0 }, {
         opacity: 0.72, ease: "none",
-        scrollTrigger: { trigger: sections[i + 1], start: "top bottom", end: "top top", scrub: 1.2 },
+        scrollTrigger: { trigger: sections[i + 1], start: "top 120%", end: "top -10%", scrub: 2 },
       });
     });
 
@@ -29,7 +29,7 @@ export function initSheets(mm) {
       const speed = parseFloat(el.dataset.speed);
       gsap.fromTo(el, { y: -speed * 70 }, {
         y: speed * 70, ease: "none",
-        scrollTrigger: { trigger: el, start: "top bottom", end: "bottom top", scrub: 1.2 },
+        scrollTrigger: { trigger: el, start: "top bottom", end: "bottom top", scrub: 2 },
       });
     });
     return () => shades.forEach((n) => n.remove());

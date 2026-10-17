@@ -6,7 +6,7 @@
 import { gsap } from "../vendor/gsap.js";
 import { MEDIA } from "./media.js";
 
-const SCRUB = 1.6; // light smoothing: layers ease toward the scroll position
+const SCRUB = 2.4; // light smoothing: layers ease toward the scroll position
 
 function plainParallax(scenery) {
   const section = scenery.parentElement;
