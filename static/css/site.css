@@ -762,3 +762,7 @@ html { -webkit-tap-highlight-color: transparent; }
   .rail .link-line { font-size: .78rem; }
   .rail article > div:last-child { padding-top: .4rem; }
 }
+/* Certificate cards keep their natural height (no stretching to the tallest card) */
+.rail { align-items: flex-start; }
+.rail > li > article { height: auto; }
+.rail > li > article > div:last-child { margin-top: 0; }
