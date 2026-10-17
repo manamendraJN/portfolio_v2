@@ -17,4 +17,53 @@
       {% endfor %}
     </ul>
   </div>
+  <script>
+    /* Slider arrows + Left/Right keys. Classic inline script on purpose: no imports, so it works even if a module fails to load. */
+    (function () {
+      var rail = document.querySelector("[data-rail]");
+      var prev = document.querySelector("[data-rail-prev]");
+      var next = document.querySelector("[data-rail-next]");
+      var section = document.getElementById("certificates");
+      if (!rail || !prev || !next) return;
+      var anim = 0, visible = false;
+      function step() {
+        var card = rail.querySelector("li");
+        var gap = parseFloat(getComputedStyle(rail).columnGap) || 0;
+        return card ? card.getBoundingClientRect().width + gap : rail.clientWidth * 0.8;
+      }
+      function sync() {
+        prev.disabled = rail.scrollLeft <= 2;
+        next.disabled = rail.scrollLeft >= rail.scrollWidth - rail.clientWidth - 2;
+      }
+      function go(dir) {
+        var max = rail.scrollWidth - rail.clientWidth, from = rail.scrollLeft, s = step();
+        var to = Math.max(0, Math.min(max, Math.round(from / s) * s + dir * s));
+        cancelAnimationFrame(anim);
+        if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) { rail.scrollLeft = to; sync(); return; }
+        rail.style.scrollSnapType = "none";
+        var t0 = performance.now();
+        (function tick(now) {
+          var k = Math.min(1, (now - t0) / 450);
+          rail.scrollLeft = from + (to - from) * (1 - Math.pow(1 - k, 3));
+          if (k < 1) anim = requestAnimationFrame(tick); else { rail.style.scrollSnapType = ""; sync(); }
+        })(t0);
+      }
+      prev.addEventListener("click", function () { go(-1); });
+      next.addEventListener("click", function () { go(1); });
+      rail.addEventListener("scroll", sync, { passive: true });
+      window.addEventListener("resize", sync);
+      if (window.IntersectionObserver) new IntersectionObserver(function (e) { visible = e[0].isIntersecting; }, { threshold: 0.35 }).observe(section);
+      document.addEventListener("keydown", function (e) {
+        if (e.key !== "ArrowRight" && e.key !== "ArrowLeft") return;
+        if (e.altKey || e.ctrlKey || e.metaKey || e.shiftKey) return;
+        var t = e.target;
+        if (t && t.closest && t.closest("input, textarea, select, [contenteditable]")) return;
+        if (!visible && !rail.contains(t)) return;
+        if (document.querySelector("[data-overlay][data-open]")) return;
+        e.preventDefault();
+        go(e.key === "ArrowRight" ? 1 : -1);
+      });
+      sync();
+    })();
+  </script>
 </section>

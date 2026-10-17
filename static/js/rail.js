@@ -1,5 +1,5 @@
 /* Certificate rail: native overflow-x + scroll-snap (works with touch and keyboard, no JS),
-   enhanced with mouse dragging and previous/next arrow buttons. Scroll position is native; no animated properties here. */
+   enhanced with mouse dragging. The arrow buttons live in an inline script in certificates.html so they never depend on the module bundle. Scroll position is native; no animated properties here. */
 export function initRail() {
   const rail = document.querySelector("[data-rail]");
   if (!rail) return;
@@ -40,61 +40,4 @@ export function initRail() {
     }
   }, true);
   rail.querySelectorAll("a, img").forEach((n) => n.addEventListener("dragstart", (e) => e.preventDefault()));
-
-  // Arrow buttons: scroll one card (plus gap) at a time; disabled at either end.
-  const prev = document.querySelector("[data-rail-prev]");
-  const next = document.querySelector("[data-rail-next]");
-  if (prev && next) {
-    const step = () => {
-      const card = rail.querySelector("li");
-      const gap = parseFloat(getComputedStyle(rail).columnGap) || 0;
-      return card ? card.getBoundingClientRect().width + gap : rail.clientWidth * 0.8;
-    };
-    const reduced = () => window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    // Own scroll animation: independent of browser smooth-scroll and scroll-snap quirks, so both buttons and keys always move it.
-    let anim = 0;
-    const go = (dir) => {
-      const max = rail.scrollWidth - rail.clientWidth;
-      const from = rail.scrollLeft;
-      const to = Math.max(0, Math.min(max, Math.round(from / step()) * step() + dir * step()));
-      cancelAnimationFrame(anim);
-      if (reduced()) { rail.scrollLeft = to; sync(); return; }
-      rail.style.scrollSnapType = "none";
-      const t0 = performance.now();
-      const dur = 450;
-      const tick = (now) => {
-        const k = Math.min(1, (now - t0) / dur);
-        rail.scrollLeft = from + (to - from) * (1 - Math.pow(1 - k, 3));
-        if (k < 1) anim = requestAnimationFrame(tick);
-        else { rail.style.scrollSnapType = ""; sync(); }
-      };
-      anim = requestAnimationFrame(tick);
-    };
-    const sync = () => {
-      const max = rail.scrollWidth - rail.clientWidth - 2;
-      prev.disabled = rail.scrollLeft <= 2;
-      next.disabled = rail.scrollLeft >= max;
-    };
-    prev.addEventListener("click", () => go(-1));
-    next.addEventListener("click", () => go(1));
-    rail.addEventListener("scroll", sync, { passive: true });
-    window.addEventListener("resize", sync);
-    // Left/Right arrow keys move the slider whenever the gallery is on screen (no need to focus it first).
-    const section = document.getElementById("certificates");
-    let visible = false;
-    if (section && "IntersectionObserver" in window) {
-      new IntersectionObserver(([entry]) => { visible = entry.isIntersecting; }, { threshold: 0.35 }).observe(section);
-    }
-    document.addEventListener("keydown", (e) => {
-      if (e.key !== "ArrowRight" && e.key !== "ArrowLeft") return;
-      if (e.altKey || e.ctrlKey || e.metaKey || e.shiftKey) return;
-      const t = e.target;
-      const typing = t instanceof Element && t.closest("input, textarea, select, [contenteditable]");
-      if (typing || (!visible && !rail.contains(t))) return;
-      if (document.querySelector("[data-overlay][data-open]")) return;
-      e.preventDefault();
-      go(e.key === "ArrowRight" ? 1 : -1);
-    });
-    sync();
-  }
 }
