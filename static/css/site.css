@@ -887,3 +887,20 @@ footer p.font-display { font-size: var(--fs-card); }
 }
 #experience .nrow .marginalia { font-size: var(--fs-note); line-height: var(--lh-tight); font-weight: 600; }
 #experience .nrow p.label { font-size: clamp(.68rem, .65rem + .1vw, .75rem); line-height: 1.4; }
+
+/* ================= Section separation =================
+   Light sections alternate between the paper tone and a slightly lighter tone, each starting with a hairline
+   divider and a soft fade, so every section has a clear beginning and end without heavy borders. */
+:root { --paper-light: #FAF6EC; }
+#skills, #education, #research { --sheet-bg: var(--paper-light); }
+#skills, #about, #experience, #education, #research, #certificates { position: relative; border-top: 1px solid rgba(27, 36, 56, .14); }
+#skills::before, #about::before, #experience::before, #education::before, #research::before, #certificates::before {
+  content: ""; position: absolute; left: 0; right: 0; top: 0; height: 4.5rem; pointer-events: none;
+  background: linear-gradient(180deg, rgba(27, 36, 56, .05), rgba(27, 36, 56, 0)); }
+/* short accent tick at the content edge marks where each section begins */
+#skills .wrap::before, #about .wrap::before, #experience .wrap::before, #education .wrap::before, #research .wrap::before, #certificates .wrap::before {
+  content: ""; display: block; width: 2.5rem; height: 3px; background: var(--vermilion); margin-bottom: 1rem; border-radius: 2px; }
+/* consistent rhythm: same top and bottom space for every section */
+#skills, #about, #experience, #education, #research, #certificates { padding-top: clamp(2.25rem, 4vw, 3.25rem) !important; padding-bottom: clamp(2.25rem, 4vw, 3.25rem) !important; }
+#work { padding-bottom: clamp(2.25rem, 4vw, 3.25rem) !important; }
+#about .wrap::before { grid-column: 1 / -1; margin-bottom: 0; }
