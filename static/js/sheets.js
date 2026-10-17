@@ -20,7 +20,7 @@ export function initSheets(mm) {
       shades.push(shade);
       gsap.fromTo(shade, { opacity: 0 }, {
         opacity: 0.72, ease: "none",
-        scrollTrigger: { trigger: sections[i + 1], start: "top bottom", end: "top top", scrub: true },
+        scrollTrigger: { trigger: sections[i + 1], start: "top bottom", end: "top top", scrub: 1.2 },
       });
     });
 

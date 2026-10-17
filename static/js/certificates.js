@@ -28,7 +28,7 @@ export function initCertificates(mm) {
       defaults: { ease: "none" },
       scrollTrigger: {
         trigger: pinEl, start: "top 80px", end: () => "+=" + distance(),
-        pin: true, scrub: 0.6, anticipatePin: 1, invalidateOnRefresh: true, refreshPriority: 5,
+        pin: true, scrub: 1.2, anticipatePin: 1, invalidateOnRefresh: true, refreshPriority: 5,
       },
     });
     // The whole track moves right to left in step with the scroll.

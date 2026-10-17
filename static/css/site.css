@@ -153,7 +153,7 @@ section[id] { scroll-margin-top: 2rem; }
 .hero-figure { margin-top: 2.5rem; width: 100%; max-width: 46rem; }
 @media (min-width: 1024px) { .hero-figure { margin-left: auto; } }
 .hero-wash { display: none; }
-.hero-track.is-staged { height: 500vh; margin-bottom: -100vh; } /* four story scenes, then the next sheet slides over */
+.hero-track.is-staged { height: 700vh; margin-bottom: -100vh; } /* four story scenes, then the next sheet slides over */
 .hero-track.is-staged .hero-stage { position: sticky; top: 0; height: 100vh; padding: 5.5rem 0 0; }
 .hero-track.is-staged .hero-title { font-size: clamp(3.4rem, min(8.5vw, 13.5vh), 9rem); }
 .hero-track.is-staged .hero-wrap { height: 100%; }
@@ -305,7 +305,7 @@ html.past-hero .index { opacity: 1; visibility: visible; transition-delay: 0s; }
 /* ================= Mobile (phones and narrow screens) =================
    Layout only: every animation and effect above stays. Dynamic-viewport units (svh) keep the pinned hero steady
    while the mobile browser toolbar shows and hides. */
-.hero-track.is-staged { height: 500svh; margin-bottom: -100svh; }
+.hero-track.is-staged { height: 700svh; margin-bottom: -100svh; }
 .hero-track.is-staged .hero-stage { height: 100svh; }
 
 @media (max-width: 899px) {
