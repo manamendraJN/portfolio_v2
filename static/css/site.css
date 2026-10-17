@@ -708,3 +708,13 @@ html { -webkit-tap-highlight-color: transparent; }
   .project-links .icon { width: .75rem; height: .75rem; }
 }
 @media (max-width: 340px) { .project-grid { grid-template-columns: minmax(0, 1fr); } }
+
+/* ---- About: compact text and cards ---- */
+.about-text { font-size: clamp(.95rem, .9rem + .2vw, 1.05rem); line-height: 1.6; }
+.about-card, .focus-card.about-card { position: static; padding: .85rem 1rem; display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; gap: .9rem; }
+.about-card-num { font-family: "Instrument Serif", Georgia, serif; font-size: 2.2rem; line-height: 1; color: var(--vermilion); }
+.about-card-title { font-family: "Instrument Serif", Georgia, serif; font-size: clamp(1.15rem, 1rem + .4vw, 1.4rem); line-height: 1.1; }
+.about-card-text { font-size: .85rem; line-height: 1.45; color: var(--ink-soft); margin-top: .2rem; }
+.about-card-icon { display: grid; place-items: center; width: 2.2rem; height: 2.2rem; border-radius: 50%; background: rgba(127, 148, 119, .25); }
+.about-card-icon .icon { width: 1.05rem; height: 1.05rem; }
+@media (max-width: 479px) { .about-card-icon { display: none; } .about-card-num { font-size: 1.8rem; } .about-card, .focus-card.about-card { grid-template-columns: auto minmax(0, 1fr); gap: .7rem; } }

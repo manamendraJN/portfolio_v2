@@ -1,24 +1,24 @@
 {% load portfolio_tags %}
 <section id="about" class="layer sheet pt-16 md:pt-24" aria-labelledby="about-title" data-section>
   <div class="sheet-edge" aria-hidden="true"></div>
-  <div class="wrap grid gap-12 lg:grid-cols-12">
+  <div class="wrap about-grid grid gap-8 lg:grid-cols-12 lg:gap-10">
     <div class="lg:col-span-6" data-speed="0.5">
       {% section_heading "03" "About" "" "" "" "about-title" %}
-      <div class="space-y-5 text-lead max-w-xl">
+      <div class="about-text space-y-3 max-w-xl">
         {% for para in about %}<p>{{ para }}</p>{% endfor %}
       </div>
     </div>
     <div class="lg:col-span-6">
       <h3 class="sr-only">Three themes</h3>
-      <div class="grid gap-6 pb-6 md:pb-12" data-focus-stack>
+      <div class="about-cards grid gap-3" data-focus-stack>
         {% for card in focus_cards %}
-        <article class="focus-card" data-focus-card>
-          <div class="flex items-start justify-between gap-4">
-            <span class="font-display text-6xl leading-none text-vermilion" aria-hidden="true">{{ card.number }}</span>
-            <span class="rounded-full bg-sage/25 p-3 text-ink">{% icon card.icon %}</span>
+        <article class="focus-card about-card" data-focus-card>
+          <span class="about-card-num" aria-hidden="true">{{ card.number }}</span>
+          <div class="about-card-body">
+            <h4 class="about-card-title">{{ card.title }}</h4>
+            <p class="about-card-text">{{ card.text }}</p>
           </div>
-          <h4 class="mt-4 font-display text-3xl">{{ card.title }}</h4>
-          <p class="mt-2 text-ink-soft">{{ card.text }}</p>
+          <span class="about-card-icon" aria-hidden="true">{% icon card.icon %}</span>
         </article>
         {% endfor %}
       </div>
