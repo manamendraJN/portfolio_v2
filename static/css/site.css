@@ -904,3 +904,6 @@ footer p.font-display { font-size: var(--fs-card); }
 #skills, #about, #experience, #education, #research, #certificates { padding-top: clamp(2.25rem, 4vw, 3.25rem) !important; padding-bottom: clamp(2.25rem, 4vw, 3.25rem) !important; }
 #work { padding-bottom: clamp(2.25rem, 4vw, 3.25rem) !important; }
 #about .wrap::before { grid-column: 1 / -1; margin-bottom: 0; }
+/* Contact slides over the certificates again: the certificates must stay a sticky layer (the earlier divider rule had made it relative) */
+#certificates.layer { position: sticky; top: var(--stick-top, auto); }
+@media (prefers-reduced-motion: reduce) { #certificates.layer { position: relative; top: auto; } }
