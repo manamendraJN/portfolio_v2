@@ -651,3 +651,7 @@ html { -webkit-tap-highlight-color: transparent; }
   .nrow .detail { display: none; } /* decorative; saves vertical space on phones */
 }
 @media (max-width: 359px) { .skill-grid { grid-template-columns: minmax(0, 1fr); } }
+
+/* Title-only section heading (h2) */
+.section-title { font: 500 clamp(.8rem, .74rem + .3vw, .95rem)/1.2 "JetBrains Mono", monospace; letter-spacing: .16em; text-transform: uppercase; color: var(--ink); }
+.section-title span { margin-right: .15rem; }

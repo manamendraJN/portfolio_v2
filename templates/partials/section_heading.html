@@ -1,4 +1,11 @@
+{% if title %}
 <div class="mb-7 md:mb-10">
   <p class="label mb-4"><span class="text-vermilion">{{ number }}</span> &mdash; {{ label }}</p>
   <h2 {% if heading_id %}id="{{ heading_id }}" {% endif %}class="text-h2 max-w-4xl">{{ title }}{% if emphasis %} <em>{{ emphasis }}</em>{% endif %}{% if tail %} {{ tail }}{% endif %}</h2>
 </div>
+{% else %}
+{# Title-only heading: "01 — Selected projects" is the section's h2. #}
+<div class="mb-7 md:mb-10">
+  <h2 {% if heading_id %}id="{{ heading_id }}" {% endif %}class="section-title"><span class="text-vermilion">{{ number }}</span> &mdash; {{ label }}</h2>
+</div>
+{% endif %}
