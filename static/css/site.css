@@ -766,3 +766,6 @@ html { -webkit-tap-highlight-color: transparent; }
 .rail { align-items: flex-start; }
 .rail > li > article { height: auto; }
 .rail > li > article > div:last-child { margin-top: 0; }
+
+/* Contact: text only (portrait removed) */
+.contact-grid { grid-template-columns: minmax(0, 1fr) !important; padding-right: 0 !important; }
