@@ -26,7 +26,6 @@ function stagedHero(track) {
   const flyers = [...stage.querySelectorAll(".scenery [data-fly]")];
   const emergers = [...stage.querySelectorAll(".scenery [data-emerge]")];
   const copy = stage.querySelector("[data-hero-copy]");
-  const figure = stage.querySelector("[data-hero-scene]");
   const dark = story.querySelector("[data-hero-dark]");
   const scenes = [...story.querySelectorAll(".story-scene")];
   const [craft, creation, mindset] = scenes;
@@ -70,16 +69,11 @@ function stagedHero(track) {
     tl.fromTo(el, { y: vh(y0 * (window.innerWidth < 900 ? 0.5 : 1)), z: z0, opacity: window.innerWidth < 900 ? 0.15 : 0 }, { y: vh(-2), z: 0, opacity: window.innerWidth < 900 ? Math.min(1, finalOpacity + 0.3) : finalOpacity, ease: "power1.out", duration: window.innerWidth < 900 ? 0.4 : 0.6 }, 0.02);
   });
 
-  // Scene 1 (introduction): the desk scene rises in, then everything lifts away at its own speed.
-  // On phones the desk scene takes the place of the copy instead of sitting beside it, so it rises a little later.
-  const narrow = window.innerWidth < 900;
-  tl.fromTo(figure, { yPercent: 135 }, { yPercent: 0, ease: "power2.out", duration: narrow ? 0.07 : 0.09 }, narrow ? 0.05 : 0);
+  // Scene 1 (introduction): the headline lines leave at their own speed, then the story scenes take over.
   stage.querySelectorAll("[data-hero-line]").forEach((el) =>
     tl.to(el, { y: vh(parseFloat(el.dataset.heroLine)), ease: "power1.in", duration: 0.09 }, 0.1));
-  // Phones: the copy clears first, then the desk scene holds fully visible and undimmed before it leaves.
-  tl.to(copy, { autoAlpha: 0, duration: narrow ? 0.05 : 0.07 }, narrow ? 0.05 : 0.11)
-    .to(figure, { autoAlpha: 0, yPercent: -16, duration: 0.07 }, narrow ? 0.19 : 0.11)
-    .to(dark, { autoAlpha: 0.55, duration: 0.09 }, narrow ? 0.21 : 0.12); // dims the scenery but keeps its depth layers visible
+  tl.to(copy, { autoAlpha: 0, duration: 0.07 }, 0.11)
+    .to(dark, { autoAlpha: 0.55, duration: 0.09 }, 0.12); // dims the scenery but keeps its depth layers visible
 
   // Scene windows: [in-start, in-end, out-start, out-end]. Layers inside move at their own data-depth speed.
   const parallaxIn = (scene, from, to) =>
@@ -91,7 +85,7 @@ function stagedHero(track) {
     });
 
   // Scene 2 (the craft): editor and terminal panels glide at different speeds.
-  tl.fromTo(craft, { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.06 }, narrow ? 0.24 : 0.18)
+  tl.fromTo(craft, { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.06 }, 0.18)
     .to(craft, { autoAlpha: 0, duration: 0.06 }, 0.34);
   parallaxIn(craft, 0.18, 0.4);
 

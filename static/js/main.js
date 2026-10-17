@@ -3,7 +3,6 @@
    Ownership: GSAP owns scroll-driven transforms; CSS owns the nav overlay, pill and list-row hover states. */
 import { gsap, ScrollTrigger } from "../vendor/gsap.js";
 import "./media.js";
-import { initHero } from "./hero.js";
 import { initParallax } from "./parallax.js";
 import { initSheets } from "./sheets.js";
 import { initThread } from "./thread.js";
@@ -31,7 +30,6 @@ const mm = gsap.matchMedia();
 initNav();
 initLayers();
 initCursor();
-initHero();
 initRail();
 
 initParallax(mm);

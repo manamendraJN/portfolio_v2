@@ -6,7 +6,8 @@
     <div data-parallax="0.2" class="-bottom-[10%] h-[44%]">{% include "illustrations/hills.html" %}</div>
     <div data-parallax="0.3" class="-bottom-[10%] h-[34%]">{% include "illustrations/botanical.html" %}</div>
   </div>
-  <div class="wrap relative z-10">
+  <div class="wrap contact-grid relative z-10">
+    <div class="contact-main">
     <p class="label mb-4"><span class="text-ochre">08</span> &mdash; Contact</p>
     <h2 id="contact-title" class="text-hero max-w-6xl">{{ contact_headline }}</h2>
     <ul class="mt-12 flex flex-wrap gap-3">
@@ -15,5 +16,7 @@
       {% if contact_email %}<li><a class="btn" href="mailto:{{ contact_email }}">{% icon "mail" %} {{ contact_email }}</a></li>{% endif %}
       {% if cv_url %}<li><a class="btn" href="{{ cv_url }}" target="_blank" rel="noopener noreferrer">{% icon "file-text" %} Résumé</a></li>{% endif %}
     </ul>
+    </div>
+    <div class="contact-photo">{% profile_photo profile_image_path person.name %}</div>
   </div>
 </section>
