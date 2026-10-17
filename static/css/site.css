@@ -745,3 +745,5 @@ html { -webkit-tap-highlight-color: transparent; }
 .rail { padding-inline: clamp(1.5rem, 5vw, 5rem); scroll-padding-inline: clamp(1.5rem, 5vw, 5rem); }
 .rail > li { flex-basis: min(20rem, 80vw); }
 @media (max-width: 899px) { .rail-btn { width: 2.5rem; height: 2.5rem; } .rail > li { flex-basis: min(17.5rem, 78vw); } }
+.rail-bar, .rail-arrows { position: relative; z-index: 3; }
+.rail-btn { touch-action: manipulation; }

@@ -51,10 +51,24 @@ export function initRail() {
       return card ? card.getBoundingClientRect().width + gap : rail.clientWidth * 0.8;
     };
     const reduced = () => window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    // Own scroll animation: independent of browser smooth-scroll and scroll-snap quirks, so both buttons and keys always move it.
+    let anim = 0;
     const go = (dir) => {
       const max = rail.scrollWidth - rail.clientWidth;
-      const target = Math.max(0, Math.min(max, Math.round(rail.scrollLeft / step()) * step() + dir * step()));
-      rail.scrollTo({ left: target, behavior: reduced() ? "auto" : "smooth" });
+      const from = rail.scrollLeft;
+      const to = Math.max(0, Math.min(max, Math.round(from / step()) * step() + dir * step()));
+      cancelAnimationFrame(anim);
+      if (reduced()) { rail.scrollLeft = to; sync(); return; }
+      rail.style.scrollSnapType = "none";
+      const t0 = performance.now();
+      const dur = 450;
+      const tick = (now) => {
+        const k = Math.min(1, (now - t0) / dur);
+        rail.scrollLeft = from + (to - from) * (1 - Math.pow(1 - k, 3));
+        if (k < 1) anim = requestAnimationFrame(tick);
+        else { rail.style.scrollSnapType = ""; sync(); }
+      };
+      anim = requestAnimationFrame(tick);
     };
     const sync = () => {
       const max = rail.scrollWidth - rail.clientWidth - 2;
