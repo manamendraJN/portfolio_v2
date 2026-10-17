@@ -9,8 +9,7 @@ export function initPill() {
   if (!pill || !hero || !contact) return;
   let pastHero = false;
   let nearContact = false;
-  let inGallery = false; // the pinned certificate gallery needs the full viewport height
-  const apply = () => pill.classList.toggle("is-visible", pastHero && !nearContact && !inGallery);
+  const apply = () => pill.classList.toggle("is-visible", pastHero && !nearContact);
   ScrollTrigger.create({
     trigger: hero, start: "bottom 20%",
     onEnter: () => { pastHero = true; document.documentElement.classList.add("past-hero"); apply(); },
@@ -21,11 +20,4 @@ export function initPill() {
     onEnter: () => { nearContact = true; apply(); },
     onLeaveBack: () => { nearContact = false; apply(); },
   });
-  const gallery = document.getElementById("certificates");
-  if (gallery) {
-    ScrollTrigger.create({
-      trigger: gallery, start: "top 35%", end: "bottom 80%",
-      onToggle: (self) => { inGallery = self.isActive; apply(); },
-    });
-  }
 }

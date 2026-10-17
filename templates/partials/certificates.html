@@ -1,16 +1,20 @@
 {% load portfolio_tags %}
 <section id="certificates" class="layer sheet" aria-labelledby="certificates-title" data-section>
-  <div data-cert-pin>
   <div class="wrap">
     {% section_heading "07" "Certificate gallery" "" "" "" "certificates-title" %}
-    <p class="label rail-hint mb-4" data-rail-hint>{% icon "move-horizontal" %} <span data-rail-hint-text>Drag to explore</span></p>
+    <div class="rail-bar">
+      <p class="label rail-hint">{% icon "move-horizontal" %} <span>Drag or use the arrows</span></p>
+      <div class="rail-arrows">
+        <button type="button" class="rail-btn" data-rail-prev aria-label="Previous certificates">{% icon "arrow-left" %}</button>
+        <button type="button" class="rail-btn" data-rail-next aria-label="Next certificates">{% icon "arrow-right" %}</button>
+      </div>
+    </div>
   </div>
-  <div class="rail-viewport mx-auto max-w-page">
+  <div class="mx-auto max-w-page">
     <ul class="rail list-none" tabindex="0" role="region" aria-label="Certificates, scrollable" data-rail>
       {% for cert in certificates %}
       <li>{% certificate_card cert forloop.counter %}</li>
       {% endfor %}
     </ul>
-  </div>
   </div>
 </section>

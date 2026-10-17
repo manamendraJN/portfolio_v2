@@ -735,3 +735,13 @@ html { -webkit-tap-highlight-color: transparent; }
 #skills, #about, #experience, #education, #research, #certificates { padding-top: clamp(1.5rem, 3vw, 2.5rem); }
 #work, #skills, #about, #experience, #education, #research { padding-bottom: clamp(1rem, 2vw, 1.5rem) !important; }
 #certificates { padding-bottom: clamp(2.5rem, 4vw, 3.5rem) !important; }
+
+/* ---- Certificate slider: arrows + native scroll-snap + drag ---- */
+.rail-bar { display: flex; align-items: center; justify-content: space-between; gap: 1rem; margin-bottom: .75rem; }
+.rail-arrows { display: flex; gap: .5rem; }
+.rail-btn { display: grid; place-items: center; width: 2.75rem; height: 2.75rem; border-radius: 50%; border: 1.5px solid var(--ink); background: var(--surface); color: var(--ink); cursor: pointer; }
+.rail-btn:hover:not(:disabled) { background: var(--ink); color: var(--paper); }
+.rail-btn:disabled { opacity: .35; cursor: default; }
+.rail { padding-inline: clamp(1.5rem, 5vw, 5rem); scroll-padding-inline: clamp(1.5rem, 5vw, 5rem); }
+.rail > li { flex-basis: min(20rem, 80vw); }
+@media (max-width: 899px) { .rail-btn { width: 2.5rem; height: 2.5rem; } .rail > li { flex-basis: min(17.5rem, 78vw); } }

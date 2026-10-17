@@ -11,7 +11,6 @@ import { initRail } from "./rail.js";
 import { initPill } from "./pill.js";
 import { initNav } from "./nav.js";
 import { initLayers } from "./layers.js";
-import { initCertificates } from "./certificates.js";
 import { initCursor } from "./cursor.js";
 
 const root = document.documentElement;
@@ -31,7 +30,6 @@ initCursor();
 initRail();
 
 initParallax(mm);
-initCertificates(mm);
 initSheets(mm);
 initIndex(); // created after the pin so positions include its spacer
 initPill();
