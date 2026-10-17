@@ -51,7 +51,11 @@ export function initRail() {
       return card ? card.getBoundingClientRect().width + gap : rail.clientWidth * 0.8;
     };
     const reduced = () => window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    const go = (dir) => rail.scrollBy({ left: dir * step(), behavior: reduced() ? "auto" : "smooth" });
+    const go = (dir) => {
+      const max = rail.scrollWidth - rail.clientWidth;
+      const target = Math.max(0, Math.min(max, Math.round(rail.scrollLeft / step()) * step() + dir * step()));
+      rail.scrollTo({ left: target, behavior: reduced() ? "auto" : "smooth" });
+    };
     const sync = () => {
       const max = rail.scrollWidth - rail.clientWidth - 2;
       prev.disabled = rail.scrollLeft <= 2;
@@ -61,9 +65,21 @@ export function initRail() {
     next.addEventListener("click", () => go(1));
     rail.addEventListener("scroll", sync, { passive: true });
     window.addEventListener("resize", sync);
-    rail.addEventListener("keydown", (e) => {
-      if (e.key === "ArrowRight") { e.preventDefault(); go(1); }
-      if (e.key === "ArrowLeft") { e.preventDefault(); go(-1); }
+    // Left/Right arrow keys move the slider whenever the gallery is on screen (no need to focus it first).
+    const section = document.getElementById("certificates");
+    let visible = false;
+    if (section && "IntersectionObserver" in window) {
+      new IntersectionObserver(([entry]) => { visible = entry.isIntersecting; }, { threshold: 0.35 }).observe(section);
+    }
+    document.addEventListener("keydown", (e) => {
+      if (e.key !== "ArrowRight" && e.key !== "ArrowLeft") return;
+      if (e.altKey || e.ctrlKey || e.metaKey || e.shiftKey) return;
+      const t = e.target;
+      const typing = t instanceof Element && t.closest("input, textarea, select, [contenteditable]");
+      if (typing || (!visible && !rail.contains(t))) return;
+      if (document.querySelector("[data-overlay][data-open]")) return;
+      e.preventDefault();
+      go(e.key === "ArrowRight" ? 1 : -1);
     });
     sync();
   }
