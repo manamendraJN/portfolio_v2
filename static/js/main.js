@@ -5,7 +5,6 @@ import { gsap, ScrollTrigger } from "../vendor/gsap.js";
 import "./media.js";
 import { initParallax } from "./parallax.js";
 import { initSheets } from "./sheets.js";
-import { initThread } from "./thread.js";
 import { initIndex } from "./index-nav.js";
 import { initRail } from "./rail.js";
 import { initPill } from "./pill.js";
@@ -33,7 +32,6 @@ initParallax(mm);
 initSheets(mm);
 initIndex(); // created after the pin so positions include its spacer
 initPill();
-initThread(mm); // last: its path is measured from the final layout
 ScrollTrigger.refresh();
 
 // Layout shifts after fonts and images load move every trigger.

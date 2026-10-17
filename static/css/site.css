@@ -62,13 +62,6 @@ html:not(.js) .scene-toggle { display: none; }
 .scenery { position: absolute; inset: 0; overflow: hidden; pointer-events: none; z-index: 0; }
 .scenery > * { position: absolute; left: 0; width: 100%; will-change: transform; }
 
-/* ---- Thread (narrative line) ---- */
-.thread { position: absolute; inset: 0; z-index: 15; pointer-events: none; overflow: visible; }
-.thread-path { fill: none; stroke: var(--vermilion); stroke-width: 1.6; stroke-linecap: round; opacity: .6; }
-.thread-ghost { fill: none; stroke: var(--ink); stroke-width: 1; stroke-dasharray: 2 7; stroke-linecap: round; opacity: .25; }
-.thread-marker { color: var(--ink); }
-.js .thread-marker { opacity: 0; } /* revealed by thread.js */
-
 /* ---- Fixed numbered section index: numbers always, label for the active/hovered item ---- */
 .index { position: fixed; right: 1rem; top: 50%; transform: translateY(-50%); z-index: 40; }
 .index ol { list-style: none; margin: 0; padding: 0; display: grid; gap: .35rem; }
@@ -347,8 +340,7 @@ html.past-hero .index { opacity: 1; visibility: visible; transition-delay: 0s; }
   .btn { padding: .7rem 1.15rem; }
   .nrow .num { font-size: 2.6rem; }
   .pill { right: .75rem; bottom: .75rem; padding: .6rem 1rem; font-size: .9rem; }
-  .thread-node text { display: none; }
-}
+  }
 
 /* Comfortable touch targets */
 @media (pointer: coarse) {
@@ -788,7 +780,6 @@ html { -webkit-tap-highlight-color: transparent; }
 /* Scroll performance (all screens): a full-screen multiply blend forces the browser to re-blend the whole page every frame. */
 body::before { mix-blend-mode: normal; opacity: .2; }
 [data-header] { -webkit-backdrop-filter: none; backdrop-filter: none; background: rgba(245, 240, 230, .96); }
-.thread { will-change: transform; contain: layout paint; }
 
 /* Software / AI backgrounds (hero and contact): circuit traces, source code, neural network, chips */
 #contact .scenery { color: var(--paper); }
