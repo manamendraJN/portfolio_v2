@@ -23,7 +23,7 @@ export function initSheets(mm) {
       gsap.fromTo(shade, { opacity: 0 }, {
         opacity: 0.72, ease: "none",
         scrollTrigger: section.id === "hero" && window.__workSlow
-          ? { start: window.__workSlow.start, end: window.__workSlow.end, scrub: 2, invalidateOnRefresh: true } // same range as the slow entry
+          ? { start: window.__workSlow.start, end: window.__workSlow.end, scrub: 1, invalidateOnRefresh: true } // same range as the slow entry
           : { trigger: sections[i + 1], start: "top 120%", end: "top -10%", scrub: 2 },
       });
     });

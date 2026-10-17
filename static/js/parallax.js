@@ -111,15 +111,17 @@ function stagedHero(track) {
   tl.fromTo(mindset, { autoAlpha: 0, scale: 0.96 }, { autoAlpha: 1, scale: 1, duration: 0.07 }, 0.6);
   parallaxIn(mindset, 0.6, 0.82);
 
-  // Slow entry of 01 — Selected projects: it rises over the hero at about a third of normal scroll speed.
-  // The track has extra height for this (see CSS); the section is lifted by two screens and eased down (scrubbed).
+  // Slow entry of 01 — Selected projects: it rises over the hero at a slow, eased pace.
+  // The track has extra height for this (see CSS); the section is lifted and eased down (scrubbed).
   const work = document.getElementById("work");
   const naturalTop = () => track.getBoundingClientRect().bottom + window.scrollY - window.innerHeight;
   if (work) {
-    window.__workSlow = { start: () => naturalTop() - 3 * window.innerHeight, end: () => naturalTop() };
-    gsap.fromTo(work, { y: () => -2 * window.innerHeight }, {
-      y: 0, ease: "none",
-      scrollTrigger: { start: window.__workSlow.start, end: window.__workSlow.end, scrub: SCRUB, invalidateOnRefresh: true, refreshPriority: 15 },
+    window.__workSlow = { start: () => naturalTop() - 2.5 * window.innerHeight, end: () => naturalTop() };
+    // sine.inOut: the lift starts and ends with zero extra velocity, so the section glides from normal speed
+    // down to a crawl and back to normal speed with no sudden change anywhere.
+    gsap.fromTo(work, { y: () => -1.4 * window.innerHeight, force3D: true }, {
+      y: 0, ease: "sine.inOut", force3D: true,
+      scrollTrigger: { start: window.__workSlow.start, end: window.__workSlow.end, scrub: 1, invalidateOnRefresh: true, refreshPriority: 15 },
     });
   }
 
