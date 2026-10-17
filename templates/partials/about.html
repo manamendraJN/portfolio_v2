@@ -1,8 +1,8 @@
 {% load portfolio_tags %}
-<section id="about" class="layer sheet pt-16 md:pt-24" aria-labelledby="about-title" data-section>
+<section id="about" class="sheet pt-16 md:pt-24" aria-labelledby="about-title" data-section>
   <div class="sheet-edge" aria-hidden="true"></div>
   <div class="wrap about-grid grid gap-8 lg:grid-cols-12 lg:gap-10">
-    <div class="lg:col-span-6" data-speed="0.5">
+    <div class="lg:col-span-6">
       {% section_heading "03" "About" "" "" "" "about-title" %}
       <div class="about-text space-y-3 max-w-xl">
         {% for para in about %}<p>{{ para }}</p>{% endfor %}
