@@ -598,3 +598,12 @@ body { font-size: clamp(1rem, .96rem + .18vw, 1.125rem); }
   .hero-track.is-staged .hero-portrait .profile-frame { border-radius: 50%; aspect-ratio: 1; box-shadow: 3px 3px 0 var(--ochre); }
   .hero-portrait .profile-photo { width: 7rem; }
 }
+
+/* Portrait pop-up positions (GSAP owns the transform, so no CSS transform here) */
+.hero-track.is-staged .hero-portrait { top: 17%; transform: none; }
+@media (max-width: 899px) {
+  .hero-track.is-staged .hero-portrait { top: 50%; left: 0; right: 0; margin: -10rem auto 0; width: max-content; z-index: 13; }
+  .hero-track.is-staged .hero-portrait .profile-photo { width: min(62vw, 15rem); }
+  .hero-track.is-staged .hero-portrait .profile-frame { border-radius: 8px; aspect-ratio: 4 / 5; box-shadow: 6px 6px 0 var(--ochre); }
+  .hero-track.is-staged .hero-portrait figcaption { display: block; }
+}

@@ -72,10 +72,18 @@ function stagedHero(track) {
   // Scene 1 (introduction): the headline lines leave at their own speed, then the story scenes take over.
   stage.querySelectorAll("[data-hero-line]").forEach((el) =>
     tl.to(el, { y: vh(parseFloat(el.dataset.heroLine)), ease: "power1.in", duration: 0.09 }, 0.1));
+  // Portrait pop-up: it rises out of the lower background with a little scale and parallax, holds, then leaves.
   const portrait = stage.querySelector("[data-hero-portrait]");
-  if (portrait) tl.to(portrait, { autoAlpha: 0, y: vh(-10), duration: 0.08 }, 0.12);
-  tl.to(copy, { autoAlpha: 0, duration: 0.07 }, 0.11)
-    .to(dark, { autoAlpha: 0.55, duration: 0.09 }, 0.12); // dims the scenery but keeps its depth layers visible
+  const narrow = window.innerWidth < 900;
+  if (portrait) {
+    gsap.set(portrait, { transformPerspective: 900, autoAlpha: 0 });
+    tl.fromTo(portrait, { yPercent: 130, scale: 0.82, z: -250, autoAlpha: 0 },
+      { yPercent: 0, scale: 1, z: 0, autoAlpha: 1, ease: "power3.out", duration: 0.09 }, narrow ? 0.05 : 0)
+      .to(portrait, { yPercent: -6, ease: "none", duration: 0.1 }, narrow ? 0.14 : 0.09)
+      .to(portrait, { autoAlpha: 0, yPercent: -22, scale: 1.06, z: 160, ease: "power1.in", duration: 0.06 }, 0.19);
+  }
+  tl.to(copy, { autoAlpha: 0, duration: narrow ? 0.05 : 0.07 }, narrow ? 0.05 : 0.11)
+    .to(dark, { autoAlpha: 0.55, duration: 0.09 }, narrow ? 0.21 : 0.17); // dims the scenery but keeps its depth layers visible
 
   // Scene windows: [in-start, in-end, out-start, out-end]. Layers inside move at their own data-depth speed.
   const parallaxIn = (scene, from, to) =>
@@ -87,7 +95,7 @@ function stagedHero(track) {
     });
 
   // Scene 2 (the craft): editor and terminal panels glide at different speeds.
-  tl.fromTo(craft, { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.06 }, 0.18)
+  tl.fromTo(craft, { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.06 }, narrow ? 0.25 : 0.21)
     .to(craft, { autoAlpha: 0, duration: 0.06 }, 0.34);
   parallaxIn(craft, 0.18, 0.4);
 
