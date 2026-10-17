@@ -72,6 +72,8 @@ function stagedHero(track) {
   // Scene 1 (introduction): the headline lines leave at their own speed, then the story scenes take over.
   stage.querySelectorAll("[data-hero-line]").forEach((el) =>
     tl.to(el, { y: vh(parseFloat(el.dataset.heroLine)), ease: "power1.in", duration: 0.09 }, 0.1));
+  const portrait = stage.querySelector("[data-hero-portrait]");
+  if (portrait) tl.to(portrait, { autoAlpha: 0, y: vh(-10), duration: 0.08 }, 0.12);
   tl.to(copy, { autoAlpha: 0, duration: 0.07 }, 0.11)
     .to(dark, { autoAlpha: 0.55, duration: 0.09 }, 0.12); // dims the scenery but keeps its depth layers visible
 

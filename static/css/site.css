@@ -582,3 +582,19 @@ body { font-size: clamp(1rem, .96rem + .18vw, 1.125rem); }
 }
 @media (min-width: 900px) { .contact-photo .profile-photo { width: min(100%, 16rem); } }
 @media (min-width: 1280px) { .contact-grid { padding-right: 4.5rem; } } /* clear of the fixed section index */
+
+/* ---- Hero portrait (fills the empty right side) ---- */
+.hero-portrait { margin-top: 2rem; }
+.hero-portrait .profile-photo { width: min(100%, 13rem); margin: 0; }
+.hero-portrait .profile-frame { border-color: var(--paper); background: var(--dusk); box-shadow: 6px 6px 0 var(--ochre); }
+.hero-portrait figcaption { color: rgba(245, 240, 230, .78); }
+.hero-track.is-staged .hero-portrait { position: absolute; right: clamp(1.5rem, 6vw, 6rem); top: 50%; margin: 0; transform: translateY(-46%); z-index: 4; }
+.hero-track.is-staged .hero-portrait .profile-photo { width: clamp(11rem, 20vw, 19rem); }
+@media (min-width: 1280px) { .hero-track.is-staged .hero-portrait { right: clamp(5rem, 9vw, 9rem); } } /* clear of the section index */
+@media (max-width: 899px) {
+  .hero-portrait figcaption { display: none; }
+  .hero-track.is-staged .hero-portrait { top: 0; right: 1.25rem; transform: none; }
+  .hero-track.is-staged .hero-portrait .profile-photo { width: 4.6rem; }
+  .hero-track.is-staged .hero-portrait .profile-frame { border-radius: 50%; aspect-ratio: 1; box-shadow: 3px 3px 0 var(--ochre); }
+  .hero-portrait .profile-photo { width: 7rem; }
+}
