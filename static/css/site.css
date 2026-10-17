@@ -769,3 +769,8 @@ html { -webkit-tap-highlight-color: transparent; }
 
 /* Contact: text only (portrait removed) */
 .contact-grid { grid-template-columns: minmax(0, 1fr) !important; padding-right: 0 !important; }
+
+/* Phones: portrait centred in the space below the navigation bar (no transform, so GSAP's pop-up motion is unaffected) */
+@media (max-width: 899px) {
+  .hero-track.is-staged .hero-portrait { top: 4.75rem; bottom: 1rem; left: 0; right: 0; margin: auto !important; width: max-content; height: fit-content; }
+}

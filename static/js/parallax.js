@@ -79,8 +79,8 @@ function stagedHero(track) {
     gsap.set(portrait, { transformPerspective: 900, autoAlpha: 0 });
     tl.fromTo(portrait, { yPercent: 130, scale: 0.82, z: -250, autoAlpha: 0 },
       { yPercent: 0, scale: 1, z: 0, autoAlpha: 1, ease: "power3.out", duration: 0.09 }, narrow ? 0.05 : 0)
-      .to(portrait, { yPercent: -6, ease: "none", duration: 0.1 }, narrow ? 0.14 : 0.09)
-      .to(portrait, { autoAlpha: 0, yPercent: -22, scale: 1.06, z: 160, ease: "power1.in", duration: 0.06 }, 0.19);
+      .to(portrait, { yPercent: narrow ? -2 : -6, ease: "none", duration: 0.1 }, narrow ? 0.14 : 0.09)
+      .to(portrait, { autoAlpha: 0, yPercent: narrow ? -8 : -22, scale: narrow ? 1 : 1.06, z: narrow ? 0 : 160, ease: "power1.in", duration: 0.06 }, 0.19);
   }
   tl.to(copy, { autoAlpha: 0, duration: narrow ? 0.05 : 0.07 }, narrow ? 0.05 : 0.11)
     .to(dark, { autoAlpha: 0.55, duration: 0.09 }, narrow ? 0.21 : 0.17); // dims the scenery but keeps its depth layers visible
