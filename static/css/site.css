@@ -900,9 +900,9 @@ footer p.font-display { font-size: var(--fs-card); }
 #work::after, #skills::after, #about::after, #experience::after, #education::after, #research::after, #certificates::after {
   content: ""; position: absolute; inset: 0; z-index: 0; pointer-events: none; clip-path: inset(0);
   background: var(--glow-a), var(--glow-b); filter: blur(46px); opacity: 1; }
-#work > :not(.sheet-edge):not(script), #skills > :not(.sheet-edge):not(script), #about > :not(.sheet-edge):not(script),
-#experience > :not(.sheet-edge):not(script), #education > :not(.sheet-edge):not(script), #research > :not(.sheet-edge):not(script),
-#certificates > :not(.sheet-edge):not(script) { position: relative; z-index: 1; }
+#work > :not(.sheet-edge):not(.layer-shade):not(script), #skills > :not(.sheet-edge):not(.layer-shade):not(script), #about > :not(.sheet-edge):not(.layer-shade):not(script),
+#experience > :not(.sheet-edge):not(.layer-shade):not(script), #education > :not(.sheet-edge):not(.layer-shade):not(script), #research > :not(.sheet-edge):not(.layer-shade):not(script),
+#certificates > :not(.sheet-edge):not(.layer-shade):not(script) { position: relative; z-index: 1; }
 #work    { --glow-a: radial-gradient(38% 55% at 88% 18%, rgba(157, 180, 200, .30), transparent 70%);  --glow-b: radial-gradient(34% 50% at 8% 88%,  rgba(127, 148, 119, .20), transparent 70%); }
 #skills  { --glow-a: radial-gradient(36% 60% at 6% 25%,  rgba(217, 164, 65, .16),  transparent 70%);  --glow-b: radial-gradient(40% 55% at 92% 80%, rgba(157, 180, 200, .30), transparent 70%); }
 #about   { --glow-a: radial-gradient(40% 60% at 85% 20%, rgba(157, 180, 200, .30), transparent 70%);  --glow-b: radial-gradient(30% 50% at 10% 85%, rgba(194, 65, 31, .10),  transparent 70%); }
