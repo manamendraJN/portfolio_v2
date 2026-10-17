@@ -3,7 +3,7 @@
      the desk scene rises into place, the copy lifts away and the next paper sheet slides over it.
    - Flat (mobile / short screens): plain per-layer parallax behind the hero.
    - Closing section: plain layered parallax. Disabled under reduced motion. */
-import { gsap } from "../vendor/gsap.js";
+import { gsap, ScrollTrigger } from "../vendor/gsap.js";
 import { MEDIA } from "./media.js";
 
 const SCRUB = 2.4; // light smoothing: layers ease toward the scroll position
@@ -115,10 +115,32 @@ function stagedHero(track) {
   // The track has extra height for this (see CSS); the section is lifted and eased down (scrubbed).
   const work = document.getElementById("work");
   const naturalTop = () => track.getBoundingClientRect().bottom + window.scrollY - window.innerHeight;
+  const nativeTimeline = window.CSS && CSS.supports && CSS.supports("animation-timeline: scroll()");
+  if (work && nativeTimeline) {
+    // Chrome/Edge/Safari 26+: the slow entry and the hero darkening run as native scroll-linked CSS animations
+    // (compositor thread), so they cannot lag behind the scroll the way JavaScript-scrubbed motion can.
+    const root = document.documentElement;
+    const setRange = () => {
+      const vh = window.innerHeight;
+      root.style.setProperty("--ws", `${Math.round(naturalTop() - 2.5 * vh)}px`);
+      root.style.setProperty("--we", `${Math.round(naturalTop())}px`);
+      root.style.setProperty("--wd", `${Math.round(1.4 * vh)}px`);
+    };
+    setRange();
+    root.classList.add("css-slow");
+    ScrollTrigger.addEventListener("refresh", setRange);
+    window.__workSlow = { native: true };
+    return () => {
+      ScrollTrigger.removeEventListener("refresh", setRange);
+      root.classList.remove("css-slow");
+      window.__workSlow = null;
+      track.append(story);
+      track.classList.remove("is-staged");
+    };
+  }
   if (work) {
     window.__workSlow = { start: () => naturalTop() - 2.5 * window.innerHeight, end: () => naturalTop() };
-    // sine.inOut: the lift starts and ends with zero extra velocity, so the section glides from normal speed
-    // down to a crawl and back to normal speed with no sudden change anywhere.
+    // Fallback (no native scroll timelines): JavaScript-scrubbed, eased with sine.inOut.
     gsap.fromTo(work, { y: () => -1.4 * window.innerHeight, force3D: true }, {
       y: 0, ease: "sine.inOut", force3D: true,
       scrollTrigger: { start: window.__workSlow.start, end: window.__workSlow.end, scrub: 1, invalidateOnRefresh: true, refreshPriority: 15 },

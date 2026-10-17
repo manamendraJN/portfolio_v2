@@ -776,3 +776,16 @@ html { -webkit-tap-highlight-color: transparent; }
 }
 #work { will-change: transform; backface-visibility: hidden; }
 .layer-shade { transition: none; }
+
+/* ---- Native scroll-linked slow entry of 01 and hero darkening (compositor-driven; no JS per frame) ---- */
+@supports (animation-timeline: scroll()) {
+  html.css-slow #work { animation: work-lift linear both; animation-timeline: scroll(root); animation-range: var(--ws) var(--we); animation-timing-function: cubic-bezier(.37, 0, .63, 1); }
+  html.css-slow .layer-shade--slow { animation: shade-in linear both; animation-timeline: scroll(root); animation-range: var(--ws) var(--we); }
+}
+@keyframes work-lift { from { transform: translate3d(0, calc(var(--wd) * -1), 0); } to { transform: translate3d(0, 0, 0); } }
+@keyframes shade-in { from { opacity: 0; } to { opacity: .72; } }
+
+/* Scroll performance (all screens): a full-screen multiply blend forces the browser to re-blend the whole page every frame. */
+body::before { mix-blend-mode: normal; opacity: .2; }
+[data-header] { -webkit-backdrop-filter: none; backdrop-filter: none; background: rgba(245, 240, 230, .96); }
+.thread { will-change: transform; contain: layout paint; }

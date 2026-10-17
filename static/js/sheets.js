@@ -20,6 +20,7 @@ export function initSheets(mm) {
       shade.setAttribute("aria-hidden", "true");
       host.append(shade);
       shades.push(shade);
+      if (section.id === "hero" && window.__workSlow && window.__workSlow.native) { shade.classList.add("layer-shade--slow"); return; } // native CSS timeline drives it
       gsap.fromTo(shade, { opacity: 0 }, {
         opacity: 0.72, ease: "none",
         scrollTrigger: section.id === "hero" && window.__workSlow
