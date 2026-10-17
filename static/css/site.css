@@ -690,3 +690,21 @@ html { -webkit-tap-highlight-color: transparent; }
 .project-links { font-size: .88rem; gap: .3rem 1rem; }
 .project-art figcaption { font-size: .55rem; bottom: .35rem; }
 @media (max-width: 719px) { .project-card { max-width: 20.5rem; } .project-art svg { max-height: 12.5rem; } .project-body { padding: .7rem .8rem .85rem; } }
+
+/* Phones: compact two-up project cards (illustration, title, short summary, tags, links) */
+@media (max-width: 719px) {
+  .project-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .6rem; }
+  .project-card { max-width: none; }
+  .project-art svg { max-height: none; }
+  .project-art figcaption { display: none; }
+  .project-body { padding: .55rem .6rem .7rem; gap: .35rem; }
+  .project-body > .label { font-size: .58rem; }
+  .project-title { font-size: 1.05rem; }
+  .project-summary { font-size: .74rem; line-height: 1.4; display: -webkit-box; -webkit-line-clamp: 4; -webkit-box-orient: vertical; overflow: hidden; }
+  .project-note { display: none; }
+  .project-tags li:nth-child(n+4) { display: none; }
+  .project-tags .tag { font-size: .5rem; padding: .08rem .38rem; }
+  .project-links { font-size: .74rem; gap: .2rem .7rem; padding-top: .2rem; }
+  .project-links .icon { width: .75rem; height: .75rem; }
+}
+@media (max-width: 340px) { .project-grid { grid-template-columns: minmax(0, 1fr); } }
