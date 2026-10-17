@@ -10,10 +10,18 @@
       <div data-parallax="-0.04" data-fly="-4,300,1" class="-top-[10%] h-[120%]">{% include "illustrations/stars_far.html" %}</div>
       <div data-parallax="-0.09" data-fly="-10,650,1" class="-top-[10%] h-[120%]">{% include "illustrations/stars_near.html" %}</div>
       <div data-parallax="-0.16" data-layer-x="-12" data-fly="-16,300,1" class="!top-[6%] h-[28%]">{% include "illustrations/bg_code.html" %}</div>
-      <div class="hero-frags" data-parallax="-0.28" data-fly="-14,380,1"><span style="top:16%;left:56%">const idea = build();</span><span style="top:34%;left:72%">&lt;Product /&gt;</span><span style="top:8%;left:34%">await api.create()</span></div>
-      <div class="hero-frags" data-parallax="-0.18" data-fly="-8,220,1"><span style="top:26%;left:44%">git commit -m "ship it"</span><span style="top:46%;left:84%">return ship(app);</span></div>
-      <div data-parallax="-0.14" data-emerge="46,-950,0.55" class="hero-ridge -bottom-[10%] h-[48%]">{% include "illustrations/bg_neural.html" %}</div>
-      <div data-parallax="-0.2" data-emerge="56,-650,0.7" class="hero-ridge -bottom-[10%] h-[44%]">{% include "illustrations/bg_neural.html" %}</div>
+      <div class="hero-snips" data-parallax="-0.28" data-fly="-14,380,1" aria-hidden="true">
+        <div class="snip snip-js float f1"><div class="snip-tag">api.js</div><pre><span class="k">const</span> res = <span class="k">await</span> <span class="f">fetch</span>(<span class="s">"/api/projects"</span>);
+<span class="k">const</span> data = <span class="k">await</span> res.<span class="f">json</span>();</pre></div>
+        <div class="snip snip-py float f3"><div class="snip-tag">main.py</div><pre><span class="k">@app</span>.<span class="f">post</span>(<span class="s">"/predict"</span>)
+<span class="k">async def</span> <span class="f">predict</span>(img: Image):
+    <span class="k">return</span> model.<span class="f">infer</span>(img)</pre></div>
+      </div>
+      <div class="hero-snips hero-snips-b" data-parallax="-0.18" data-fly="-8,220,1" aria-hidden="true">
+        <div class="snip snip-sql float f4"><div class="snip-tag">server.js</div><pre>router.<span class="f">get</span>(<span class="s">"/users/:id"</span>, <span class="k">async</span> (req, res) =&gt; {
+  res.<span class="f">json</span>(<span class="k">await</span> db.users.<span class="f">find</span>(req.params.id));
+});</pre></div>
+      </div>
       <div class="hero-nodes" data-parallax="-0.2" data-fly="-12,240,1">{% include "illustrations/bg_nodes.html" %}</div>
       <div class="hero-symbols" data-parallax="-0.3" data-fly="-18,420,1"><span class="float f1" style="top:20%;left:46%">{ }</span><span class="float f2" style="top:62%;left:52%">&lt;/&gt;</span><span class="float f3" style="top:38%;left:90%">=&gt;</span><span class="float f4" style="top:74%;left:80%">[ ]</span><span class="float f5" style="top:12%;left:70%">;</span></div>
       <div class="hero-term float f2" data-parallax="-0.16" data-fly="-10,200,1" aria-hidden="true"><div class="term-bar"><i></i><i></i><i></i><span>zsh</span></div><pre><span class="k">$</span> npm run build

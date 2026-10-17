@@ -835,3 +835,19 @@ body::before { mix-blend-mode: normal; opacity: .2; }
 #contact .contact-term { bottom: 3.5%; width: min(22rem, 28vw) !important; }
 @media (max-width: 899px) { #contact { padding-bottom: 12.5rem !important; } #contact .contact-term { width: min(78vw, 20rem) !important; left: 50%; margin-left: min(-39vw, -10rem); bottom: 2.5%; } }
 @media (max-width: 899px) { #contact .contact-term { left: calc(50% - min(39vw, 10rem)) !important; margin-left: 0 !important; right: auto !important; } }
+
+/* ---- Hero code snippet cards: subtle glow, low opacity, behind the content ---- */
+.hero-snips { top: 0 !important; height: 100%; left: 0; }
+.snip { position: absolute; width: min(17rem, 24vw); background: rgba(35, 44, 74, .5); border: 1px solid rgba(157, 180, 200, .22); border-radius: 8px; box-shadow: 0 0 28px rgba(157, 180, 200, .09); overflow: hidden; opacity: .72; }
+.snip-tag { padding: .3rem .6rem; font: 400 .6rem/1 "JetBrains Mono", monospace; color: rgba(157, 180, 200, .75); border-bottom: 1px solid rgba(157, 180, 200, .16); }
+.snip pre { margin: 0; padding: .55rem .7rem .65rem; font: 400 .62rem/1.6 "JetBrains Mono", monospace; color: rgba(245, 240, 230, .78); white-space: pre; overflow: hidden; }
+.snip .k { color: #9DB4C8; } .snip .f { color: #A9C4A1; } .snip .s { color: var(--ochre); }
+.snip-js { left: 49%; top: 7%; }
+.snip-py { left: 49%; top: 55%; }
+.snip-sql { left: 6%; bottom: 3%; width: min(21rem, 30vw); }
+.hero-term { box-shadow: 0 0 28px rgba(157, 180, 200, .08); }
+@media (max-width: 899px) {
+  .snip-js, .snip-py { display: none; }
+  .snip-sql { left: 1.25rem; right: auto; bottom: 2.5%; width: min(78vw, 17rem); opacity: .5; }
+}
+@media (min-width: 900px) and (max-width: 1100px) { .snip-js, .snip-py { display: none; } .snip-sql { left: 5%; bottom: 2%; opacity: .55; } }
