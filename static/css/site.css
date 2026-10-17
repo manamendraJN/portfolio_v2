@@ -172,7 +172,7 @@ section[id] { scroll-margin-top: 2rem; }
 .hero-figure { margin-top: 2.5rem; width: 100%; max-width: 46rem; }
 @media (min-width: 1024px) { .hero-figure { margin-left: auto; } }
 .hero-wash { display: none; }
-.hero-track.is-staged { height: 640vh; margin-bottom: -100vh; } /* four story scenes, then the next sheet slides over */
+.hero-track.is-staged { height: 500vh; margin-bottom: -100vh; } /* four story scenes, then the next sheet slides over */
 .hero-track.is-staged .hero-stage { position: sticky; top: 0; height: 100vh; padding: 5.5rem 0 0; }
 .hero-track.is-staged .hero-title { font-size: clamp(3.4rem, min(8.5vw, 13.5vh), 9rem); }
 .hero-track.is-staged .hero-wrap { height: 100%; }
@@ -324,7 +324,7 @@ html.past-hero .index { opacity: 1; visibility: visible; transition-delay: 0s; }
 /* ================= Mobile (phones and narrow screens) =================
    Layout only: every animation and effect above stays. Dynamic-viewport units (svh) keep the pinned hero steady
    while the mobile browser toolbar shows and hides. */
-.hero-track.is-staged { height: 640svh; margin-bottom: -100svh; }
+.hero-track.is-staged { height: 500svh; margin-bottom: -100svh; }
 .hero-track.is-staged .hero-stage { height: 100svh; }
 .stack.is-pinned { height: 100svh; }
 
@@ -643,3 +643,28 @@ html { -webkit-tap-highlight-color: transparent; }
   .contact-main { padding-top: 1rem; }
 }
 @media (min-width: 1280px) { .contact-grid { padding-right: 6.5rem; } }
+
+/* ================= Compact layout pass ================= */
+.layer.sheet:not(#contact) { min-height: 0; padding-bottom: clamp(2.5rem, 5vw, 4.5rem); }
+.nrow { padding: 1rem 0; gap: .5rem 1.5rem; }
+.nrow .num { font-size: clamp(2rem, 1.2rem + 2.4vw, 3.6rem); }
+.focus-card { padding: 1.25rem; }
+.profile-photo { margin-bottom: 1.25rem; }
+.story-scene { padding-block: 2rem; }
+/* Skills: category cards in a compact grid */
+.skill-grid { display: grid; gap: .85rem; grid-template-columns: minmax(0, 1fr); }
+@media (min-width: 640px) { .skill-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (min-width: 1024px) { .skill-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; } }
+.skill-card { background: var(--surface); border: 1.5px solid var(--ink); border-radius: 8px; padding: .9rem 1rem 1rem; }
+.skill-card-title { display: flex; align-items: center; gap: .55rem; font-family: "Instrument Serif", Georgia, serif; font-size: 1.4rem; line-height: 1.1; margin: 0 0 .65rem; }
+.skill-card-title .icon { width: 1.15rem; height: 1.15rem; color: var(--vermilion); }
+.skill-tags { display: flex; flex-wrap: wrap; gap: .35rem; list-style: none; margin: 0; padding: 0; }
+@media (max-width: 899px) { .layer.sheet:not(#contact) { padding-bottom: 2.25rem; } .story-scene { padding-block: 1.5rem; } }
+@media (max-width: 639px) {
+  .skill-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .6rem; }
+  .skill-card { padding: .7rem .7rem .8rem; }
+  .skill-card-title { font-size: 1.15rem; margin-bottom: .5rem; gap: .4rem; }
+  .skill-tags { gap: .3rem; } .skill-tags .tag { padding: .12rem .5rem; font-size: .58rem; }
+  .nrow .detail { display: none; } /* decorative; saves vertical space on phones */
+}
+@media (max-width: 359px) { .skill-grid { grid-template-columns: minmax(0, 1fr); } }
