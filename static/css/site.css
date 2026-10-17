@@ -628,14 +628,14 @@ html { -webkit-tap-highlight-color: transparent; }
 @media (min-width: 640px) { .skill-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (min-width: 1024px) { .skill-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; } }
 .skill-card { background: var(--surface); border: 1.5px solid var(--ink); border-radius: 8px; padding: .9rem 1rem 1rem; }
-.skill-card-title { display: flex; align-items: center; gap: .55rem; font-family: "Instrument Serif", Georgia, serif; font-size: 1.4rem; line-height: 1.1; margin: 0 0 .65rem; }
+.skill-card-title { display: flex; align-items: center; gap: .55rem; font-family: "Instrument Serif", Georgia, serif; margin: 0 0 .65rem; }
 .skill-card-title .icon { width: 1.15rem; height: 1.15rem; color: var(--vermilion); }
 .skill-tags { display: flex; flex-wrap: wrap; gap: .35rem; list-style: none; margin: 0; padding: 0; }
 @media (max-width: 899px) { .sheet:not(#contact) { padding-bottom: 2.25rem; } .story-scene { padding-block: 1.5rem; } }
 @media (max-width: 639px) {
   .skill-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .6rem; }
   .skill-card { padding: .7rem .7rem .8rem; }
-  .skill-card-title { font-size: 1.15rem; margin-bottom: .5rem; gap: .4rem; }
+  .skill-card-title { margin-bottom: .5rem; gap: .4rem; }
   .skill-tags { gap: .3rem; } .skill-tags .tag { padding: .12rem .5rem; font-size: .58rem; }
   .nrow .detail { display: none; } /* decorative; saves vertical space on phones */
 }
@@ -665,9 +665,9 @@ html { -webkit-tap-highlight-color: transparent; }
 .project-art svg { display: block; width: 100%; height: auto; }
 .project-art figcaption { position: absolute; left: .7rem; right: .7rem; bottom: .45rem; display: flex; justify-content: space-between; font: 500 .62rem/1 "JetBrains Mono", monospace; text-transform: uppercase; letter-spacing: .12em; color: var(--ink-soft); }
 .project-body { display: flex; flex-direction: column; gap: .6rem; padding: 1.1rem 1.25rem 1.25rem; flex: 1; }
-.project-title { font-size: clamp(1.5rem, 1.1rem + 1vw, 2rem); line-height: 1.05; }
-.project-summary { font-size: .98rem; line-height: 1.55; }
-.project-note { font-size: .85rem; line-height: 1.5; }
+.project-title { }
+.project-summary { }
+.project-note { }
 .project-tags { display: flex; flex-wrap: wrap; gap: .35rem; list-style: none; padding: 0; margin: .2rem 0 0; }
 .project-links { display: flex; flex-wrap: wrap; gap: .4rem 1.25rem; list-style: none; padding: 0; margin: auto 0 0; padding-top: .4rem; }
 /* Smaller project cards: three columns on desktop, tighter text */
@@ -675,9 +675,9 @@ html { -webkit-tap-highlight-color: transparent; }
 @media (min-width: 720px) and (max-width: 1023px) { .project-grid { gap: 1rem; } }
 @media (max-width: 719px) { .project-card { max-width: 26rem; margin-inline: auto; width: 100%; } }
 .project-body { padding: .8rem .9rem .95rem; gap: .45rem; }
-.project-title { font-size: clamp(1.25rem, 1rem + .5vw, 1.5rem); }
-.project-summary { font-size: .88rem; line-height: 1.5; }
-.project-note { font-size: .78rem; line-height: 1.45; }
+.project-title { }
+.project-summary { }
+.project-note { }
 .project-tags { gap: .3rem; } .project-tags .tag { padding: .1rem .5rem; font-size: .58rem; }
 .project-links { font-size: .88rem; gap: .3rem 1rem; }
 .project-art figcaption { font-size: .55rem; bottom: .35rem; }
@@ -691,8 +691,8 @@ html { -webkit-tap-highlight-color: transparent; }
   .project-art figcaption { display: none; }
   .project-body { padding: .55rem .6rem .7rem; gap: .35rem; }
   .project-body > .label { font-size: .58rem; }
-  .project-title { font-size: 1.05rem; }
-  .project-summary { font-size: .74rem; line-height: 1.4; display: -webkit-box; -webkit-line-clamp: 4; -webkit-box-orient: vertical; overflow: hidden; }
+  .project-title { }
+  .project-summary { display: -webkit-box; -webkit-line-clamp: 4; -webkit-box-orient: vertical; overflow: hidden; }
   .project-note { display: none; }
   .project-tags li:nth-child(n+4) { display: none; }
   .project-tags .tag { font-size: .5rem; padding: .08rem .38rem; }
@@ -702,11 +702,11 @@ html { -webkit-tap-highlight-color: transparent; }
 @media (max-width: 340px) { .project-grid { grid-template-columns: minmax(0, 1fr); } }
 
 /* ---- About: compact text and cards ---- */
-.about-text { font-size: clamp(.95rem, .9rem + .2vw, 1.05rem); line-height: 1.6; }
+.about-text { }
 .about-card, .focus-card.about-card { position: static; padding: .85rem 1rem; display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; gap: .9rem; }
 .about-card-num { font-family: "Instrument Serif", Georgia, serif; font-size: 2.2rem; line-height: 1; color: var(--vermilion); }
-.about-card-title { font-family: "Instrument Serif", Georgia, serif; font-size: clamp(1.15rem, 1rem + .4vw, 1.4rem); line-height: 1.1; }
-.about-card-text { font-size: .85rem; line-height: 1.45; color: var(--ink-soft); margin-top: .2rem; }
+.about-card-title { font-family: "Instrument Serif", Georgia, serif; }
+.about-card-text { color: var(--ink-soft); margin-top: .2rem; }
 .about-card-icon { display: grid; place-items: center; width: 2.2rem; height: 2.2rem; border-radius: 50%; background: rgba(127, 148, 119, .25); }
 .about-card-icon .icon { width: 1.05rem; height: 1.05rem; }
 @media (max-width: 479px) { .about-card-icon { display: none; } .about-card-num { font-size: 1.8rem; } .about-card, .focus-card.about-card { grid-template-columns: auto minmax(0, 1fr); gap: .7rem; } }
@@ -842,3 +842,48 @@ body::before { mix-blend-mode: normal; opacity: .2; }
   .snip-sql { left: 1.25rem; right: auto; bottom: 2.5%; width: min(78vw, 17rem); opacity: .5; }
 }
 @media (min-width: 900px) and (max-width: 1100px) { .snip-js, .snip-py { display: none; } .snip-sql { left: 5%; bottom: 2%; opacity: .55; } }
+
+
+/* ================= Typography system =================
+   One scale, fluid between phone and desktop. Hero / contact headlines keep their own display sizes on purpose.
+   serif = Instrument Serif (titles) | sans = Manrope (reading text, buttons) | mono = JetBrains Mono (labels, tags). */
+:root {
+  --fs-display-sm: clamp(2rem, 1.2rem + 3.4vw, 4.2rem);      /* story headlines */
+  --fs-item: clamp(1.6rem, 1.25rem + 1.5vw, 2.4rem);          /* experience / education / research item titles */
+  --fs-card: clamp(1.3rem, 1.2rem + .45vw, 1.55rem);          /* card titles: project, skill, about, certificate */
+  --fs-lead: clamp(1.05rem, 1rem + .4vw, 1.25rem);            /* intro / institution lines */
+  --fs-body: clamp(.95rem, .91rem + .22vw, 1.05rem);          /* paragraphs */
+  --fs-body-sm: clamp(.85rem, .82rem + .15vw, .95rem);        /* card descriptions */
+  --fs-note: clamp(.78rem, .75rem + .12vw, .85rem);           /* notes, captions */
+  --fs-btn: clamp(.9rem, .88rem + .15vw, 1rem);
+  --lh-title: 1.12; --lh-body: 1.6; --lh-tight: 1.45;
+  --c-text: var(--ink); --c-text-soft: var(--ink-soft);
+}
+body { font-size: var(--fs-body); line-height: var(--lh-body); }
+.text-lead { font-size: var(--fs-lead); line-height: 1.55; }
+.text-h3 { font-size: var(--fs-item); line-height: var(--lh-title); }
+.story-line { font-size: var(--fs-display-sm); line-height: 1.04; }
+.project-title, .skill-card-title, .about-card-title, .rail .font-display, #research h4 { font-family: "Instrument Serif", Georgia, serif; font-weight: 400; font-size: var(--fs-card); line-height: var(--lh-title); }
+.project-summary, .about-card-text, .skill-tags, .rail article p { font-size: var(--fs-body-sm); line-height: var(--lh-tight); }
+.about-text, #research article p, #experience .nrow p, #education p:not(.label) { font-size: var(--fs-body); line-height: var(--lh-body); font-weight: 400; }
+#experience .nrow p.font-semibold, #education .text-lead { font-weight: 600; }
+#education .text-lead { font-weight: 400; font-size: var(--fs-lead); }
+.project-note, .marginalia { font-size: var(--fs-note); line-height: var(--lh-tight); }
+.btn, .rail-btn { font-size: var(--fs-btn); font-weight: 600; letter-spacing: 0; }
+.label { font-size: clamp(.68rem, .65rem + .1vw, .75rem); line-height: 1.4; letter-spacing: .14em; }
+.tag { font-size: clamp(.62rem, .6rem + .08vw, .68rem); line-height: 1.5; }
+.section-title { line-height: 1.2; }
+footer p.font-display { font-size: var(--fs-card); }
+/* Card / mono text must stay legible on phones: no sub-12px reading text */
+@media (max-width: 719px) {
+  .project-summary { font-size: .8rem; line-height: 1.42; }
+  .project-title { font-size: 1.12rem; }
+  .project-note { font-size: .75rem; }
+  .rail .label, .rail figcaption { font-size: .6rem; letter-spacing: .06em; }
+  .rail .font-display { font-size: 1.1rem; }
+  .rail article p.text-sm { font-size: .72rem; }
+  .skill-card-title { font-size: 1.2rem; }
+  .skill-tags .tag, .project-tags .tag { font-size: .56rem; }
+}
+#experience .nrow .marginalia { font-size: var(--fs-note); line-height: var(--lh-tight); font-weight: 600; }
+#experience .nrow p.label { font-size: clamp(.68rem, .65rem + .1vw, .75rem); line-height: 1.4; }
