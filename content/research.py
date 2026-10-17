@@ -13,7 +13,6 @@ class Research:
     contribution: str
     group_title: str
     group_modules: tuple[str, ...]
-    pipeline: tuple[str, ...]
 
 
 # No accuracy figures or results: none were supplied.
@@ -40,12 +39,5 @@ RESEARCH = Research(
         "Temporal Wardrobe Intelligence",
         "Personalized Accessories Recommendation",
         "Integrated Grooming Recommendation",
-    ),
-    pipeline=(
-        "Front and side photographs",
-        "EfficientNet-B3 feature extraction",
-        "Body measurements",
-        "Garment-size scoring",
-        "Confidence-rated size recommendation with fit advice",
     ),
 )

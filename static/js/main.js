@@ -9,7 +9,6 @@ import { initThread } from "./thread.js";
 import { initIndex } from "./index-nav.js";
 import { initProjects } from "./projects.js";
 import { initRail } from "./rail.js";
-import { initResearch } from "./research.js";
 import { initPill } from "./pill.js";
 import { initNav } from "./nav.js";
 import { initLayers } from "./layers.js";
@@ -38,7 +37,6 @@ initCertificates(mm);
 initSheets(mm);
 initIndex(); // created after the pin so positions include its spacer
 initPill();
-initResearch(mm);
 initThread(mm); // last: its path is measured from the final layout
 ScrollTrigger.refresh();
 
