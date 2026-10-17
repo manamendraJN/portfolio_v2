@@ -122,9 +122,9 @@ function stagedHero(track) {
     const root = document.documentElement;
     const setRange = () => {
       const vh = window.innerHeight;
-      root.style.setProperty("--ws", `${Math.round(naturalTop() - 2.5 * vh)}px`);
+      root.style.setProperty("--ws", `${Math.round(naturalTop() - 2 * vh)}px`);
       root.style.setProperty("--we", `${Math.round(naturalTop())}px`);
-      root.style.setProperty("--wd", `${Math.round(1.4 * vh)}px`);
+      root.style.setProperty("--wd", `${Math.round(1 * vh)}px`);
     };
     setRange();
     root.classList.add("css-slow");
@@ -139,10 +139,10 @@ function stagedHero(track) {
     };
   }
   if (work) {
-    window.__workSlow = { start: () => naturalTop() - 2.5 * window.innerHeight, end: () => naturalTop() };
-    // Fallback (no native scroll timelines): JavaScript-scrubbed, eased with sine.inOut.
-    gsap.fromTo(work, { y: () => -1.4 * window.innerHeight, force3D: true }, {
-      y: 0, ease: "sine.inOut", force3D: true,
+    window.__workSlow = { start: () => naturalTop() - 2 * window.innerHeight, end: () => naturalTop() };
+    // Fallback (no native scroll timelines): JavaScript-scrubbed, one constant speed (ease none).
+    gsap.fromTo(work, { y: () => -1 * window.innerHeight, force3D: true }, {
+      y: 0, ease: "none", force3D: true,
       scrollTrigger: { start: window.__workSlow.start, end: window.__workSlow.end, scrub: 1, invalidateOnRefresh: true, refreshPriority: 15 },
     });
   }
