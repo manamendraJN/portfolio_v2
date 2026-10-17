@@ -607,3 +607,31 @@ body { font-size: clamp(1rem, .96rem + .18vw, 1.125rem); }
   .hero-track.is-staged .hero-portrait .profile-frame { border-radius: 8px; aspect-ratio: 4 / 5; box-shadow: 6px 6px 0 var(--ochre); }
   .hero-track.is-staged .hero-portrait figcaption { display: block; }
 }
+
+/* ================= Landscape phones / short screens ================= */
+@media (max-height: 560px) {
+  .hero-track.is-staged .hero-portrait { top: 8%; right: 5vw; }
+  .hero-track.is-staged .hero-portrait .profile-photo { width: min(32vh, 9.5rem); }
+  .hero-track.is-staged .hero-portrait figcaption { display: none; }
+  .hero-sun { display: none !important; }
+  .hero-track.is-staged .story-line { font-size: clamp(1.4rem, 5.2vh, 2.1rem); }
+  .hero-track.is-staged .story-line--big { font-size: clamp(1.6rem, 6.4vh, 2.6rem); }
+  .story-chips { margin-top: .6rem; } .story-chips .tag { font-size: .6rem; }
+  .hero-track.is-staged .story-scene .mt-8 { margin-top: .75rem; }
+  .story-visual { height: min(9rem, 30vh); }
+  .contact-photo .profile-photo { width: min(100%, 9rem); }
+}
+
+/* ================= Mobile performance (look unchanged) ================= */
+@media (hover: none), (max-width: 899px) {
+  /* A full-screen multiply blend repaints every frame while scrolling; plain blending looks the same at this opacity. */
+  body::before { mix-blend-mode: normal; opacity: .22; }
+  [data-header] { -webkit-backdrop-filter: none; backdrop-filter: none; background: rgba(245, 240, 230, .96); }
+  .panel, .plate-frame, .scene { box-shadow: none; }
+  .panel { box-shadow: 0 10px 24px rgba(0, 0, 0, .3); }
+  .wobble { filter: none; } /* the SVG displacement filter is the costliest paint on low-power GPUs */
+}
+/* Only layers that are actually scrubbed keep a compositor hint */
+.scenery > *:not([data-fly]):not([data-emerge]):not([data-parallax]) { will-change: auto; }
+.rail { overscroll-behavior-x: contain; }
+html { -webkit-tap-highlight-color: transparent; }
