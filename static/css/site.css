@@ -635,3 +635,11 @@ body { font-size: clamp(1rem, .96rem + .18vw, 1.125rem); }
 .scenery > *:not([data-fly]):not([data-emerge]):not([data-parallax]) { will-change: auto; }
 .rail { overscroll-behavior-x: contain; }
 html { -webkit-tap-highlight-color: transparent; }
+/* Contact alignment: smaller portrait that stays clear of the hills and the section-index badge */
+@media (min-width: 900px) {
+  .contact-photo .profile-photo { width: min(100%, 14rem); }
+  #contact { padding-bottom: clamp(9rem, 14vw, 12rem); }
+  .contact-grid { align-items: start; }
+  .contact-main { padding-top: 1rem; }
+}
+@media (min-width: 1280px) { .contact-grid { padding-right: 6.5rem; } }
