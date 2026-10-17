@@ -726,3 +726,7 @@ html { -webkit-tap-highlight-color: transparent; }
 .js .pill { transition: opacity .6s, transform .6s, visibility 0s .6s; }
 .nrow .detail { transition: opacity .6s, transform .6s; }
 .btn { transition: transform .4s; }
+
+/* Sections 02-06 read as one continuous layer: no torn edge or extra gap between them */
+#about, #experience, #education, #research { padding-top: clamp(1.5rem, 3vw, 2.5rem); }
+#skills, #about, #experience, #education { padding-bottom: clamp(1rem, 2vw, 1.5rem) !important; }
