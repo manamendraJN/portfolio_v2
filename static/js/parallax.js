@@ -111,9 +111,23 @@ function stagedHero(track) {
   tl.fromTo(mindset, { autoAlpha: 0, scale: 0.96 }, { autoAlpha: 1, scale: 1, duration: 0.07 }, 0.6);
   parallaxIn(mindset, 0.6, 0.82);
 
+  // Slow entry of 01 — Selected projects: it rises over the hero at about a third of normal scroll speed.
+  // The track has extra height for this (see CSS); the section is lifted by two screens and eased down (scrubbed).
+  const work = document.getElementById("work");
+  const naturalTop = () => track.getBoundingClientRect().bottom + window.scrollY - window.innerHeight;
+  if (work) {
+    window.__workSlow = { start: () => naturalTop() - 3 * window.innerHeight, end: () => naturalTop() };
+    gsap.fromTo(work, { y: () => -2 * window.innerHeight }, {
+      y: 0, ease: "none",
+      scrollTrigger: { start: window.__workSlow.start, end: window.__workSlow.end, scrub: SCRUB, invalidateOnRefresh: true, refreshPriority: 15 },
+    });
+  }
+
   return () => {
+    window.__workSlow = null;
     track.append(story);
     track.classList.remove("is-staged");
+    if (work) gsap.set(work, { clearProps: "transform" });
   };
 }
 
