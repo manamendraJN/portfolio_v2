@@ -4,6 +4,7 @@
    - Flat (very short screens, reduced motion): a plain readable hero with the island below the copy.*/
 import { gsap, ScrollTrigger } from "../vendor/gsap.js";
 import { MEDIA } from "./media.js";
+import { prepareIslandBitmaps } from "./island-zoom.js";
 
 const SCRUB = 2.4; // light smoothing: layers ease toward the scroll position
 
@@ -66,6 +67,7 @@ function stagedHero(track) {
     const S = Math.max(vw / w0, vhh / h0) * 1.04;
     return { w0, h0, lx, ly, P0x, P0y, vw, vhh, S };
   };
+  const bitmaps = prepareIslandBitmaps(island); // vector -> bitmaps while zooming: no per-frame vector raster
   let g = geo();
   const remeasure = () => { g = geo(); };
   const proxy = { p: 0 };
@@ -80,6 +82,7 @@ function stagedHero(track) {
     const r = Math.max(0, g.vw - (Pdx + (g.w0 * s) / 2)), b = Math.max(0, g.vhh - (Pdy + (g.h0 * s) / 2));
     const rad = 4 * (g.w0 / 188) * s * (1 - e);
     story.style.clipPath = `inset(${t}px ${r}px ${b}px ${l}px round ${rad}px)`;
+    bitmaps.update(p, s);
     // The story only takes over once the screen nearly fills the view; before that the laptop's own code is what you zoom into.
     story.style.opacity = String(Math.min(1, Math.max(0, (p - 0.7) / 0.22)));
     story.style.visibility = p < 0.68 ? "hidden" : "visible";
@@ -111,6 +114,7 @@ function stagedHero(track) {
     window.removeEventListener("resize", onResize);
     ScrollTrigger.removeEventListener("refresh", onResize);
     stage.classList.remove("is-zooming");
+    bitmaps.release();
     window.__workSlow = null;
     story.style.clipPath = "";
     story.style.visibility = "";
