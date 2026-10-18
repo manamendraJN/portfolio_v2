@@ -11,7 +11,8 @@
       <linearGradient id="g-glass" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".16"/><stop offset=".5" stop-color="#fff" stop-opacity=".02"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient>
       <linearGradient id="g-mug" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#FFF7F1"/><stop offset=".6" stop-color="#F1E6DB"/><stop offset="1" stop-color="#DCCFC2"/></linearGradient>
       <radialGradient id="g-glow" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#BFD3E6" stop-opacity=".55"/><stop offset="1" stop-color="#BFD3E6" stop-opacity="0"/></radialGradient>
-      <filter id="f-soft" x="-30%" y="-60%" width="160%" height="220%"><feGaussianBlur stdDeviation="9"/></filter>
+      <radialGradient id="g-shade" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#5E4332" stop-opacity=".42"/><stop offset="1" stop-color="#5E4332" stop-opacity="0"/></radialGradient>
+      <radialGradient id="g-grassshade" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#4F7044" stop-opacity=".4"/><stop offset="1" stop-color="#4F7044" stop-opacity="0"/></radialGradient>
     </defs>
     <g class="island-float">
       {# soft shadow under the island is the sky; rock and earth #}
@@ -26,7 +27,7 @@
       <g fill="#FFF7F1"><circle cx="150" cy="462" r="3.2"/><circle cx="215" cy="470" r="3.2"/><circle cx="700" cy="464" r="3.2"/><circle cx="770" cy="470" r="3.2"/></g>
       <g fill="#F4B6B8"><circle cx="180" cy="468" r="3.2"/><circle cx="735" cy="468" r="3.2"/><circle cx="120" cy="472" r="2.8"/></g>
       <g fill="#F3C969"><circle cx="240" cy="474" r="3"/><circle cx="670" cy="474" r="3"/><circle cx="800" cy="474" r="2.6"/></g>
-      <ellipse cx="450" cy="440" rx="270" ry="14" fill="#5E7F52" opacity=".28" filter="url(#f-soft)"/>
+      <ellipse cx="450" cy="440" rx="290" ry="20" fill="url(#g-grassshade)"/>
 
       {# desk #}
       <path d="M196 412H704V438H196Z" fill="url(#g-wood)"/>
@@ -37,8 +38,8 @@
 
       {# laptop #}
       <g data-hot="Full-stack apps, from API to UI" tabindex="0" role="img" aria-label="Laptop: full-stack apps, from API to UI" class="hot">
-        <ellipse cx="450" cy="420" rx="148" ry="9" fill="#6B4B38" opacity=".28" filter="url(#f-soft)"/>
-        <rect x="330" y="228" width="240" height="176" rx="26" fill="url(#g-glow)" filter="url(#f-soft)"/>
+        <ellipse cx="450" cy="421" rx="165" ry="12" fill="url(#g-shade)"/>
+        <ellipse cx="450" cy="322" rx="156" ry="128" fill="url(#g-glow)"/>
         <rect x="342" y="236" width="216" height="164" rx="11" fill="url(#g-alu)"/>
         <rect x="342" y="236" width="216" height="164" rx="11" fill="none" stroke="#9AA6D6" stroke-opacity=".35" stroke-width="1.2"/>
         <rect x="350" y="244" width="200" height="148" rx="6" fill="#161C33"/>

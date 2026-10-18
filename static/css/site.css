@@ -939,3 +939,6 @@ footer p.font-display { font-size: var(--fs-card); }
 /* Centre the island exactly, even when it is wider than the screen (auto margins left-align an over-wide box) */
 .hero-track.is-staged .island-scene { --iw: min(88vw, calc(72svh * 1.406)); width: var(--iw); left: calc(50% - var(--iw) / 2); right: auto; margin: 0; }
 @media (max-width: 899px) { .hero-track.is-staged .island-scene { --iw: min(116vw, calc(54svh * 1.406)); } }
+/* While the camera zooms into the laptop, keep the scene static so the GPU only has to scale it */
+.is-zooming .island-float, .is-zooming .float-slow, .is-zooming .float-slow2, .is-zooming .steam, .is-zooming .caret, .is-zooming .hot { animation-play-state: paused; transition: none; }
+.island-scene, .island-svg { backface-visibility: hidden; }

@@ -51,7 +51,7 @@ function stagedHero(track) {
   stage.querySelectorAll("[data-hero-line]").forEach((el) =>
     tl.to(el, { y: vh(parseFloat(el.dataset.heroLine)), ease: "power1.in", duration: 0.1 }, 0.02));
   tl.to(copy, { autoAlpha: 0, duration: 0.07 }, 0.045);
-  tl.to(clouds, { opacity: 0, scale: 1.25, duration: ZOOM * 0.8, transformOrigin: "50% 50%" }, T.zoom);
+  tl.to(clouds, { opacity: 0, duration: ZOOM * 0.8 }, T.zoom); // opacity only: scaling filtered clouds would re-render them every frame
 
   // Stage 2 - zoom into the laptop: the island scales about the laptop screen and glides to the middle of the view while the
   // story (the screen's contents) opens from the exact screen rectangle. Everything is a function of one progress value.
@@ -66,9 +66,11 @@ function stagedHero(track) {
     const S = Math.max(vw / w0, vhh / h0) * 1.04;
     return { w0, h0, lx, ly, P0x, P0y, vw, vhh, S };
   };
+  let g = geo();
+  const remeasure = () => { g = geo(); };
   const proxy = { p: 0 };
+  let zooming = false;
   const apply = () => {
-    const g = geo();
     const p = proxy.p;
     const e = p < 0.5 ? 2 * p * p : 1 - Math.pow(-2 * p + 2, 2) / 2;
     const s = Math.exp(Math.log(g.S) * e);
@@ -82,6 +84,9 @@ function stagedHero(track) {
     story.style.opacity = String(Math.min(1, Math.max(0, (p - 0.7) / 0.22)));
     story.style.visibility = p < 0.68 ? "hidden" : "visible";
     story.style.pointerEvents = p > 0.97 ? "auto" : "none";
+    // Ambient SVG animations (island bob, steam, caret) repaint the scene every frame: pause them while it is zooming.
+    const z = p > 0.002 && p < 0.998;
+    if (z !== zooming) { zooming = z; stage.classList.toggle("is-zooming", z); }
   };
   tl.to(proxy, { p: 1, duration: ZOOM, ease: "none", onUpdate: apply }, T.zoom);
   apply();
@@ -99,10 +104,13 @@ function stagedHero(track) {
   const work = document.getElementById("work");
   const naturalTop = () => track.getBoundingClientRect().bottom + window.scrollY - window.innerHeight;
   const nativeTimeline = window.CSS && CSS.supports && CSS.supports("animation-timeline: scroll()");
-  const onResize = () => apply();
+  const onResize = () => { remeasure(); apply(); };
   window.addEventListener("resize", onResize);
+  ScrollTrigger.addEventListener("refresh", onResize);
   const finish = () => {
     window.removeEventListener("resize", onResize);
+    ScrollTrigger.removeEventListener("refresh", onResize);
+    stage.classList.remove("is-zooming");
     window.__workSlow = null;
     story.style.clipPath = "";
     story.style.visibility = "";
