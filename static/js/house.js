@@ -24,7 +24,7 @@ export function buildHouse(tl, house, T, narrow) {
   gsap.set(q(".hs-star"), { opacity: 0 });
   gsap.set(grp("labels"), { opacity: 0 });
   const cfs = q(".cf");
-  cfs.forEach((el) => gsap.set(el, { clipPath: "inset(0 100% 0 0)", autoAlpha: 1 }));
+  cfs.forEach((el) => gsap.set(el, { clipPath: "inset(0 100% 0 0)", autoAlpha: 1, y: 0 }));
   const cf = (id) => house.querySelector(`[data-cf="${id}"]`);
   gsap.set(cf("idea"), { clipPath: "inset(0 0% 0 0)", autoAlpha: narrow ? 0 : 1 });
 
@@ -35,29 +35,28 @@ export function buildHouse(tl, house, T, narrow) {
     tl.to(els, { strokeDashoffset: 0, duration: dur, stagger: dur * 0.5, ease: "none" }, at);
   };
   const fade = (els, at, dur, to = 1) => tl.to(els, { opacity: to, duration: dur, ease: "none" }, at);
-  // The code fragment is written (clip-path reveal) as its step starts, then dims once the next step takes over.
+  // The code fragment is written (clip-path reveal) as its step starts, then leaves (fade + lift) as the next one comes in,
+  // so only the fragment for the current build step is on screen.
   const write = (id, at, dur) => {
     const el = cf(id);
     if (!el) return;
     if (narrow) tl.to(el, { autoAlpha: 1, clipPath: "inset(0 0% 0 0)", duration: dur, ease: "none" }, at);
     else tl.to(el, { clipPath: "inset(0 0% 0 0)", duration: dur, ease: "none" }, at);
   };
-  const dim = (id, at, dur, to = 0.42) => {
+  const dim = (id, at, dur) => {
     const el = cf(id);
     if (!el) return;
-    if (narrow) tl.to(el, { autoAlpha: 0, duration: dur, ease: "none" }, at); // phones: one fragment at a time
-    else tl.to(el, { opacity: to, duration: dur, ease: "none" }, at);
+    tl.to(el, { autoAlpha: 0, y: narrow ? 0 : -14, duration: dur, ease: "power1.in" }, at);
   };
 
   // --- Stage 1 -> 2: the idea fades back, the construction guides stay
-  dim("idea", T.s2, 0.03, 0.45);
 
   // --- Stage 3: the craft: foundation, vertical supports, beams
   fade(grp("foundation"), T.craft, 0.02, 1);
   fade(grp("guides"), T.craft, 0.03, 0.3);
   write("foundation", T.craft + 0.01, 0.025);
   draw(strokes("foundation").filter((e) => !e.hasAttribute("data-slab")), T.craft + 0.01, 0.035);
-  dim("idea", T.craft, 0.02, 0.2);
+  dim("idea", T.craft, 0.02);
   write("frame", T.craft + 0.045, 0.025);
   dim("foundation", T.craft + 0.045, 0.02);
   draw(strokes("frame"), T.craft + 0.045, 0.05);
