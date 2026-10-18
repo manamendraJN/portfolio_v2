@@ -923,3 +923,6 @@ footer p.font-display { font-size: var(--fs-card); }
 @keyframes sky-drift { from { transform: translate3d(0, 0, 0); } to { transform: translate3d(-50%, 0, 0); } }
 @media (prefers-reduced-motion: reduce) { .cl-layer { animation: none; } }
 @media (max-width: 899px) { .cl-near { opacity: .8; } .cl-mid { opacity: .9; } }
+/* With the buttons gone from the hero, the island can use the freed space */
+.hero-track.is-staged .island-scene { width: min(88vw, calc(72svh * 1.406)); }
+@media (max-width: 899px) { .hero-track.is-staged .island-scene { width: min(116vw, calc(54svh * 1.406)); } }
