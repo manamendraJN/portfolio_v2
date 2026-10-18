@@ -1,36 +1,9 @@
 {% load portfolio_tags %}
-{% comment %}Hero track: on tall desktop screens JS adds .is-staged, pinning the stage (sticky) while layers move at different speeds
-   and the next paper sheet slides over it. Everywhere else it is a plain, readable hero.{% endcomment %}
+{% comment %}Hero track: JS adds .is-staged, pinning the stage (sticky) while one scroll timeline builds the house from code
+   and the next paper sheet slides over it. Without JS / with reduced motion it is a plain, readable hero.{% endcomment %}
 <section id="hero" class="hero-track" aria-labelledby="hero-title" data-section data-hero-track>
   <div class="hero-stage on-dark" data-hero-stage>
-    {# Layered scenery. transform owner: GSAP (parallax.js: staged scrub on desktop, plain scroll parallax elsewhere). #}
-    <div class="scenery" aria-hidden="true">
-      {# data-fly="y(vh), z(px), final opacity factor": layers approach the viewer and rise. data-emerge: layers that rise out of the background. #}
-      <div data-parallax="-0.12" data-fly="-6,200,1" class="-top-[10%] h-[120%]">{% include "illustrations/bg_circuit.html" %}</div>
-      <div data-parallax="-0.04" data-fly="-4,300,1" class="-top-[10%] h-[120%]">{% include "illustrations/stars_far.html" %}</div>
-      <div data-parallax="-0.09" data-fly="-10,650,1" class="-top-[10%] h-[120%]">{% include "illustrations/stars_near.html" %}</div>
-      <div data-parallax="-0.16" data-layer-x="-12" data-fly="-16,300,1" class="!top-[6%] h-[28%]">{% include "illustrations/bg_code.html" %}</div>
-      <div class="hero-snips" data-parallax="-0.28" data-fly="-14,380,1" aria-hidden="true">
-        <div class="snip snip-js float f1"><div class="snip-tag">api.js</div><pre><span class="k">const</span> res = <span class="k">await</span> <span class="f">fetch</span>(<span class="s">"/api/projects"</span>);
-<span class="k">const</span> data = <span class="k">await</span> res.<span class="f">json</span>();</pre></div>
-        <div class="snip snip-py float f3"><div class="snip-tag">main.py</div><pre><span class="k">@app</span>.<span class="f">post</span>(<span class="s">"/predict"</span>)
-<span class="k">async def</span> <span class="f">predict</span>(img: Image):
-    <span class="k">return</span> model.<span class="f">infer</span>(img)</pre></div>
-      </div>
-      <div class="hero-snips hero-snips-b" data-parallax="-0.18" data-fly="-8,220,1" aria-hidden="true">
-        <div class="snip snip-sql float f4"><div class="snip-tag">server.js</div><pre>router.<span class="f">get</span>(<span class="s">"/users/:id"</span>, <span class="k">async</span> (req, res) =&gt; {
-  res.<span class="f">json</span>(<span class="k">await</span> db.users.<span class="f">find</span>(req.params.id));
-});</pre></div>
-      </div>
-      <div class="hero-nodes" data-parallax="-0.2" data-fly="-12,240,1">{% include "illustrations/bg_nodes.html" %}</div>
-      <div class="hero-symbols" data-parallax="-0.3" data-fly="-18,420,1"><span class="float f1" style="top:20%;left:46%">{ }</span><span class="float f2" style="top:62%;left:52%">&lt;/&gt;</span><span class="float f3" style="top:38%;left:90%">=&gt;</span><span class="float f4" style="top:74%;left:80%">[ ]</span><span class="float f5" style="top:12%;left:70%">;</span></div>
-      <div class="hero-term float f2" data-parallax="-0.16" data-fly="-10,200,1" aria-hidden="true"><div class="term-bar"><i></i><i></i><i></i><span>zsh</span></div><pre><span class="k">$</span> npm run build
-<span class="g">&#10003;</span> compiled successfully
-<span class="k">$</span> python train.py
-<span class="y">loss 0.042</span> &middot; model ready<span class="cur">&#9613;</span></pre></div>
-      <div data-parallax="-0.22" data-fly="-20,260,0.3" data-ground class="-bottom-[10%] h-[46%]">{% include "illustrations/bg_chips.html" %}</div>
-      <div data-parallax="-0.34" data-fly="-38,650,0" data-ground class="-bottom-[10%] h-[24%]">{% include "illustrations/bg_chips.html" %}</div>
-    </div>
+    {% include "partials/hero_house.html" %}
 
     <div class="wrap hero-wrap relative z-10">
       <div data-hero-copy>

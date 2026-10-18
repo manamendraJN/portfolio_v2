@@ -2,57 +2,22 @@
 {% comment %}Scenes 2-4 of the hero story. On tall screens JS moves this block into the pinned stage and scrubs it with the scroll;
    everywhere else (small screens, reduced motion, no JS) it is a plain, readable dark band under the hero.{% endcomment %}
 <div class="hero-story" data-hero-story>
-  <div class="hero-dark" data-hero-dark aria-hidden="true"></div>
-
   <section class="story-scene" data-scene-name="craft" aria-labelledby="story-craft">
-    <div class="story-text" data-depth="0.3">
+    <div class="story-text">
       <p class="label">02 &mdash; The craft</p>
       <h2 id="story-craft" class="story-line">Every great product starts with <em>a line of code.</em></h2>
-    </div>
-    <div class="story-visual" aria-hidden="true">
-      <div class="panel panel-editor" data-depth="1.1">
-        <div class="panel-bar"><i></i><i></i><i></i><span>app.tsx</span></div>
-<pre class="code"><span class="c">// an idea, written down</span>
-<span class="k">const</span> idea = <span class="s">"your next product"</span>;
-
-<span class="k">async function</span> <span class="f">build</span>(idea) {
-  <span class="k">const</span> ui  = <span class="f">design</span>(idea);
-  <span class="k">const</span> api = <span class="f">connect</span>(ui);
-  <span class="k">return</span> <span class="f">ship</span>(api);
-}</pre>
-      </div>
-      <div class="panel panel-terminal" data-depth="-0.6">
-        <div class="panel-bar"><i></i><i></i><i></i><span>terminal</span></div>
-<pre class="code"><span class="k">$</span> npm run dev
-<span class="f">✓</span> compiled successfully
-<span class="c">  ready on localhost</span></pre>
-      </div>
-      <div class="frag frag-a" data-depth="1.8">&lt;Product /&gt;</div>
-      <div class="frag frag-b" data-depth="-1.3">git commit -m "ship it"</div>
     </div>
   </section>
 
   <section class="story-scene" data-scene-name="creation" aria-labelledby="story-creation">
-    <div class="story-text" data-depth="0.3">
+    <div class="story-text">
       <p class="label">03 &mdash; The creation</p>
       <h2 id="story-creation" class="story-line">From concept to <em>full-stack solutions.</em></h2>
-    </div>
-    <div class="story-visual story-stack" aria-hidden="true">
-      <svg class="story-links" viewBox="0 0 520 360" fill="none" stroke-linecap="round" preserveAspectRatio="xMidYMid meet">
-        <path data-link d="M120 118 C 200 118, 200 190, 270 190"/>
-        <path data-link d="M270 190 C 340 190, 340 262, 410 262"/>
-      </svg>
-      <div class="panel panel-browser" data-depth="1.0">
-        <div class="panel-bar"><i></i><i></i><i></i><span>app</span></div>
-        <div class="ui"><b></b><div class="ui-row"><u></u><u></u><u></u></div><s></s></div>
-      </div>
-      <div class="node node-api" data-depth="-0.5"><span>API</span></div>
-      <div class="node node-db" data-depth="0.7"><span>Database</span></div>
     </div>
   </section>
 
   <section class="story-scene story-scene--end" data-scene-name="mindset" aria-labelledby="story-mindset">
-    <div class="story-center" data-depth="0.2">
+    <div class="story-center">
       <p class="label">04 &mdash; The mindset</p>
       <h2 id="story-mindset" class="story-line story-line--big">Building today. <em>Exploring AI.</em> Creating what&rsquo;s next.</h2>
       <ul class="story-chips" aria-label="Interests">

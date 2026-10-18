@@ -1,10 +1,11 @@
-/* Layered, scroll-driven parallax. Owner of every layer transform/opacity here: GSAP (scrubbed).
-   - Staged hero (tall desktop): the stage is pinned with CSS sticky; layers sink at different speeds,
-     the desk scene rises into place, the copy lifts away and the next paper sheet slides over it.
-   - Flat (mobile / short screens): plain per-layer parallax behind the hero.
+/* Scroll-driven hero and closing parallax. Owner of every property animated here: GSAP (scrubbed).
+   - Staged hero: the stage is pinned with CSS sticky and ONE timeline tells the story: intro, profile, then a house
+     built from code (house.js), then the finished house while the next paper sheet slides over it.
+   - Flat (very short screens): the hero is a plain readable layout; the finished house is shown as-is.
    - Closing section: plain layered parallax. Disabled under reduced motion. */
 import { gsap, ScrollTrigger } from "../vendor/gsap.js";
 import { MEDIA } from "./media.js";
+import { buildHouse } from "./house.js";
 
 const SCRUB = 2.4; // light smoothing: layers ease toward the scroll position
 
@@ -23,20 +24,21 @@ function plainParallax(scenery) {
 function stagedHero(track) {
   const stage = track.querySelector("[data-hero-stage]");
   const story = track.querySelector("[data-hero-story]");
-  const flyers = [...stage.querySelectorAll(".scenery [data-fly]")];
-  const emergers = [...stage.querySelectorAll(".scenery [data-emerge]")];
+  const house = stage.querySelector("[data-house]");
   const copy = stage.querySelector("[data-hero-copy]");
-  const dark = story.querySelector("[data-hero-dark]");
+  const portrait = stage.querySelector("[data-hero-portrait]");
   const scenes = [...story.querySelectorAll(".story-scene")];
   const [craft, creation, mindset] = scenes;
+  const narrow = window.innerWidth < 900;
   const vh = (n) => () => (n * window.innerHeight) / 100;
 
-  // The story joins the pinned stage while staged; it returns to the flow (a plain dark band) otherwise.
+  // The story text joins the pinned stage while staged; it returns to the flow (a plain dark band) otherwise.
   stage.append(story);
   track.classList.add("is-staged");
   gsap.set(scenes, { autoAlpha: 0 });
-  gsap.set(dark, { autoAlpha: 0 });
 
+  // ONE timeline for the whole hero: every stage below is a window on it, so the house keeps its progress
+  // from stage to stage and scrolling back un-builds it in reverse.
   const tl = gsap.timeline({
     defaults: { ease: "none" },
     scrollTrigger: {
@@ -44,72 +46,36 @@ function stagedHero(track) {
       refreshPriority: 20, // first in the page: later triggers must see its spacing
     },
   });
+  tl.to({}, { duration: 1 }, 0); // the timeline spans the whole pinned scroll; the story uses the first 70% of it
 
-  // Background, 3D depth: every layer has its own perspective so z reads as distance from the viewer.
-  const ground = (el) => (el.hasAttribute("data-ground") ? "50% 100%" : "50% 50%"); // ground layers grow upward from the horizon
-  gsap.set([...flyers, ...emergers], { transformPerspective: 900 });
-  // Layers present from the start rise and come toward the viewer (nearer layers travel further and grow more).
-  // Phones get a stronger travel so the depth reads clearly on a small screen.
-  const boost = window.innerWidth < 900 ? 2.2 : 1;
-  flyers.forEach((el) => {
-    let [y, z, k] = el.dataset.fly.split(",").map(Number);
-    y *= boost;
-    z *= boost;
-    const base = parseFloat(getComputedStyle(el).opacity) || 1;
-    const x = el.dataset.layerX ? () => (parseFloat(el.dataset.layerX) * window.innerWidth) / 100 : 0;
-    gsap.set(el, { transformOrigin: ground(el) });
-    // Front-loaded: most of the rush toward the viewer happens in the first scroll, then it keeps drifting.
-    tl.to(el, { y: vh(y * 0.6), z: z * 0.6, x: typeof x === "function" ? () => x() * 0.6 : 0, opacity: base + (base * k - base) * 0.5, ease: "power2.out", duration: 0.2 }, 0)
-      .to(el, { y: vh(y), z, x, opacity: base * k, duration: 0.8 }, 0.2);
-  });
-  // Distant ridges start small, faint and low in the background, then rise out of it and move forward.
-  emergers.forEach((el) => {
-    const [y0, z0, finalOpacity] = el.dataset.emerge.split(",").map(Number);
-    gsap.set(el, { transformOrigin: "50% 100%" });
-    tl.fromTo(el, { y: vh(y0 * (window.innerWidth < 900 ? 0.5 : 1)), z: z0, opacity: window.innerWidth < 900 ? 0.15 : 0 }, { y: vh(-2), z: 0, opacity: window.innerWidth < 900 ? Math.min(1, finalOpacity + 0.3) : finalOpacity, ease: "power1.out", duration: window.innerWidth < 900 ? 0.4 : 0.6 }, 0.02);
-  });
+  // Milestones (fractions of the pinned scroll). The last 30% holds the finished house while 01 slides over it.
+  const T = { s2: 0.09, craft: 0.205, creation: 0.345, mindset: 0.505 };
 
-  // Scene 1 (introduction): the headline lines leave at their own speed, then the story scenes take over.
+  // Stage 1 - introduction: the headline lines leave at their own speed, the copy fades
   stage.querySelectorAll("[data-hero-line]").forEach((el) =>
-    tl.to(el, { y: vh(parseFloat(el.dataset.heroLine)), ease: "power1.in", duration: 0.09 }, 0.1));
-  // Portrait pop-up: it rises out of the lower background with a little scale and parallax, holds, then leaves.
-  const portrait = stage.querySelector("[data-hero-portrait]");
-  const narrow = window.innerWidth < 900;
+    tl.to(el, { y: vh(parseFloat(el.dataset.heroLine)), ease: "power1.in", duration: 0.06 }, 0.035));
+  tl.to(copy, { autoAlpha: 0, duration: 0.04 }, 0.06);
+
+  // Stage 2 - profile: a blueprint plate slides in beside the early drawing, holds, then makes room for the build
   if (portrait) {
-    gsap.set(portrait, { transformPerspective: 900, autoAlpha: 0 });
-    tl.fromTo(portrait, { yPercent: 130, scale: 0.82, z: -250, autoAlpha: 0 },
-      { yPercent: 0, scale: 1, z: 0, autoAlpha: 1, ease: "power3.out", duration: 0.09 }, narrow ? 0.05 : 0)
-      .to(portrait, { yPercent: narrow ? -2 : -6, ease: "none", duration: 0.1 }, narrow ? 0.14 : 0.09)
-      .to(portrait, { autoAlpha: 0, yPercent: narrow ? -8 : -22, scale: narrow ? 1 : 1.06, z: narrow ? 0 : 160, ease: "power1.in", duration: 0.06 }, 0.19);
+    gsap.set(portrait, { autoAlpha: 0 });
+    tl.fromTo(portrait, { yPercent: narrow ? 30 : 12, autoAlpha: 0 },
+      { yPercent: 0, autoAlpha: 1, ease: "power2.out", duration: 0.04 }, T.s2 + 0.01)
+      .to(portrait, { yPercent: -2, ease: "none", duration: 0.06 }, T.s2 + 0.05)
+      .to(portrait, { autoAlpha: 0, yPercent: -6, ease: "power1.in", duration: 0.035 }, T.craft - 0.04);
   }
-  tl.to(copy, { autoAlpha: 0, duration: narrow ? 0.05 : 0.07 }, narrow ? 0.05 : 0.11)
-    .to(dark, { autoAlpha: 0.55, duration: 0.09 }, narrow ? 0.21 : 0.17); // dims the scenery but keeps its depth layers visible
 
-  // Scene windows: [in-start, in-end, out-start, out-end]. Layers inside move at their own data-depth speed.
-  const parallaxIn = (scene, from, to) =>
-    scene.querySelectorAll("[data-depth]").forEach((el) => {
-      const d = parseFloat(el.dataset.depth);
-      gsap.set(el, { transformPerspective: 1000 });
-      // Panels rise out of the depth: small and far at first, larger and closer as the scene plays.
-      tl.fromTo(el, { y: vh(d * 9), z: -Math.abs(d) * 200 }, { y: vh(-d * 9), z: Math.abs(d) * 140, duration: to - from }, from);
-    });
+  // Stages 3-5: each story text enters, holds and leaves in step with the construction milestone beside it
+  const textWindow = (scene, at, until) => {
+    tl.fromTo(scene, { autoAlpha: 0, y: vh(3) }, { autoAlpha: 1, y: 0, duration: 0.025 }, at);
+    if (until != null) tl.to(scene, { autoAlpha: 0, y: vh(-3), duration: 0.02 }, until);
+  };
+  textWindow(craft, T.craft, T.creation - 0.025);
+  textWindow(creation, T.creation, T.mindset - 0.025);
+  textWindow(mindset, T.mindset, null); // the final message and buttons stay with the finished house
 
-  // Scene 2 (the craft): editor and terminal panels glide at different speeds.
-  tl.fromTo(craft, { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.06 }, narrow ? 0.25 : 0.21)
-    .to(craft, { autoAlpha: 0, duration: 0.06 }, 0.34);
-  parallaxIn(craft, 0.18, 0.4);
-
-  // Scene 3 (the creation): browser, API and database connect as the lines draw.
-  const links = [...creation.querySelectorAll("[data-link]")];
-  links.forEach((p) => { p.setAttribute("pathLength", "1"); gsap.set(p, { strokeDasharray: 1, strokeDashoffset: 1 }); });
-  tl.fromTo(creation, { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.06 }, 0.4)
-    .to(creation, { autoAlpha: 0, duration: 0.06 }, 0.54);
-  parallaxIn(creation, 0.4, 0.6);
-  links.forEach((p, i) => tl.to(p, { strokeDashoffset: 0, duration: 0.05 }, 0.44 + i * 0.05));
-
-  // Scene 4 (the mindset): the call to action stays until the next sheet covers the hero.
-  tl.fromTo(mindset, { autoAlpha: 0, scale: 0.96 }, { autoAlpha: 1, scale: 1, duration: 0.07 }, 0.6);
-  parallaxIn(mindset, 0.6, 0.82);
+  // The house itself
+  if (house) buildHouse(tl, house, T, narrow);
 
   // Slow entry of 01 — Selected projects: it rises over the hero at a slow, eased pace.
   // The track has extra height for this (see CSS); the section is lifted and eased down (scrubbed).
