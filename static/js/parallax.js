@@ -26,8 +26,6 @@ function stagedHero(track) {
   const screenRect = island.querySelector("[data-island-screen]");
   const clouds = stage.querySelector("[data-sky-clouds]");
   const copy = stage.querySelector("[data-hero-copy]");
-  const chip = stage.querySelector("[data-hero-chip]");
-  const hint = stage.querySelector("[data-hero-hint]");
   const scenes = [...story.querySelectorAll(".story-scene")];
   const [craft, creation, mindset] = scenes;
   const vh = (n) => () => (n * window.innerHeight) / 100;
@@ -49,12 +47,10 @@ function stagedHero(track) {
   const T = { zoom: 0.07, craft: 0.33, creation: 0.47, mindset: 0.61 };
   const ZOOM = 0.24;
 
-  // Stage 1 - hero: the headline lines drift up at their own speed, the copy and the hint fade
+  // Stage 1 - hero: the headline lines drift up at their own speed and the copy fades
   stage.querySelectorAll("[data-hero-line]").forEach((el) =>
     tl.to(el, { y: vh(parseFloat(el.dataset.heroLine)), ease: "power1.in", duration: 0.1 }, 0.02));
   tl.to(copy, { autoAlpha: 0, duration: 0.07 }, 0.045);
-  tl.to(hint, { autoAlpha: 0, duration: 0.03 }, 0.01);
-  tl.to(chip, { autoAlpha: 0, duration: 0.05 }, T.zoom + 0.08);
   tl.to(clouds, { opacity: 0, scale: 1.25, duration: ZOOM * 0.8, transformOrigin: "50% 50%" }, T.zoom);
 
   // Stage 2 - zoom into the laptop: the island scales about the laptop screen and glides to the middle of the view while the
