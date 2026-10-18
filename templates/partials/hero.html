@@ -4,6 +4,7 @@
    Without JS / with reduced motion / on very short screens it is a plain, readable hero with the island below the copy.{% endcomment %}
 <section id="hero" class="hero-track" aria-labelledby="hero-title" data-section data-hero-track>
   <div class="hero-stage sky" data-hero-stage>
+    {% include "partials/sky_clouds.html" %}
     <div class="hero-chip" data-hero-chip>{% profile_photo profile_image_path person.name %}<span><b>{{ person.name }}</b><i>{{ person.role }}</i></span></div>
 
     <div class="wrap hero-wrap relative z-10">

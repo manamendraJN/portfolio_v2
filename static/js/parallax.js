@@ -24,7 +24,7 @@ function stagedHero(track) {
   const story = track.querySelector("[data-hero-story]");
   const island = stage.querySelector("[data-island]");
   const screenRect = island.querySelector("[data-island-screen]");
-  const clouds = island.querySelector(".island-clouds");
+  const clouds = stage.querySelector("[data-sky-clouds]");
   const copy = stage.querySelector("[data-hero-copy]");
   const chip = stage.querySelector("[data-hero-chip]");
   const hint = stage.querySelector("[data-hero-hint]");

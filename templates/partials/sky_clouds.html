@@ -1,0 +1,51 @@
+{% comment %}Soft, volumetric sunset clouds in three drifting layers (far, mid, near). Each layer is its own SVG whose cloud art is rendered once
+   (blur + turbulence displacement for fluffy, irregular edges, a lavender underside and a warm top light) and then only moved with a CSS
+   transform, so the animation is cheap. The layer art is repeated twice so the drift loops seamlessly.{% endcomment %}
+<div class="sky-clouds" aria-hidden="true" data-sky-clouds>
+  <svg width="0" height="0" style="position:absolute" focusable="false">
+    <defs>
+      <filter id="cf-soft" x="-30%" y="-80%" width="160%" height="260%" color-interpolation-filters="sRGB">
+        <feGaussianBlur in="SourceGraphic" stdDeviation="5" result="b"/>
+        <feTurbulence type="fractalNoise" baseFrequency="0.012 0.024" numOctaves="5" seed="4" result="t"/>
+        <feDisplacementMap in="b" in2="t" scale="70" xChannelSelector="R" yChannelSelector="G" result="d"/>
+        <feGaussianBlur in="d" stdDeviation="1.6" result="shape"/>
+        <feGaussianBlur in="shape" stdDeviation="7" result="bump"/>
+        <feDiffuseLighting in="bump" surfaceScale="9" diffuseConstant="1.15" lighting-color="#FFF6EC" result="lit"><feDistantLight azimuth="235" elevation="52"/></feDiffuseLighting>
+        <feComponentTransfer in="lit" result="tone"><feFuncR type="linear" slope=".4" intercept=".62"/><feFuncG type="linear" slope=".4" intercept=".58"/><feFuncB type="linear" slope=".34" intercept=".66"/></feComponentTransfer>
+        <feComposite in="tone" in2="shape" operator="in"/>
+      </filter>
+      <filter id="cf-wisp" x="-30%" y="-120%" width="160%" height="340%" color-interpolation-filters="sRGB">
+        <feGaussianBlur in="SourceGraphic" stdDeviation="14" result="b"/>
+        <feTurbulence type="fractalNoise" baseFrequency="0.006 0.03" numOctaves="3" seed="9" result="t"/>
+        <feDisplacementMap in="b" in2="t" scale="90" xChannelSelector="R" yChannelSelector="G"/>
+      </filter>
+      <linearGradient id="cg-lit" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFBF5"/><stop offset=".55" stop-color="#FFEADF"/><stop offset="1" stop-color="#F3C9D3"/></linearGradient>
+      <g id="cl-a">
+        <g filter="url(#cf-soft)">
+          <ellipse cx="170" cy="190" rx="150" ry="34" fill="#E3B4C9" opacity=".75"/>
+          <g fill="url(#cg-lit)"><ellipse cx="160" cy="170" rx="135" ry="34"/><ellipse cx="105" cy="140" rx="62" ry="44"/><ellipse cx="190" cy="124" rx="76" ry="52"/><ellipse cx="258" cy="152" rx="58" ry="38"/></g>
+        </g>
+      </g>
+      <g id="cl-b">
+        <g filter="url(#cf-soft)">
+          <ellipse cx="150" cy="150" rx="120" ry="26" fill="#E3B4C9" opacity=".7"/>
+          <g fill="url(#cg-lit)"><ellipse cx="150" cy="136" rx="112" ry="26"/><ellipse cx="108" cy="114" rx="50" ry="34"/><ellipse cx="176" cy="104" rx="58" ry="38"/></g>
+        </g>
+      </g>
+      <g id="cl-w"><g filter="url(#cf-wisp)"><ellipse cx="300" cy="60" rx="290" ry="14" fill="#FFF6EE" opacity=".8"/><ellipse cx="520" cy="86" rx="200" ry="10" fill="#FFF6EE" opacity=".6"/></g></g>
+    </defs>
+  </svg>
+
+  <div class="cl-layer cl-far"><svg viewBox="0 0 4800 640" preserveAspectRatio="xMinYMin slice" focusable="false">
+    <g id="pat-far" opacity=".62" transform="scale(.62)"><use href="#cl-b" x="100" y="120"/><use href="#cl-a" x="900" y="40"/><use href="#cl-b" x="1700" y="150"/><use href="#cl-a" x="2500" y="90"/><use href="#cl-b" x="1300" y="330"/><use href="#cl-b" x="3300" y="300"/></g>
+    <use href="#pat-far" x="2400"/>
+  </svg></div>
+  <div class="cl-layer cl-mid"><svg viewBox="0 0 4800 640" preserveAspectRatio="xMinYMin slice" focusable="false">
+    <g id="pat-mid"><g opacity=".9" transform="scale(.9)"><use href="#cl-a" x="-60" y="300"/><use href="#cl-b" x="560" y="120"/><use href="#cl-a" x="1250" y="360"/><use href="#cl-a" x="1900" y="140"/></g><use href="#cl-w" x="0" y="140" opacity=".6"/><use href="#cl-w" x="1200" y="40" opacity=".5"/></g>
+    <use href="#pat-mid" x="2400"/>
+  </svg></div>
+  <div class="cl-layer cl-near"><svg viewBox="0 0 4800 640" preserveAspectRatio="xMinYMax slice" focusable="false">
+    <g id="pat-near"><g transform="scale(1.35)"><use href="#cl-a" x="-140" y="330"/><use href="#cl-a" x="700" y="380"/><use href="#cl-b" x="1400" y="340"/></g><use href="#cl-w" x="400" y="420" opacity=".75"/></g>
+    <use href="#pat-near" x="2400"/>
+  </svg></div>
+</div>
