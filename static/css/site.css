@@ -926,3 +926,16 @@ footer p.font-display { font-size: var(--fs-card); }
 /* With the buttons gone from the hero, the island can use the freed space */
 .hero-track.is-staged .island-scene { width: min(88vw, calc(72svh * 1.406)); }
 @media (max-width: 899px) { .hero-track.is-staged .island-scene { width: min(116vw, calc(54svh * 1.406)); } }
+
+/* Hero alignment: everything shares one centre line; the island sits higher with the whole rock visible */
+.hero-stage .hero-intro .text-lead { margin-inline: auto; max-width: 38rem; text-align: center; text-wrap: pretty; }
+.hero-stage .hero-intro { width: 100%; margin-inline: auto; }
+.hero-track.is-staged .hero-stage { padding-top: 5.8rem; }
+.hero-track.is-staged .island-scene { bottom: 4svh; }
+@media (max-width: 899px) {
+  .hero-track.is-staged .hero-stage { padding-top: 5.2rem; }
+  .hero-track.is-staged .island-scene { bottom: 3svh; }
+}
+/* Centre the island exactly, even when it is wider than the screen (auto margins left-align an over-wide box) */
+.hero-track.is-staged .island-scene { --iw: min(88vw, calc(72svh * 1.406)); width: var(--iw); left: calc(50% - var(--iw) / 2); right: auto; margin: 0; }
+@media (max-width: 899px) { .hero-track.is-staged .island-scene { --iw: min(116vw, calc(54svh * 1.406)); } }
