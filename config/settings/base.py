@@ -19,8 +19,8 @@ DEBUG = False
 ALLOWED_HOSTS = [h for h in env("DJANGO_ALLOWED_HOSTS", "localhost,127.0.0.1").split(",") if h]
 
 INSTALLED_APPS = [
+    "portfolio",  # before staticfiles: its runserver adds no-cache headers to /static/ in development
     "django.contrib.staticfiles",
-    "portfolio",
 ]
 
 MIDDLEWARE = [

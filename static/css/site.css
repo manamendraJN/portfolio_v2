@@ -901,3 +901,10 @@ footer p.font-display { font-size: var(--fs-card); }
 .hero-track:not(.is-staged) .hero-stage { display: flex; flex-direction: column; }
 .hero-track:not(.is-staged) .house-scene { order: 2; width: min(calc(100% - 2.5rem), 30rem); margin: 0 auto 2.5rem; }
 .hero-track:not(.is-staged) .hero-wrap { order: 1; }
+
+/* The staged hero starts genuinely unfinished even before (or without) the scroll script: nothing is drawn, no fill shows.
+   house.js then drives every part from the scroll; these are only the starting values. */
+.hero-track.is-staged .house-svg [data-d] { stroke-dasharray: 100000; stroke-dashoffset: 100000; }
+.hero-track.is-staged .house-svg [data-slab] { stroke-dashoffset: 0; }
+.hero-track.is-staged .house-svg [data-fill], .hero-track.is-staged .house-svg [data-h="light"],
+.hero-track.is-staged .house-svg .hs-star, .hero-track.is-staged .house-svg [data-h="labels"] { opacity: 0; }
