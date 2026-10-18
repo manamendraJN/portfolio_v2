@@ -908,3 +908,18 @@ footer p.font-display { font-size: var(--fs-card); }
 .hero-track.is-staged .house-svg [data-slab] { stroke-dashoffset: 0; }
 .hero-track.is-staged .house-svg [data-fill], .hero-track.is-staged .house-svg [data-h="light"],
 .hero-track.is-staged .house-svg .hs-star, .hero-track.is-staged .house-svg [data-h="labels"] { opacity: 0; }
+
+/* ===== Phones: compact, non-overlapping hero story text; the house is sized by house.js to the space below it ===== */
+@media (max-width: 899px) {
+  .hero-track.is-staged .story-line { font-size: clamp(1.6rem, 7.6vw, 2.3rem); line-height: 1.06; margin-top: .45rem; }
+  .hero-track.is-staged .story-line--big { font-size: clamp(1.75rem, 8.2vw, 2.5rem); max-width: none; }
+  .story-scene--end .story-chips { gap: .3rem; margin-top: .75rem; }
+  .story-scene--end .story-chips .tag { font-size: .56rem; padding: .08rem .45rem; }
+  .story-scene--end .mt-8 { margin-top: .9rem; }
+  .story-scene--end .flex { flex-wrap: nowrap; gap: .5rem; }
+  .story-scene--end .btn { flex: 1 1 0; justify-content: center; padding: .6rem .7rem; font-size: .88rem; min-height: 44px; white-space: nowrap; }
+  .hero-track.is-staged .hero-portrait { top: 5rem; }
+  .hero-track.is-staged .hero-portrait .profile-photo { width: min(46vw, 11.5rem, calc((100svh - 28rem) * 0.8 + 8rem)); }
+  .cf .cf-file { display: none; }
+}
+@media (max-width: 380px) { .story-scene--end .btn .icon { display: none; } }

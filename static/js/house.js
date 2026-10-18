@@ -99,3 +99,17 @@ export function buildHouse(tl, house, T, narrow) {
     .to(halos("ai"), { opacity: 0.35, duration: 0.02, ease: "none" }, T.mindset + 0.17);
   fade(grp("labels"), T.mindset + 0.15, 0.03, 1);
 }
+
+/* Phones: size the house to the space left under the text so the drawing never sits behind the copy or the buttons.
+   The house box starts below the lowest text of any stage (intro, profile, craft, creation, mindset). */
+export function fitHouseToSpace(house, blocks) {
+  const fit = () => {
+    const vh = window.innerHeight;
+    const lowest = Math.max(...blocks.filter(Boolean).map((el) => el.getBoundingClientRect().bottom));
+    const room = vh - lowest - 12;
+    const width = Math.max(210, Math.min(window.innerWidth, room * (4 / 3)));
+    house.style.width = `${Math.round(width)}px`;
+  };
+  fit();
+  return { fit, release: () => house.style.removeProperty("width") };
+}

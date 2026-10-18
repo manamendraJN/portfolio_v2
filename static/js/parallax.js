@@ -5,7 +5,7 @@
    - Closing section: plain layered parallax. Disabled under reduced motion. */
 import { gsap, ScrollTrigger } from "../vendor/gsap.js";
 import { MEDIA } from "./media.js";
-import { buildHouse } from "./house.js";
+import { buildHouse, fitHouseToSpace } from "./house.js";
 
 const SCRUB = 2.4; // light smoothing: layers ease toward the scroll position
 
@@ -76,6 +76,17 @@ function stagedHero(track) {
 
   // The house itself
   if (house) buildHouse(tl, house, T, narrow);
+  let fitter = null;
+  if (house && narrow) {
+    fitter = fitHouseToSpace(house, [copy, portrait, ...scenes.map((sc) => sc.querySelector(".story-text, .story-center"))]);
+    ScrollTrigger.addEventListener("refresh", fitter.fit);
+  }
+  const unfit = () => {
+    if (fitter) {
+      ScrollTrigger.removeEventListener("refresh", fitter.fit);
+      fitter.release();
+    }
+  };
 
   // Slow entry of 01 — Selected projects: it rises over the hero at a slow, eased pace.
   // The track has extra height for this (see CSS); the section is lifted and eased down (scrubbed).
@@ -97,6 +108,7 @@ function stagedHero(track) {
     ScrollTrigger.addEventListener("refresh", setRange);
     window.__workSlow = { native: true };
     return () => {
+      unfit();
       ScrollTrigger.removeEventListener("refresh", setRange);
       root.classList.remove("css-slow");
       window.__workSlow = null;
@@ -114,6 +126,7 @@ function stagedHero(track) {
   }
 
   return () => {
+    unfit();
     window.__workSlow = null;
     track.append(story);
     track.classList.remove("is-staged");
