@@ -923,3 +923,10 @@ footer p.font-display { font-size: var(--fs-card); }
   .cf .cf-file { display: none; }
 }
 @media (max-width: 380px) { .story-scene--end .btn .icon { display: none; } }
+
+/* Phones: stages 02 and 03 sit lower than stage 04 */
+@media (max-width: 899px) {
+  .hero-track.is-staged .story-scene[data-scene-name="craft"],
+  .hero-track.is-staged .story-scene[data-scene-name="creation"] { padding-top: 8.5rem; }
+  .hero-track.is-staged .story-scene[data-scene-name="mindset"] { padding-top: 6.25rem; }
+}
