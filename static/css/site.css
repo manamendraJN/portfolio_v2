@@ -524,31 +524,6 @@ body { font-size: clamp(1rem, .96rem + .18vw, 1.125rem); }
 @media (min-width: 900px) { .contact-photo .profile-photo { width: min(100%, 16rem); } }
 @media (min-width: 1280px) { .contact-grid { padding-right: 4.5rem; } } /* clear of the fixed section index */
 
-/* ---- Hero portrait (fills the empty right side) ---- */
-.hero-portrait { margin-top: 2rem; }
-.hero-portrait .profile-photo { width: min(100%, 13rem); margin: 0; }
-.hero-portrait .profile-frame { border-color: var(--paper); background: var(--dusk); box-shadow: 6px 6px 0 var(--ochre); }
-.hero-portrait figcaption { color: rgba(245, 240, 230, .78); }
-.hero-track.is-staged .hero-portrait { position: absolute; right: clamp(1.5rem, 6vw, 6rem); top: 50%; margin: 0; transform: translateY(-46%); z-index: 4; }
-.hero-track.is-staged .hero-portrait .profile-photo { width: clamp(11rem, 20vw, 19rem); }
-@media (min-width: 1280px) { .hero-track.is-staged .hero-portrait { right: clamp(5rem, 9vw, 9rem); } } /* clear of the section index */
-@media (max-width: 899px) {
-  .hero-portrait figcaption { display: none; }
-  .hero-track.is-staged .hero-portrait { top: 0; right: 1.25rem; transform: none; }
-  .hero-track.is-staged .hero-portrait .profile-photo { width: 4.6rem; }
-  .hero-track.is-staged .hero-portrait .profile-frame { border-radius: 50%; aspect-ratio: 1; box-shadow: 3px 3px 0 var(--ochre); }
-  .hero-portrait .profile-photo { width: 7rem; }
-}
-
-/* Portrait pop-up positions (GSAP owns the transform, so no CSS transform here) */
-.hero-track.is-staged .hero-portrait { top: 17%; transform: none; }
-@media (max-width: 899px) {
-  .hero-track.is-staged .hero-portrait { top: 50%; left: 0; right: 0; margin: -10rem auto 0; width: max-content; z-index: 13; }
-  .hero-track.is-staged .hero-portrait .profile-photo { width: min(62vw, 15rem); }
-  .hero-track.is-staged .hero-portrait .profile-frame { border-radius: 8px; aspect-ratio: 4 / 5; box-shadow: 6px 6px 0 var(--ochre); }
-  .hero-track.is-staged .hero-portrait figcaption { display: block; }
-}
-
 /* ================= Landscape phones / short screens ================= */
 @media (max-height: 560px) {
   .hero-track.is-staged .hero-portrait { top: 8%; right: 5vw; }
@@ -842,95 +817,6 @@ footer p.font-display { font-size: var(--fs-card); }
   #work::after, #skills::after, #about::after, #experience::after, #education::after, #research::after, #certificates::after { filter: blur(30px); }
 }
 
-/* ================= House story (hero) ================= */
-.house-scene { position: relative; z-index: 3; width: min(100%, 36rem); margin: 2rem auto 0; pointer-events: none; }
-.house-wrap { position: relative; width: 100%; aspect-ratio: 4 / 3; }
-.house-svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
-.house-svg [data-h="grid"] path { fill: none; stroke: #9DB4C8; stroke-width: .5; opacity: .12; }
-.house-svg .hs-guide, .house-svg .hs-guide path { fill: none; stroke: #9DB4C8; stroke-width: 1; stroke-dasharray: 5 6; }
-.house-svg [data-h="guides"] { opacity: .14; }
-.house-svg .hs, .house-svg .hs path, .house-svg .hs circle:not([data-fill]), .house-svg .hs ellipse { fill: none; stroke: #F5F0E6; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
-.house-svg .hs-bold path, .house-svg .hs-bold circle { stroke-width: 3.4; }
-.house-svg .hs .hs-thin { stroke-width: 1.3; opacity: .7; }
-.house-svg .hs .hs-guide-line { stroke: #9DB4C8; stroke-width: 1.2; }
-.house-svg .hs .hs-fill { fill: rgba(245, 240, 230, .07); stroke: none; }
-.house-svg .hs .hs-door { fill: #C2411F; stroke: none; }
-.house-svg .hs .hs-knob { fill: #D9A441; stroke: none; }
-.house-svg .hs-light rect { fill: #D9A441; fill-opacity: .6; }
-.house-svg .hs-star { fill: #F5F0E6; }
-.house-svg .hs-ai path, .house-svg .hs-ai circle[data-d] { fill: none; stroke: #D9A441; stroke-width: 1.8; stroke-linecap: round; }
-.house-svg .hs-ai circle[data-fill] { fill: #D9A441; stroke: none; }
-.house-svg .hs-halo [data-halo="stack"], .house-svg .hs-halo [data-halo="ai"] { fill: #D9A441; }
-.house-svg .hs-halo [data-halo="door"] { fill: #C2411F; }
-.house-svg .hs-label text { font: 500 14px "JetBrains Mono", monospace; letter-spacing: .06em; fill: #D9A441; }
-.house-code { position: absolute; inset: 0; }
-.cf { display: none; position: absolute; left: var(--x, 0); top: var(--y, 0); width: max-content; padding: .35rem .55rem .45rem; background: rgba(35, 44, 74, .62); border: 1px solid rgba(157, 180, 200, .28); border-radius: 6px; box-shadow: 0 0 18px rgba(157, 180, 200, .08); font: 400 clamp(.6rem, .78vw, .74rem)/1.55 "JetBrains Mono", monospace; color: rgba(245, 240, 230, .9); will-change: clip-path; }
-.cf.cf-r { left: auto; right: 0; }
-.cf-file { display: block; margin-bottom: .15rem; font-size: .9em; color: rgba(157, 180, 200, .85); }
-.cf code { display: block; font: inherit; white-space: pre; }
-.cf .k { color: #9DB4C8; } .cf .f { color: #A9C4A1; } .cf .c { color: #8C97AE; } .cf .g { color: #A9C4A1; }
-.hero-track.is-staged .cf { display: block; }
-
-/* staged hero: the house sits on the right, text and portrait on the left */
-.hero-track.is-staged .house-scene { position: absolute; right: clamp(1rem, 3vw, 3rem); top: 50%; transform: translateY(-44%); margin: 0; width: min(54vw, 820px, calc((100svh - 6.5rem) * 1.333)); }
-.hero-track.is-staged .hero-portrait { top: calc(50% - 0.625 * clamp(11rem, 20vw, 19rem) - 1.6rem); left: clamp(2rem, 7vw, 7rem); right: auto; bottom: auto; margin: 0; width: max-content; transform: none; z-index: 4; }
-.hero-track.is-staged .hero-portrait .profile-photo { width: clamp(11rem, 20vw, 19rem); }
-.hero-track.is-staged .hero-portrait::before { content: "Plan 02 \00B7  The architect"; display: block; margin-bottom: .55rem; font: 500 .62rem/1 "JetBrains Mono", monospace; letter-spacing: .16em; text-transform: uppercase; color: var(--ochre); }
-.hero-portrait .profile-frame { border: 1.5px solid rgba(245, 240, 230, .65); border-radius: 3px; background: rgba(35, 44, 74, .75); box-shadow: 0 0 28px rgba(157, 180, 200, .12); position: relative; }
-.hero-portrait .profile-frame::before, .hero-portrait .profile-frame::after { content: ""; position: absolute; width: .9rem; height: .9rem; border: 2px solid var(--ochre); pointer-events: none; z-index: 2; }
-.hero-portrait .profile-frame::before { top: -6px; left: -6px; border-right: 0; border-bottom: 0; }
-.hero-portrait .profile-frame::after { bottom: -6px; right: -6px; border-left: 0; border-top: 0; }
-.hero-track.is-staged .story-scene { grid-template-columns: minmax(0, 1fr); padding-right: 50vw; }
-.hero-track.is-staged .story-scene--end { padding-right: 50vw; place-items: center start; }
-.story-scene--end .story-center { text-align: left; }
-.story-scene--end .story-line--big { margin-inline: 0; max-width: 14ch; }
-.story-scene--end .story-chips, .story-scene--end .flex { justify-content: flex-start; }
-
-@media (max-width: 899px) {
-  .hero-track.is-staged .house-scene { right: auto; left: 50%; top: auto; bottom: 1svh; transform: translateX(-50%); width: min(100vw, calc(36svh * 1.333)); }
-  .hero-track.is-staged .hero-portrait { top: 5.5rem; left: 50%; translate: -50% 0; }
-  .hero-track.is-staged .hero-portrait .profile-photo { width: min(52vw, 13rem); }
-  .hero-track.is-staged .hero-portrait figcaption { display: block; }
-  .hero-track.is-staged .story-scene, .hero-track.is-staged .story-scene--end { padding-right: clamp(1.5rem, 5vw, 5rem); align-content: start; padding-top: 5.5rem; place-items: start; }
-  .cf, .cf.cf-r { left: 2% !important; right: auto !important; top: 1% !important; font-size: .6rem; }
-  .house-svg .hs-label { display: none; }
-}
-@media (prefers-reduced-motion: reduce) { .cf { display: none !important; } }
-/* Fallback (no JS, reduced motion, very short screens): the finished house sits under the intro, nothing hidden */
-.house-svg [data-h="halo"] { opacity: 0; }
-.hero-track:not(.is-staged) .hero-stage { display: flex; flex-direction: column; }
-.hero-track:not(.is-staged) .house-scene { order: 2; width: min(calc(100% - 2.5rem), 30rem); margin: 0 auto 2.5rem; }
-.hero-track:not(.is-staged) .hero-wrap { order: 1; }
-
-/* The staged hero starts genuinely unfinished even before (or without) the scroll script: nothing is drawn, no fill shows.
-   house.js then drives every part from the scroll; these are only the starting values. */
-.hero-track.is-staged .house-svg [data-d] { stroke-dasharray: 100000; stroke-dashoffset: 100000; }
-.hero-track.is-staged .house-svg [data-slab] { stroke-dashoffset: 0; }
-.hero-track.is-staged .house-svg [data-fill], .hero-track.is-staged .house-svg [data-h="light"],
-.hero-track.is-staged .house-svg .hs-star, .hero-track.is-staged .house-svg [data-h="labels"] { opacity: 0; }
-
-/* ===== Phones: compact, non-overlapping hero story text; the house is sized by house.js to the space below it ===== */
-@media (max-width: 899px) {
-  .hero-track.is-staged .story-line { font-size: clamp(1.6rem, 7.6vw, 2.3rem); line-height: 1.06; margin-top: .45rem; }
-  .hero-track.is-staged .story-line--big { font-size: clamp(1.75rem, 8.2vw, 2.5rem); max-width: none; }
-  .story-scene--end .story-chips { gap: .3rem; margin-top: .75rem; }
-  .story-scene--end .story-chips .tag { font-size: .56rem; padding: .08rem .45rem; }
-  .story-scene--end .mt-8 { margin-top: .9rem; }
-  .story-scene--end .flex { flex-wrap: nowrap; gap: .5rem; }
-  .story-scene--end .btn { flex: 1 1 0; justify-content: center; padding: .6rem .7rem; font-size: .88rem; min-height: 44px; white-space: nowrap; }
-  .hero-track.is-staged .hero-portrait { top: 5rem; }
-  .hero-track.is-staged .hero-portrait .profile-photo { width: min(46vw, 11.5rem, calc((100svh - 28rem) * 0.8 + 8rem)); }
-  .cf .cf-file { display: none; }
-}
-@media (max-width: 380px) { .story-scene--end .btn .icon { display: none; } }
-
-/* Phones: stages 02 and 03 sit lower than stage 04 */
-@media (max-width: 899px) {
-  .hero-track.is-staged .story-scene[data-scene-name="craft"],
-  .hero-track.is-staged .story-scene[data-scene-name="creation"] { padding-top: 8.5rem; }
-  .hero-track.is-staged .story-scene[data-scene-name="mindset"] { padding-top: 6.25rem; }
-}
-
 /* ================= Blueprint dot grid background for sections 01-07 =================
    Faint ink dots on warm paper (like drafting paper): a fine 24px dot grid plus a small "+" mark every 120px.
    Static tiles drawn once; the soft blurred glows (::after) sit over it and the content sits above both. */
@@ -942,3 +828,86 @@ footer p.font-display { font-size: var(--fs-card); }
   background-size: 120px 120px, 24px 24px;
   background-position: 0 0, 0 0;
 }
+
+/* ================= Sunset hero: floating island desk, zoom into the laptop ================= */
+.hero-stage.sky { background: linear-gradient(180deg, #FBDCC8 0%, #F8C8C2 44%, #DABFE0 100%); color: var(--ink); }
+.hero-stage.sky::before, .hero-stage.sky::after { display: none; }
+.hero-stage.sky .scenery { display: none; }
+.hero-stage .hero-wrap { height: auto; display: block; text-align: center; padding-bottom: 0; }
+.hero-title { text-align: center; color: var(--ink); font-size: clamp(2.2rem, 4.6vw, 4.3rem); line-height: 1; letter-spacing: -.02em; max-width: 21ch; margin: 0 auto; text-wrap: balance; }
+.hero-title span { display: inline; }
+.hero-title em { font-style: italic; }
+.hero-stage .hero-kicker { color: var(--vermilion); text-align: center; margin: .7rem auto 0; font-size: clamp(1.1rem, 1.8vw, 1.5rem); }
+.hero-intro { max-width: 40rem; margin: .9rem auto 0 !important; }
+.hero-intro .text-lead { color: rgba(27, 36, 56, .84); font-size: clamp(.98rem, .94rem + .3vw, 1.15rem); }
+.hero-ctas { display: flex; flex-wrap: wrap; justify-content: center; gap: .7rem; margin-top: 1.1rem; }
+.hero-stage .hero-ctas .btn { border-color: var(--ink); color: var(--ink); min-height: 48px; white-space: nowrap; }
+.hero-stage .hero-ctas .btn-primary { background: var(--vermilion); border-color: var(--vermilion); color: var(--surface); }
+.hero-social { display: flex; justify-content: center; gap: 1.4rem; margin: .9rem 0 0; padding: 0; list-style: none; font: 500 .72rem/1 "JetBrains Mono", monospace; letter-spacing: .14em; text-transform: uppercase; }
+.hero-social a { color: var(--ink); text-decoration: underline; text-underline-offset: 4px; }
+.hero-stage :focus-visible { outline-color: var(--vermilion); }
+.hero-chip { position: absolute; z-index: 6; top: 5.3rem; left: clamp(1rem, 4vw, 3rem); display: flex; align-items: center; gap: .6rem; padding: .3rem .85rem .3rem .3rem; background: rgba(255, 253, 248, .72); border-radius: 999px; box-shadow: 0 6px 18px rgba(27, 36, 56, .1); }
+.hero-chip .profile-photo { margin: 0; width: auto; }
+.hero-chip .profile-frame { width: 2.5rem; height: 2.5rem; aspect-ratio: 1; border-radius: 50%; border: 0; box-shadow: none; }
+.hero-chip figcaption { display: none; }
+.hero-chip span { display: grid; line-height: 1.15; }
+.hero-chip b { font-size: .82rem; } .hero-chip i { font-style: normal; font-size: .68rem; color: var(--ink-soft); }
+.hero-hint { position: absolute; z-index: 6; left: 50%; bottom: 1.1rem; translate: -50% 0; margin: 0; padding: .55rem 1.1rem; background: rgba(27, 36, 56, .86); color: var(--paper); border-radius: 999px; font: 500 .72rem/1 "JetBrains Mono", monospace; letter-spacing: .08em; white-space: nowrap; }
+.hero-hint a { color: var(--ochre); text-decoration: none; margin-left: .4rem; }
+
+/* island */
+.island-scene { position: relative; width: min(94vw, 46rem); margin: 1.5rem auto 0; }
+.island-svg { display: block; width: 100%; height: auto; overflow: visible; position: relative; z-index: 1; }
+.island-clouds { position: absolute; inset: -10% -14%; pointer-events: none; }
+.island-clouds svg { width: 100%; height: 100%; display: block; }
+.island-float { animation: island-bob 9s ease-in-out infinite; }
+.float-slow { animation: island-bob 6.5s ease-in-out infinite; } .float-slow2 { animation: island-bob 8s ease-in-out -3s infinite; }
+.cloud { animation: cloud-drift 38s ease-in-out infinite alternate; } .cloud.c2 { animation-duration: 46s; } .cloud.c3 { animation-duration: 52s; animation-direction: alternate-reverse; } .cloud.c4 { animation-duration: 42s; }
+@keyframes island-bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+@keyframes cloud-drift { from { transform: translateX(-14px); } to { transform: translateX(18px); } }
+.screen-code .caret { animation: caret 1.1s steps(1) infinite; } @keyframes caret { 50% { opacity: 0; } }
+.steam { animation: steam 4s ease-in-out infinite; } @keyframes steam { 0%, 100% { opacity: .35; } 50% { opacity: .85; } }
+@media (prefers-reduced-motion: reduce) { .island-float, .float-slow, .float-slow2, .cloud, .caret, .steam { animation: none !important; } }
+.hot { cursor: pointer; outline: none; transition: transform .25s; transform-box: fill-box; transform-origin: center; }
+.hot:hover, .hot:focus-visible { transform: translateY(-4px); }
+.hot:focus-visible { filter: drop-shadow(0 0 3px var(--vermilion)); }
+.hot-tip { position: absolute; z-index: 7; padding: .38rem .8rem; background: var(--ink); color: var(--paper); border-radius: 999px; font: 600 .78rem/1.2 "Manrope", sans-serif; white-space: nowrap; pointer-events: none; box-shadow: 0 6px 16px rgba(27, 36, 56, .25); }
+.hot-tip[hidden] { display: none; }
+
+/* plain hero (no JS, reduced motion, very short screens) */
+.hero-track:not(.is-staged) .hero-stage { padding: 6.5rem 0 3rem; }
+.hero-track:not(.is-staged) .hero-hint { position: static; translate: none; display: block; width: max-content; max-width: calc(100% - 2rem); margin: 1rem auto 0; white-space: normal; text-align: center; }
+.hero-track:not(.is-staged) .hero-chip { top: 4.6rem; }
+.screen-bar { display: none; }
+
+/* staged hero */
+.hero-track.is-staged .hero-stage { padding: 5.2rem 0 0; }
+.hero-track.is-staged .hero-title { font-size: clamp(2.2rem, min(4.6vw, 8svh), 4.3rem); }
+.hero-track.is-staged .island-scene { position: absolute; left: 0; right: 0; bottom: -5svh; margin: 0 auto; width: min(78vw, calc(60svh * 1.406)); }
+.hero-track.is-staged .hero-story { position: absolute; inset: 0; z-index: 11; background: var(--ink); padding: 0; pointer-events: none; }
+.hero-track.is-staged .story-scene { place-items: center; text-align: center; padding: 5.5rem clamp(1.5rem, 8vw, 8rem) 2rem; }
+.hero-track.is-staged .story-scene--end { padding-right: clamp(1.5rem, 8vw, 8rem); place-items: center; }
+.story-scene--end .story-center, .story-scene .story-text { text-align: center; margin-inline: auto; }
+.story-scene--end .story-line--big { margin-inline: auto; max-width: 16ch; }
+.story-scene--end .story-chips, .story-scene--end .flex { justify-content: center; }
+.hero-track.is-staged .screen-bar { display: flex; align-items: center; gap: .4rem; position: absolute; z-index: 2; top: 4.3rem; left: 0; right: 0; padding: .45rem 1rem; border-bottom: 1px solid rgba(245, 240, 230, .12); font: 400 .7rem/1 "JetBrains Mono", monospace; color: rgba(245, 240, 230, .55); }
+.screen-bar i { width: .55rem; height: .55rem; border-radius: 50%; background: var(--vermilion); } .screen-bar i:nth-child(2) { background: var(--ochre); } .screen-bar i:nth-child(3) { background: var(--sage); } .screen-bar span { margin-left: .6rem; }
+
+@media (max-width: 899px) {
+  .hero-chip span { display: none; } .hero-chip { padding: .3rem; top: 4.8rem; left: .9rem; }
+  .hero-track.is-staged .hero-stage { padding-top: 4.9rem; }
+  .hero-track.is-staged .hero-title { font-size: clamp(2rem, min(9.4vw, 6.6svh), 3rem); max-width: 14ch; }
+  .hero-stage .hero-intro .text-lead { font-size: .95rem; line-height: 1.45; }
+  .hero-ctas { flex-wrap: nowrap; } .hero-ctas .btn { flex: 1 1 0; padding-inline: .7rem; font-size: .9rem; justify-content: center; }
+  .hero-social { margin-top: .6rem; }
+  .hero-track.is-staged .island-scene { width: min(104vw, calc(40svh * 1.406)); bottom: -1svh; }
+  .hero-hint { font-size: .62rem; padding: .5rem .85rem; bottom: .7rem; max-width: 96vw; }
+  .hero-track.is-staged .story-scene { padding-inline: 1.4rem; }
+  .hero-track.is-staged .story-line { font-size: clamp(1.7rem, 7.8vw, 2.4rem); }
+  .hero-track.is-staged .story-line--big { font-size: clamp(1.9rem, 8.6vw, 2.7rem); }
+}
+@media (max-width: 380px) { .hero-ctas .btn .icon { display: none; } }
+.hero-title span { display: inline-block; }
+.hero-title { max-width: 26ch; }
+@media (max-width: 899px) { .hero-track.is-staged .hero-title, .hero-title { max-width: 16ch; } }
+.hero-track.is-staged .hero-wrap { height: auto; } /* the copy wrapper must not cover the island: its labels need hover */

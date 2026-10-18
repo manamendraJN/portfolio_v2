@@ -1,0 +1,89 @@
+{% comment %}Original illustration: a small floating island with a developer's desk. Hover or focus an object for a label.
+   Scrolling zooms into the laptop screen (parallax.js), which opens into the story. Decorative apart from the labelled objects.{% endcomment %}
+<div class="island-scene" data-island>
+  <div class="island-clouds" aria-hidden="true">
+    <svg viewBox="0 0 900 640" preserveAspectRatio="xMidYMid slice" focusable="false">
+      <g fill="#FFF7F1">
+        <g class="cloud c1" opacity=".75"><ellipse cx="150" cy="170" rx="95" ry="26"/><ellipse cx="205" cy="152" rx="58" ry="28"/><ellipse cx="108" cy="156" rx="46" ry="22"/></g>
+        <g class="cloud c2" opacity=".65"><ellipse cx="760" cy="120" rx="110" ry="28"/><ellipse cx="715" cy="102" rx="60" ry="26"/><ellipse cx="820" cy="106" rx="50" ry="20"/></g>
+        <g class="cloud c3" opacity=".7"><ellipse cx="90" cy="470" rx="100" ry="26"/><ellipse cx="150" cy="454" rx="56" ry="24"/></g>
+        <g class="cloud c4" opacity=".6"><ellipse cx="800" cy="470" rx="108" ry="28"/><ellipse cx="748" cy="452" rx="58" ry="26"/></g>
+      </g>
+    </svg>
+  </div>
+  <svg class="island-svg" viewBox="0 0 900 640" role="group" aria-label="Illustration: a floating island with a developer's desk. Hover or focus an object to read what it stands for.">
+    <g class="island-float">
+      {# rock and earth #}
+      <path d="M120 470C130 540 250 575 330 596C390 612 430 640 450 640C470 640 510 612 570 596C650 575 770 540 780 470Z" fill="#B88F78"/>
+      <path d="M170 500C220 540 300 560 345 580C380 592 420 612 450 626C480 612 520 592 555 580C600 560 680 540 730 500C690 540 600 562 450 566C300 562 210 540 170 500Z" fill="#9C7660" opacity=".55"/>
+      <path d="M250 520L300 588M360 560L392 618M540 560L508 618M650 520L600 588" stroke="#8A6552" stroke-width="3" stroke-linecap="round" fill="none" opacity=".5"/>
+      {# grass top #}
+      <path d="M90 470C90 440 170 424 260 428C340 424 560 424 640 428C730 424 810 440 810 470C810 492 700 504 450 504C200 504 90 492 90 470Z" fill="#9DB88A"/>
+      <path d="M90 470C90 492 200 504 450 504C700 504 810 492 810 470C810 484 700 488 450 488C200 488 90 484 90 470Z" fill="#7E9C6E" opacity=".7"/>
+      <g fill="#FFF7F1"><circle cx="150" cy="462" r="3"/><circle cx="215" cy="470" r="3"/><circle cx="700" cy="464" r="3"/><circle cx="770" cy="470" r="3"/></g>
+      <g fill="#F4B6B8"><circle cx="180" cy="468" r="3"/><circle cx="735" cy="468" r="3"/><circle cx="120" cy="472" r="2.6"/></g>
+      <g fill="#F3C969"><circle cx="240" cy="474" r="2.8"/><circle cx="670" cy="474" r="2.8"/><circle cx="800" cy="474" r="2.4"/></g>
+
+      {# desk #}
+      <path d="M200 412H700V436H200Z" fill="#D8B48E"/>
+      <path d="M200 412H700V420H200Z" fill="#E7C9A5"/>
+      <path d="M230 436V478M670 436V478" stroke="#B88F6A" stroke-width="10" stroke-linecap="round"/>
+      <path d="M200 436H700" stroke="#B88F6A" stroke-width="3" opacity=".7"/>
+
+      {# laptop #}
+      <g data-hot="Full-stack apps, from API to UI" tabindex="0" role="img" aria-label="Laptop: full-stack apps, from API to UI" class="hot">
+        <path d="M318 412L334 400H566L582 412Z" fill="#CFC8D6"/>
+        <path d="M318 412H582V418H318Z" fill="#B7AFC2"/>
+        <rect x="346" y="244" width="208" height="156" rx="9" fill="#38426A"/>
+        <rect data-island-screen x="356" y="254" width="188" height="130" rx="4" fill="#232C4A"/>
+        <g class="screen-code">
+          <rect x="368" y="268" width="46" height="6" rx="3" fill="#9DB4C8"/><rect x="420" y="268" width="30" height="6" rx="3" fill="#D9A441"/>
+          <rect x="378" y="284" width="70" height="6" rx="3" fill="#A9C4A1"/><rect x="456" y="284" width="40" height="6" rx="3" fill="#F5F0E6" opacity=".8"/>
+          <rect x="378" y="300" width="38" height="6" rx="3" fill="#F5F0E6" opacity=".8"/><rect x="422" y="300" width="62" height="6" rx="3" fill="#9DB4C8"/>
+          <rect x="388" y="316" width="84" height="6" rx="3" fill="#D9A441"/>
+          <rect x="378" y="332" width="30" height="6" rx="3" fill="#C2411F"/><rect x="414" y="332" width="54" height="6" rx="3" fill="#A9C4A1"/>
+          <rect x="368" y="348" width="62" height="6" rx="3" fill="#9DB4C8"/><rect x="436" y="348" width="9" height="6" fill="#D9A441" class="caret"/>
+        </g>
+        <circle cx="450" cy="392" r="2.4" fill="#9DB4C8" opacity=".7"/>
+      </g>
+
+      {# mug #}
+      <g data-hot="Fuelled by coffee" tabindex="0" role="img" aria-label="Coffee mug: fuelled by coffee" class="hot">
+        <path d="M250 372H290V412H250Z" fill="#FFF7F1"/><path d="M250 372H290V380H250Z" fill="#E9DDD2"/>
+        <path d="M290 382Q308 382 308 396Q308 408 290 406" stroke="#FFF7F1" stroke-width="6" fill="none" stroke-linecap="round"/>
+        <path class="steam" d="M262 364Q254 352 262 342Q270 332 262 322M278 364Q270 352 278 342Q286 332 278 322" stroke="#FFF7F1" stroke-width="3" fill="none" stroke-linecap="round" opacity=".8"/>
+      </g>
+
+      {# phone #}
+      <g data-hot="Mobile apps too" tabindex="0" role="img" aria-label="Phone: mobile apps too" class="hot">
+        <path d="M612 332L640 328L650 410L622 414Z" fill="#38426A"/>
+        <path d="M616 336L638 333L646 404L624 408Z" fill="#F4B6B8"/>
+        <circle cx="632" cy="368" r="9" fill="#FFF7F1" opacity=".85"/>
+      </g>
+
+      {# plant #}
+      <g data-hot="Ideas grow with care" tabindex="0" role="img" aria-label="Plant: ideas grow with care" class="hot">
+        <path d="M664 384H698L694 412H668Z" fill="#E59A82"/>
+        <path d="M681 384Q662 366 664 346Q680 358 681 384ZM681 384Q700 362 708 344Q694 352 681 384ZM681 384Q681 360 681 338Q690 358 681 384Z" fill="#8FB57A"/>
+      </g>
+
+      {# notebook on the grass #}
+      <g data-hot="Problem-solving, step by step" tabindex="0" role="img" aria-label="Open notebook: problem-solving, step by step" class="hot">
+        <path d="M330 478L450 470L450 504L322 512Z" fill="#FFF7F1"/><path d="M450 470L570 478L578 512L450 504Z" fill="#F4EDE3"/>
+        <path d="M450 470V504" stroke="#C7B9AA" stroke-width="2"/>
+        <path d="M344 486L434 480M346 496L434 490M466 480L556 486M466 490L558 496" stroke="#C9BFD6" stroke-width="2.2" stroke-linecap="round"/>
+        <path d="M520 462L590 492" stroke="#D9A441" stroke-width="5" stroke-linecap="round"/><path d="M590 492L598 495" stroke="#38426A" stroke-width="5" stroke-linecap="round"/>
+      </g>
+
+      {# floating code symbol and paper plane #}
+      <g data-hot="Clean, readable code" tabindex="0" role="img" aria-label="Code symbol: clean, readable code" class="hot float-slow">
+        <rect x="170" y="238" width="86" height="54" rx="10" fill="#FFF7F1" opacity=".9"/>
+        <text x="213" y="274" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="26" fill="#C2411F">&lt;/&gt;</text>
+      </g>
+      <g data-hot="Ship it" tabindex="0" role="img" aria-label="Paper plane: ship it" class="hot float-slow2">
+        <path d="M690 232L770 204L736 262L722 244Z" fill="#FFF7F1"/><path d="M722 244L770 204L728 250Z" fill="#E6D8CF"/>
+      </g>
+    </g>
+  </svg>
+  <div class="hot-tip" role="status" aria-live="polite" data-hot-tip hidden></div>
+</div>

@@ -1,7 +1,8 @@
 {% load portfolio_tags %}
-{% comment %}Scenes 2-4 of the hero story. On tall screens JS moves this block into the pinned stage and scrubs it with the scroll;
-   everywhere else (small screens, reduced motion, no JS) it is a plain, readable dark band under the hero.{% endcomment %}
+{% comment %}The story inside the laptop screen. In the pinned hero JS moves this block into the stage and opens it from the laptop screen
+   as you scroll; everywhere else (reduced motion, no JS, very short screens) it is a plain, readable dark band under the hero.{% endcomment %}
 <div class="hero-story" data-hero-story>
+  <div class="screen-bar" aria-hidden="true"><i></i><i></i><i></i><span>portfolio.tsx</span></div>
   <section class="story-scene" data-scene-name="craft" aria-labelledby="story-craft">
     <div class="story-text">
       <p class="label">02 &mdash; The craft</p>

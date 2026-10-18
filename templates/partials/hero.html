@@ -1,33 +1,37 @@
 {% load portfolio_tags %}
-{% comment %}Hero track: JS adds .is-staged, pinning the stage (sticky) while one scroll timeline builds the house from code
-   and the next paper sheet slides over it. Without JS / with reduced motion it is a plain, readable hero.{% endcomment %}
+{% comment %}Hero track. In the pinned (staged) mode one scroll timeline plays: the headline lifts away, the camera zooms into the laptop
+   on the floating island, the screen opens into the story (craft, creation, mindset), and the next paper sheet slides over.
+   Without JS / with reduced motion / on very short screens it is a plain, readable hero with the island below the copy.{% endcomment %}
 <section id="hero" class="hero-track" aria-labelledby="hero-title" data-section data-hero-track>
-  <div class="hero-stage on-dark" data-hero-stage>
-    {% include "partials/hero_house.html" %}
+  <div class="hero-stage sky" data-hero-stage>
+    <div class="hero-chip" data-hero-chip>{% profile_photo profile_image_path person.name %}<span><b>{{ person.name }}</b><i>{{ person.role }}</i></span></div>
 
     <div class="wrap hero-wrap relative z-10">
       <div data-hero-copy>
         <h1 id="hero-title" class="hero-title">
-          <span class="block" data-hero-line="-9">{{ hero.line_one }}</span>
-          <span class="block" data-hero-line="-16"><em>{{ hero.line_emphasis }}</em></span>
-          <span class="block" data-hero-line="-23">{{ hero.line_three }}</span>
+          <span data-hero-line="-6">{{ hero.line_one }}</span>
+          <span data-hero-line="-10"><em>{{ hero.line_emphasis }}</em></span>
+          <span data-hero-line="-14">{{ hero.line_three }}</span>
         </h1>
         <p class="hero-kicker">Turning ideas into digital experiences.</p>
 
-        <div class="mt-10 max-w-xl lg:mt-12" data-hero-intro data-hero-line="-8">
+        <div class="hero-intro" data-hero-intro data-hero-line="-5">
           <p class="text-lead">{{ hero.intro }}</p>
-          <div class="hero-ctas mt-7 flex flex-wrap gap-3">
+          <div class="hero-ctas">
             <a class="btn btn-primary" href="#work">Explore My Work {% icon "arrow-up-right" %}</a>
             <a class="btn" href="#contact">Get in Touch {% icon "mail" %}</a>
           </div>
-          <ul class="hero-social mt-5 flex flex-wrap gap-x-6 gap-y-2 font-mono text-xs uppercase tracking-widest" aria-label="Profiles">
-            <li><a class="underline underline-offset-4" href="{{ person.github }}" target="_blank" rel="noopener noreferrer">GitHub</a></li>
-            <li><a class="underline underline-offset-4" href="{{ person.linkedin }}" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+          <ul class="hero-social" aria-label="Profiles">
+            <li><a href="{{ person.github }}" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+            <li><a href="{{ person.linkedin }}" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
           </ul>
         </div>
       </div>
-      <div class="hero-portrait" data-hero-portrait>{% profile_photo profile_image_path person.name %}</div>
     </div>
+
+    {% include "partials/hero_island.html" %}
+
+    <p class="hero-hint" data-hero-hint><span>Scroll into the laptop</span> <a href="#work">or jump to the work &rarr;</a></p>
   </div>
 {% include "partials/hero_story.html" %}
 </section>

@@ -11,6 +11,7 @@ import { initPill } from "./pill.js";
 import { initNav } from "./nav.js";
 import { initLayers } from "./layers.js";
 import { initCursor } from "./cursor.js";
+import { initIsland } from "./island.js";
 
 const root = document.documentElement;
 const reducedQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -26,6 +27,7 @@ const mm = gsap.matchMedia();
 initNav();
 initLayers();
 initCursor();
+initIsland();
 initRail();
 
 initParallax(mm);
