@@ -232,6 +232,64 @@ html.has-cursor, html.has-cursor * { cursor: none !important; }
 .story-center { text-align: center; }
 .story-chips { display: flex; flex-wrap: wrap; justify-content: center; gap: .5rem; margin-top: 1.5rem; list-style: none; padding: 0; }
 
+/* Scroll-built house: the SVG stays stable while GSAP draws each construction step. */
+.house-scene { position: relative; z-index: 8; width: min(100%, 38rem); margin: 1rem auto 0; pointer-events: none; }
+.house-wrap { position: relative; width: 100%; aspect-ratio: 4 / 3; }
+.house-svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+.house-svg [data-h="grid"] path { fill: none; stroke: #9DB4C8; stroke-width: .5; opacity: .12; }
+.house-svg .hs-guide, .house-svg .hs-guide path { fill: none; stroke: #9DB4C8; stroke-width: 1; stroke-dasharray: 5 6; }
+.house-svg .hs, .house-svg .hs path { fill: none; stroke: var(--paper); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.house-svg .hs-bold path { stroke-width: 3.4; }
+.house-svg .hs .hs-thin { stroke-width: 1.3; opacity: .7; }
+.house-svg .hs .hs-guide-line { stroke: #9DB4C8; stroke-width: 1.2; }
+.house-svg .hs .hs-fill { fill: rgba(245, 240, 230, .07); stroke: none; }
+.house-svg .hs .hs-door { fill: var(--vermilion); stroke: none; }
+.house-svg .hs .hs-knob, .house-svg .hs-ai circle[data-fill] { fill: var(--ochre); stroke: none; }
+.house-svg .hs-light rect { fill: var(--ochre); fill-opacity: .6; }
+.house-svg .hs-ai path { fill: none; stroke: var(--ochre); stroke-width: 1.8; stroke-linecap: round; }
+.house-svg .hs-halo [data-halo="stack"], .house-svg .hs-halo [data-halo="ai"] { fill: var(--ochre); }
+.house-svg .hs-halo [data-halo="door"] { fill: var(--vermilion); }
+.house-svg .hs-label text { font: 500 14px "JetBrains Mono", monospace; letter-spacing: .06em; fill: var(--ochre); }
+.house-code { position: absolute; inset: 0; }
+.cf { display: none; position: absolute; left: var(--x, 0); top: var(--y, 0); width: max-content; padding: .35rem .55rem; background: rgba(35, 44, 74, .72); border: 1px solid rgba(157, 180, 200, .28); border-radius: 6px; font: .68rem/1.45 "JetBrains Mono", monospace; color: rgba(245, 240, 230, .9); will-change: clip-path; }
+.cf.cf-r { left: auto; right: 0; }
+.cf-file { display: block; margin-bottom: .15rem; font-size: .9em; color: rgba(157, 180, 200, .85); }
+.cf code { display: block; font: inherit; white-space: nowrap; }
+.cf .k { color: #9DB4C8; } .cf .f, .cf .g { color: #A9C4A1; } .cf .c { color: #8C97AE; }
+.hero-track.is-staged .house-scene { position: absolute; inset: 0 3vw 0 auto; z-index: 12; width: min(52vw, 48rem); margin: 0; pointer-events: none; }
+.hero-track.is-staged .house-wrap { top: 11%; }
+.hero-track.is-staged .cf { display: block; }
+.hero-track.is-staged .hero-story { background: transparent; }
+.hero-track.is-staged .story-scene { z-index: 13; grid-template-columns: minmax(0, 1fr); padding-right: 52vw; place-items: start; text-align: left; }
+.hero-track.is-staged .story-text { max-width: min(38rem, 44vw); }
+.hero-track.is-staged .story-scene .story-text { text-align: left; margin-inline: 0; }
+.hero-track.is-staged .story-line { max-width: 13ch; }
+.hero-track.is-staged .story-scene--end { place-items: start; }
+.hero-track.is-staged .story-scene--end .story-center { text-align: left; margin-inline: 0; }
+.hero-track.is-staged .story-scene--end .story-center { max-width: min(34rem, 42vw); }
+.hero-track.is-staged .story-scene--end .story-line--big { margin-inline: 0; }
+.hero-track.is-staged .story-scene--end .story-chips,
+.hero-track.is-staged .story-scene--end .flex { justify-content: flex-start; }
+.hero-track:not(.is-staged) .house-scene { order: 2; width: min(calc(100% - 2.5rem), 30rem); margin: 0 auto 2.5rem; }
+.hero-track:not(.is-staged) .house-svg [data-d] { stroke-dasharray: none; stroke-dashoffset: 0; }
+@media (max-width: 899px) {
+  .hero-track.is-staged .house-scene { inset: 90% auto auto 50%; width: min(50vw, calc(16svh * 1.333)); transform: translate(-50%, -50%); }
+  .hero-track.is-staged .house-wrap { top: auto; }
+  .hero-track.is-staged .story-scene,
+  .hero-track.is-staged .story-scene--end { grid-template-columns: 1fr; padding-right: 1.4rem; padding-top: 4.2rem; place-items: start; text-align: center; }
+  .hero-track.is-staged .story-scene .story-text,
+  .hero-track.is-staged .story-scene--end .story-center { width: 100%; text-align: center; margin-inline: auto; }
+  .hero-track.is-staged .story-scene .story-text { text-align: center; margin-inline: auto; }
+  .hero-track.is-staged .story-text { max-width: 30rem; }
+  .hero-track.is-staged .story-line { max-width: 15ch; margin-inline: auto; }
+  .hero-track.is-staged .story-scene--end .story-center { max-width: 24rem; }
+  .hero-track.is-staged .story-line--big { margin-inline: auto; }
+  .hero-track.is-staged .story-scene--end .story-chips,
+  .hero-track.is-staged .story-scene--end .flex { justify-content: center; }
+  .hero-track.is-staged .cf { display: none; }
+  .house-svg .hs-label { display: none; }
+}
+
 .panel-bar i:nth-child(2) { background: var(--ochre); } .panel-bar i:nth-child(3) { background: var(--sage); }
 .code .k { color: #9DB4C8; } .code .s { color: var(--ochre); } .code .f { color: #A9C4A1; } .code .c { color: #8C97AE; }
 .frag-a { top: 0; right: 8%; } .frag-b { bottom: 4%; left: 4%; color: #9DB4C8; }
@@ -931,10 +989,10 @@ footer p.font-display { font-size: var(--fs-card); }
 .hero-stage .hero-intro .text-lead { margin-inline: auto; max-width: 38rem; text-align: center; text-wrap: pretty; }
 .hero-stage .hero-intro { width: 100%; margin-inline: auto; }
 .hero-track.is-staged .hero-stage { padding-top: 5.8rem; }
-.hero-track.is-staged .island-scene { bottom: 4svh; }
+.hero-track.is-staged .island-scene { bottom: 2svh; }
 @media (max-width: 899px) {
   .hero-track.is-staged .hero-stage { padding-top: 5.2rem; }
-  .hero-track.is-staged .island-scene { bottom: 3svh; }
+  .hero-track.is-staged .island-scene { bottom: 1.5svh; }
 }
 /* Centre the island exactly, even when it is wider than the screen (auto margins left-align an over-wide box) */
 .hero-track.is-staged .island-scene { --iw: min(88vw, calc(72svh * 1.406)); width: var(--iw); left: calc(50% - var(--iw) / 2); right: auto; margin: 0; }
@@ -943,9 +1001,43 @@ footer p.font-display { font-size: var(--fs-card); }
 .is-zooming .island-float, .is-zooming .float-slow, .is-zooming .float-slow2, .is-zooming .steam, .is-zooming .caret, .is-zooming .hot { animation-play-state: paused; transition: none; }
 .island-scene, .island-svg { backface-visibility: hidden; }
 
-/* Bitmaps that stand in for the vector island while it zooms (see island-zoom.js) */
-.zoom-img { position: absolute; display: block; pointer-events: none; opacity: 0; visibility: hidden; user-select: none; -webkit-user-drag: none; z-index: 1; }
-.zoom-a { left: 0; top: 0; width: 100%; height: 100%; }
-.zoom-b { left: 33.3333%; top: 34.375%; width: 33.3333%; height: 34.375%; }
-/* The island and its bitmaps are promoted to their own GPU layer so the zoom only transforms a texture */
-.hero-track.is-staged .island-scene, .hero-track.is-staged .zoom-img { will-change: transform; }
+/* The island is promoted to its own GPU layer so the zoom stays on the compositor. */
+.hero-track.is-staged .island-scene { will-change: transform; }
+.hero-track.is-staged .hero-story { will-change: clip-path, opacity; transform: translateZ(0); }
+
+/* Final staged-story alignment overrides: keep copy in its own column beside the house. */
+@media (min-width: 900px) {
+  .hero-track.is-staged .story-scene {
+    box-sizing: border-box; width: 100%; max-width: none;
+    padding: clamp(6.5rem, 14vh, 7.5rem) 60vw 2rem clamp(2rem, 11vw, 10rem);
+    place-items: start; text-align: left;
+  }
+  .hero-track.is-staged .story-scene .story-text { width: 100%; max-width: 38rem; margin-inline: 0; text-align: left; }
+  .hero-track.is-staged .story-line { max-width: min(11ch, 100%); margin-inline: 0; }
+  .hero-track.is-staged .story-scene--end .story-center { width: 100%; max-width: min(34rem, 100%); margin-inline: 0; text-align: left; }
+  .hero-track.is-staged .story-scene--end .story-line--big { max-width: min(18ch, 100%); margin-inline: 0; }
+  .hero-track.is-staged .story-scene--end { align-content: center; }
+  .hero-track.is-staged .story-scene--end .story-chips,
+  .hero-track.is-staged .story-scene--end .flex { justify-content: flex-start; }
+}
+@media (max-width: 899px) {
+  .hero-track.is-staged .story-scene { place-items: start; align-items: start; align-content: center; padding: 1.8rem 1.4rem clamp(10rem, 30svh, 14rem); }
+  .hero-track.is-staged .story-scene .story-text,
+  .hero-track.is-staged .story-scene--end .story-center {
+    box-sizing: border-box; justify-self: start; width: min(29vw, 17rem); max-width: none;
+    margin: 0 0 0 clamp(.85rem, 4vw, 1.25rem); text-align: left;
+  }
+  .hero-track.is-staged .story-line { max-width: 100%; margin: .6rem 0 0; font-size: clamp(1.3rem, 6vw, 2rem); }
+  .hero-track.is-staged .story-line--big { max-width: 100%; margin-inline: 0; font-size: clamp(1.3rem, 5.8vw, 1.8rem); }
+  .hero-track.is-staged .story-chips { justify-content: flex-start; gap: .3rem; margin-top: .65rem; }
+  .hero-track.is-staged .story-chips .tag { max-width: 100%; padding: .25rem .45rem; font-size: clamp(.48rem, 1.9vw, .62rem); line-height: 1.2; text-align: left; white-space: normal; }
+  .hero-track.is-staged .story-scene--end .story-work-link { display: none; }
+  .hero-track.is-staged .story-scene--end .flex { position: static; margin-top: .7rem; justify-content: flex-start; }
+  .hero-track.is-staged .story-scene--end .btn { padding: .5rem .6rem; font-size: .75rem; }
+  .hero-track.is-staged .house-scene { inset: auto 0 6svh auto; width: min(58vw, calc(37svh * 1.333)); overflow: hidden; transform: none; }
+  .hero-track.is-staged .house-wrap { top: auto; }
+  .hero-track.is-staged .cf { display: block; box-sizing: border-box; max-width: 68%; padding: .25rem .35rem; font-size: clamp(.52rem, 2.2vw, .68rem); line-height: 1.3; }
+  .hero-track.is-staged .house-scene .cf:not(.cf-r) { left: 32%; }
+  .hero-track.is-staged .house-scene .cf.cf-r { max-width: 70%; }
+  .hero-track.is-staged .house-scene .cf code { white-space: normal; overflow-wrap: anywhere; }
+}

@@ -1,0 +1,32 @@
+{% comment %}Scroll-built house: each SVG group and matching code fragment is revealed by the hero timeline.{% endcomment %}
+<div class="house-scene" data-house role="img" aria-label="A house drawn from code: foundation, frame, walls, windows and roof, then a finished home.">
+  <div class="house-wrap">
+    <svg class="house-svg" viewBox="0 0 800 600" aria-hidden="true" focusable="false">
+      <g data-h="grid"><path d="M0 0V600M40 0V600M80 0V600M120 0V600M160 0V600M200 0V600M240 0V600M280 0V600M320 0V600M360 0V600M400 0V600M440 0V600M480 0V600M520 0V600M560 0V600M600 0V600M640 0V600M680 0V600M720 0V600M760 0V600M800 0V600M0 0H800M0 40H800M0 80H800M0 120H800M0 160H800M0 200H800M0 240H800M0 280H800M0 320H800M0 360H800M0 400H800M0 440H800M0 480H800M0 520H800M0 560H800M0 600H800"/></g>
+      <g data-h="guides" class="hs-guide"><path d="M400 40V560M40 500H760M210 140V560M590 140V560M150 300H650M400 148L150 330M400 148L650 330"/></g>
+      <g data-h="foundation" class="hs"><path data-slab data-d d="M190 500H610V524H190Z"/><path data-d d="M230 524V552M330 524V552M470 524V552M570 524V552"/><path data-d class="hs-guide-line" d="M205 552H595"/></g>
+      <g data-h="frame" class="hs hs-bold"><path data-d d="M220 500V300M310 500V300M400 500V300M490 500V300M580 500V300"/></g>
+      <g data-h="beams" class="hs hs-bold"><path data-d d="M205 300H595M220 400H580"/><path data-d class="hs-thin" d="M220 400L310 300M580 400L490 300M310 400L400 300"/></g>
+      <g data-h="walls" class="hs"><path data-fill class="hs-fill" d="M210 300H590V500H210Z"/><path data-d d="M210 300H590V500H210Z"/><path data-d class="hs-thin" d="M212 330H588M212 360H588M212 430H588M212 462H588"/></g>
+      <g data-h="windows" class="hs"><path data-d d="M235 340H295V400H235ZM325 340H385V400H325ZM505 340H565V400H505ZM420 344H470V392H420Z"/><path data-d class="hs-thin" d="M265 340V400M235 370H295M355 340V400M325 370H385M535 340V400M505 370H565M445 344V392"/></g>
+      <g data-h="door" class="hs"><path data-fill class="hs-door" d="M420 410H470V500H420Z"/><path data-d d="M420 410H470V500H420Z"/><circle data-fill class="hs-knob" cx="462" cy="460" r="3.2"/></g>
+      <g data-h="roof" class="hs hs-bold"><path data-d d="M165 300L400 148L635 300M150 300H650"/><path data-d class="hs-thin" d="M400 148V300M400 222L305 300M400 222L495 300M340 190H460M280 230H520M220 270H580"/><path data-d d="M510 218V170H540V240M400 218A14 14 0 1 0 400 246A14 14 0 1 0 400 218"/></g>
+      <g data-h="light" class="hs-light"><rect x="237" y="342" width="56" height="56"/><rect x="327" y="342" width="56" height="56"/><rect x="507" y="342" width="56" height="56"/><rect x="422" y="346" width="46" height="44"/></g>
+      <g data-h="details" class="hs"><path data-d d="M410 500V508H480V500M486 440V426M420 524L392 586M470 524L508 586"/></g>
+      <g data-h="landscape" class="hs"><path data-d d="M60 500H740M158 500Q158 470 182 470Q206 470 206 500M600 500Q600 470 624 470Q648 470 648 500M110 500V440M690 500V428"/></g>
+      <g data-h="ai" class="hs-ai"><path data-d d="M335 112L400 86L465 112M335 112L400 140L465 112M400 86V140"/><circle data-fill cx="335" cy="112" r="4.5"/><circle data-fill cx="465" cy="112" r="4.5"/><circle data-fill cx="400" cy="86" r="5"/></g>
+      <g data-h="halo" class="hs-halo"><ellipse data-halo="stack" cx="400" cy="400" rx="285" ry="190"/><circle data-halo="door" cx="445" cy="455" r="64"/><circle data-halo="ai" cx="400" cy="100" r="58"/></g>
+      <g data-h="labels" class="hs-label"><text x="476" y="82">AI</text><text x="480" y="486">solve()</text><text x="600" y="578">full-stack</text></g>
+    </svg>
+    <div class="house-code" aria-hidden="true">
+      <div class="cf" data-cf="idea" style="--x:0%;--y:10%"><span class="cf-file">idea.js</span><code><span class="c">// the idea</span><br><span class="k">const</span> home = <span class="f">idea</span>();</code></div>
+      <div class="cf" data-cf="foundation" style="--x:0%;--y:78%"><span class="cf-file">db.js</span><code>foundation.<span class="f">pour</span>();<br><span class="c">// database + auth</span></code></div>
+      <div class="cf cf-r" data-cf="frame" style="--y:48%"><span class="cf-file">api.js</span><code>frame.<span class="f">raise</span>([ api, ui, auth ]);</code></div>
+      <div class="cf" data-cf="beams" style="--x:0%;--y:46%"><span class="cf-file">stack.js</span><code>beams.<span class="f">connect</span>(frontend, backend);</code></div>
+      <div class="cf cf-r" data-cf="walls" style="--y:68%"><span class="cf-file">App.jsx</span><code>walls.<span class="f">build</span>(&lt;Layout /&gt;);</code></div>
+      <div class="cf" data-cf="openings" style="--x:0%;--y:60%"><span class="cf-file">ui.jsx</span><code>&lt;Window light /&gt; &lt;Door onOpen /&gt;</code></div>
+      <div class="cf cf-r" data-cf="roof" style="--y:20%"><span class="cf-file">deploy.js</span><code>roof.<span class="f">cover</span>(app);</code></div>
+      <div class="cf" data-cf="final" style="--x:0%;--y:14%"><span class="cf-file">main.py</span><code><span class="f">deploy</span>(house, ai=<span class="k">True</span>) <span class="g">&#10003;</span></code></div>
+    </div>
+  </div>
+</div>

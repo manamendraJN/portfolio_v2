@@ -4,9 +4,9 @@
    - Flat (very short screens, reduced motion): a plain readable hero with the island below the copy.*/
 import { gsap, ScrollTrigger } from "../vendor/gsap.js";
 import { MEDIA } from "./media.js";
-import { prepareIslandBitmaps } from "./island-zoom.js";
+import { buildHouse } from "./house.js";
 
-const SCRUB = 2.4; // light smoothing: layers ease toward the scroll position
+const SCRUB = 0.85; // keep the camera responsive without making the laptop handoff trail behind the scroll
 
 function plainParallax(scenery) {
   const section = scenery.parentElement;
@@ -24,6 +24,7 @@ function stagedHero(track) {
   const stage = track.querySelector("[data-hero-stage]");
   const story = track.querySelector("[data-hero-story]");
   const island = stage.querySelector("[data-island]");
+  const house = stage.querySelector("[data-house]");
   const screenRect = island.querySelector("[data-island-screen]");
   const clouds = stage.querySelector("[data-sky-clouds]");
   const copy = stage.querySelector("[data-hero-copy]");
@@ -67,7 +68,6 @@ function stagedHero(track) {
     const S = Math.max(vw / w0, vhh / h0) * 1.04;
     return { w0, h0, lx, ly, P0x, P0y, vw, vhh, S };
   };
-  const bitmaps = prepareIslandBitmaps(island); // vector -> bitmaps while zooming: no per-frame vector raster
   let g = geo();
   const remeasure = () => { g = geo(); };
   const proxy = { p: 0 };
@@ -82,7 +82,6 @@ function stagedHero(track) {
     const r = Math.max(0, g.vw - (Pdx + (g.w0 * s) / 2)), b = Math.max(0, g.vhh - (Pdy + (g.h0 * s) / 2));
     const rad = 4 * (g.w0 / 188) * s * (1 - e);
     story.style.clipPath = `inset(${t}px ${r}px ${b}px ${l}px round ${rad}px)`;
-    bitmaps.update(p, s);
     // The story only takes over once the screen nearly fills the view; before that the laptop's own code is what you zoom into.
     story.style.opacity = String(Math.min(1, Math.max(0, (p - 0.7) / 0.22)));
     story.style.visibility = p < 0.68 ? "hidden" : "visible";
@@ -93,6 +92,12 @@ function stagedHero(track) {
   };
   tl.to(proxy, { p: 1, duration: ZOOM, ease: "none", onUpdate: apply }, T.zoom);
   apply();
+  if (house) {
+    gsap.set(house, { autoAlpha: 0 });
+    tl.to(island, { autoAlpha: 0, duration: 0.025 }, T.craft - 0.02);
+    tl.to(house, { autoAlpha: 1, duration: 0.025 }, T.craft - 0.015);
+    buildHouse(tl, house, { craft: T.craft, creation: T.creation, mindset: T.mindset }, window.innerWidth < 900);
+  }
 
   // Stages 3-5: the story text enters, holds and leaves inside the open screen
   const textWindow = (scene, at, until) => {
@@ -114,7 +119,6 @@ function stagedHero(track) {
     window.removeEventListener("resize", onResize);
     ScrollTrigger.removeEventListener("refresh", onResize);
     stage.classList.remove("is-zooming");
-    bitmaps.release();
     window.__workSlow = null;
     story.style.clipPath = "";
     story.style.visibility = "";
